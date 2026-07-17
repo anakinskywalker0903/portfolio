@@ -15,16 +15,10 @@ const resumeVersions = [
     fileUrl: '/resumes/rohit_dubey_ai_engineer.pdf',
   },
   {
-    id: 'software-engineer',
-    role: 'Software Engineer',
-    description: 'System design, core algorithms, Java/Python backend systems, and data structures.',
-    fileUrl: '/resumes/rohit_dubey_software_engineer.pdf',
-  },
-  {
-    id: 'full-stack',
-    role: 'Full Stack Developer',
-    description: 'End-to-end web applications built with React, Node.js, Next.js, and robust databases.',
-    fileUrl: '/resumes/rohit_dubey_full_stack.pdf',
+    id: 'full-stack-sde',
+    role: 'Full Stack / SDE',
+    description: 'End-to-end web applications, system design, robust APIs, and database engineering.',
+    fileUrl: '/resumes/rohit_dubey_full_stack_sde.pdf',
   },
   {
     id: 'frontend',

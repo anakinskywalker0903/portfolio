@@ -159,13 +159,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 onClick={() => setResumeOpen(true)}
                 className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors"
               >
-                Software Engineer Resume
+                Full Stack / SDE Resume
               </button>
               <button
                 onClick={() => setResumeOpen(true)}
                 className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors"
               >
-                Full Stack Developer Resume
+                Frontend Developer Resume
               </button>
             </div>
           </div>
