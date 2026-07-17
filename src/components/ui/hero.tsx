@@ -28,7 +28,6 @@ const AvailabilityPill = () => (
       boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
     }}
   >
-    <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-pulse flex-shrink-0" />
     <span className="text-white/80 text-xs font-bold uppercase tracking-widest whitespace-nowrap">
       Learning
     </span>
@@ -158,15 +157,17 @@ export const HeroSection = () => {
       <div className="absolute inset-0 z-20" style={{ pointerEvents: 'auto' }}>
         <CanvasErrorBoundary>
           <Suspense fallback={null}>
-            <Lanyard
-              position={[0, 0, 33]}
-              gravity={[0, -40, 0]}
-              fov={20}
-              transparent={true}
-              frontImage={idCardFront}
-              backImage={idCardFront}
-              imageFit="contain"
-            />
+            {idCardFront && (
+              <Lanyard
+                position={[0, 0, 33]}
+                gravity={[0, -40, 0]}
+                fov={20}
+                transparent={true}
+                frontImage={idCardFront}
+                backImage={idCardFront}
+                imageFit="contain"
+              />
+            )}
           </Suspense>
         </CanvasErrorBoundary>
       </div>

@@ -1,39 +1,40 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import './BubbleMenu.css';
 
 const DEFAULT_ITEMS = [
   {
     label: 'home',
-    href: '#home',
+    href: '/',
     ariaLabel: 'Home',
     rotation: -6,
     hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' }
   },
   {
     label: 'skills',
-    href: '#skills',
+    href: '/skills',
     ariaLabel: 'Skills',
     rotation: 6,
     hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' }
   },
   {
     label: 'experience',
-    href: '#experience',
+    href: '/experience',
     ariaLabel: 'Experience',
     rotation: -6,
     hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' }
   },
   {
     label: 'client work',
-    href: '#client-work',
+    href: '/client-work',
     ariaLabel: 'Client Work',
     rotation: 6,
     hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' }
   },
   {
     label: 'certifications',
-    href: '#certifications',
+    href: '/certifications',
     ariaLabel: 'Certifications',
     rotation: -6,
     hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' }
@@ -61,6 +62,8 @@ export default function BubbleMenu({
   animationDuration = 0.5,
   staggerDelay = 0.12
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
 
@@ -82,12 +85,22 @@ export default function BubbleMenu({
 
   // Smooth scroll + close menu on link click
   const handleLinkClick = (e, href) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    onMenuClick?.(false);
+
     if (href && href.startsWith('#')) {
-      e.preventDefault();
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-      onMenuClick?.(false);
+      if (location.pathname !== '/') {
+        // Redirect to home with hash
+        navigate('/' + href);
+      } else {
+        const el = document.querySelector(href);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      navigate(href);
     }
   };
 
