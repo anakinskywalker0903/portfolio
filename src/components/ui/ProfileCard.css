@@ -70,7 +70,10 @@
     calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
   transition: transform 1s ease;
   transform: translateZ(0) rotateX(0deg) rotateY(0deg);
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   backface-visibility: hidden;
   overflow: hidden;
 }
@@ -101,7 +104,7 @@
   inset: 0;
   position: absolute;
   background-image: var(--inner-gradient);
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: transparent;
   transform: none;
 }
 
@@ -186,7 +189,7 @@
 .pc-card.active .pc-shine::before,
 .pc-card:hover .pc-shine::after,
 .pc-card.active .pc-shine::after {
-  opacity: 1;
+  opacity: 0.35;
 }
 
 .pc-shine::before {
@@ -243,20 +246,25 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal;
   overflow: visible;
   transform: translateZ(2);
   backface-visibility: hidden;
 }
 
 .pc-avatar-content .avatar {
-  width: 100%;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
   position: absolute;
   left: 50%;
-  transform-origin: 50% 100%;
-  transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
-    scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02)) scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
-  bottom: -1px;
+  top: 88px;
+  bottom: auto;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transform-origin: 50% 50%;
+  transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 8px)) translateY(calc((var(--pointer-from-top) - 0.5) * 8px)) translateZ(8px);
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 120ms ease-out;
@@ -361,7 +369,7 @@
     0.1px
   );
   z-index: 5;
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal;
 }
 
 .pc-details {
@@ -373,29 +381,24 @@
 }
 
 .pc-details h3 {
-  font-weight: 600;
+  font-weight: 800;
   margin: 0;
-  font-size: clamp(1.2rem, 4svh, 1.8rem);
-  background-image: linear-gradient(to bottom, #fff, #6f6fbe);
-  background-size: 1em 1.5em;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
+  font-size: clamp(1.1rem, 3.5svh, 1.4rem);
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.025em;
 }
 
 .pc-details p {
   font-weight: 600;
   position: relative;
-  top: -8px;
+  top: -4px;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 11px;
   margin: 0 auto;
-  width: min-content;
-  background-image: linear-gradient(to bottom, #fff, #4a4ac0);
-  background-size: 1em 1.5em;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
+  width: max-content;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes glow-bg {

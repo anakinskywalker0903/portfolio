@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* Custom Thematic Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #CCFF00;
+  border-left: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 9999px;
+  border: 3px solid #CCFF00;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0038FF;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #CCFF00;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -19,4 +46,194 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Formspree Submission Button Animation from CodePen QWwOqM */
+@keyframes button-loading {
+  0% {
+    width: 12rem;
+    margin-left: 0;
+    background-color: transparent;
+    border-color: #0038FF;
+  }
+  20% {
+    color: transparent;
+    transform: scale(1, 1);
+  }
+  40% {
+    border-color: #0038FF;
+    background-color: transparent;
+    transform: scale(1, 1);
+  }
+  60% {
+    transform: scale(.7, 1.1);
+    margin-left: 4.75rem; /* center offset: (12rem - 2.5rem)/2 = 4.75rem */
+    width: 2.5rem;
+    text-indent: -9999px;
+    color: transparent;
+    border-color: #0038FF;
+    background-color: #0038FF;
+  }
+  80% {
+    transform: scale(1, 1);
+  }
+  100% {
+    margin-left: 4.75rem;
+    width: 2.5rem;
+    background-color: #0038FF;
+    border-color: #0038FF;
+    color: transparent;
+  }
+}
+
+@keyframes button-ready {
+  0% {
+    margin-left: 4.75rem;
+    width: 2.5rem;
+    background-color: #0038FF;
+    border-color: #0038FF;
+  }
+  10% {
+    background-color: #0038FF;
+    border-color: #0038FF;
+  }
+  70% {
+    margin-left: -0.6rem;
+    width: 13.2rem;
+    background-color: #fff;
+    transform: scale(1.05, 1.05);
+  }
+  100% {
+    margin-left: 0;
+    width: 12rem;
+    border-color: #8cce1e;
+    background-color: #fff;
+  }
+}
+
+@keyframes button-dot-intro {
+  0% { opacity: 0; }
+  60% { opacity: 1; transform: scale(1, 1); }
+  100% { transform: scale(.75, .75); }
+}
+
+@keyframes button-dot-pulse {
+  0% { opacity: 1; transform: scale(.75, .75); }
+  15% { transform: scale(.85, .85); }
+  45% { transform: scale(.75, .75); }
+  55% { transform: scale(.95, .95); }
+  85% { transform: scale(.75, .75); }
+  100% { opacity: 1; transform: scale(.75, .75); }
+}
+
+@keyframes button-dot-outro {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1, 1); }
+}
+
+@keyframes button-ready-label {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+button.submit-anim-btn {
+  position: relative;
+  overflow: hidden;
+  width: 12rem;
+  height: 3rem;
+  color: #0038FF;
+  border: 2px solid #0038FF;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  outline: none;
+  transition: transform .125s, background-color .2s, border-color .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.submit-anim-btn:active {
+  transform: scale(.95, .95);
+}
+
+button.submit-anim-btn:before,
+button.submit-anim-btn:after {
+  position: absolute;
+  opacity: 0;
+  border-radius: 50%;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.625rem; /* center the 1.25rem dot */
+  margin-left: -0.625rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  content: '';
+  z-index: 1;
+  pointer-events: none;
+}
+
+button.submit-anim-btn.loading {
+  animation: button-loading .5s forwards;
+  pointer-events: none;
+}
+
+button.submit-anim-btn.loading span {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+button.submit-anim-btn.loading:before {
+  opacity: 1;
+  animation: button-dot-intro .5s forwards;
+}
+
+button.submit-anim-btn.loading:after {
+  opacity: 0;
+  animation: button-dot-pulse 1.5s infinite .5s;
+}
+
+button.submit-anim-btn.ready {
+  text-indent: 0;
+  color: transparent !important;
+  background-color: #0038FF;
+  animation: button-ready .333s forwards;
+  pointer-events: none;
+}
+
+button.submit-anim-btn.ready span {
+  opacity: 0;
+}
+
+button.submit-anim-btn.ready:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background-color: transparent;
+  color: #8cce1e;
+  content: 'SENT ✓';
+  opacity: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  animation: button-ready-label .5s forwards .275s;
+}
+
+button.submit-anim-btn.ready:after {
+  opacity: 1;
+  animation: button-dot-outro .333s;
 }

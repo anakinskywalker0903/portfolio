@@ -7,14 +7,23 @@ import { SocialSidebar } from '@/components/ui/SocialSidebar';
 import { ResumeModal } from '@/components/ui/ResumeModal';
 import BubbleMenu from '@/components/ui/BubbleMenu';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
-
+import ProfileCard from '@/components/ui/ProfileCard';
 const Logo = () => (
-  <Link
-    to="/"
-    className="inline-flex items-center bg-[#CCFF00] text-black font-black text-[14px] px-4 py-1.5 rounded-full tracking-tight hover:scale-105 transition-transform"
-  >
-    ROHIT
-  </Link>
+  <div className="p-0.5 rounded-full bg-white shadow-sm flex items-center justify-center border border-black/5">
+    <Link
+      to="/"
+      className="inline-flex items-center text-[#CCFF00] font-black text-[12px] px-4 py-1.5 rounded-full tracking-wider hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+      style={{
+        background: 'linear-gradient(135deg, #18181B 0%, #09090B 100%)',
+        boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.25), inset 0 -2px 6px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.2)',
+        textShadow: '0 0 8px rgba(204, 255, 0, 0.9)'
+      }}
+    >
+      {/* Liquid light reflection swipe */}
+      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+      ROHIT
+    </Link>
+  </div>
 );
 
 const menuItems = [
@@ -130,7 +139,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <footer className="bg-black text-white py-16 px-6 md:px-10 border-t-4 border-black relative z-10 w-full mt-auto">
         <div className="max-w-6xl mx-auto flex flex-col gap-12">
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
             {/* Branding Column */}
             <div className="md:col-span-2 flex flex-col gap-4">
               <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full w-fit tracking-wider uppercase">
@@ -181,22 +190,44 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </h4>
               <button
                 onClick={() => setResumeOpen(true)}
-                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors"
+                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
               >
                 AI Engineer Resume
               </button>
               <button
                 onClick={() => setResumeOpen(true)}
-                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors"
+                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
               >
                 Full Stack / SDE Resume
               </button>
               <button
                 onClick={() => setResumeOpen(true)}
-                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors"
+                className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
               >
                 Frontend Developer Resume
               </button>
+            </div>
+
+            {/* Profile Card Column */}
+            <div className="flex justify-center md:justify-end md:col-span-1 overflow-visible">
+              <ProfileCard
+                name="Rohit Dubey"
+                title="AI & Full-Stack Developer"
+                handle="rohitdubey"
+                status="Building something"
+                contactText="Hire Me"
+                avatarUrl="/rohit.jpg"
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={false}
+                behindGlowEnabled={true}
+                behindGlowColor="rgba(204, 255, 0, 0.15)"
+                innerGradient="transparent"
+                onContactClick={() => {
+                  const el = document.getElementById('contact');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              />
             </div>
           </div>
 

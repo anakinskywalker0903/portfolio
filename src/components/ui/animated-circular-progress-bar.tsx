@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { CountUp } from "./CountUp"
 
 interface AnimatedCircularProgressBarProps {
   max?: number
@@ -35,7 +36,6 @@ export function AnimatedCircularProgressBar({
           "--transition-step": "200ms",
           "--delay": "0s",
           "--percent-to-deg": "3.6deg",
-          transform: "translateZ(0)",
         } as React.CSSProperties
       }
     >
@@ -97,12 +97,12 @@ export function AnimatedCircularProgressBar({
           }
         />
       </svg>
-      <span
-        data-current-value={currentPercent}
-        className="animate-in fade-in absolute inset-0 m-auto size-fit delay-(--delay) duration-(--transition-length) ease-linear"
-      >
-        {currentPercent}
-      </span>
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span className="font-black flex items-baseline justify-center">
+          <CountUp to={currentPercent} from={0} duration={1.5} />
+          <span className="text-[9px] ml-0.5 opacity-70 font-black">%</span>
+        </span>
+      </div>
     </div>
   )
 }
