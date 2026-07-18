@@ -91,7 +91,7 @@ export const HeroSection = () => {
     <section
       id="home"
       className="bg-[#0038FF] font-sans selection:bg-[#CCFF00] selection:text-black relative overflow-hidden w-full"
-      style={{ height: '100svh', overflow: 'hidden' }}
+      style={{ height: 'calc(100svh - 32px)', overflow: 'hidden' }}
     >
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />

@@ -42,6 +42,19 @@ export function HomePage() {
 
   return (
     <div className="w-full relative bg-white">
+      {/* Top scroll velocity ticker */}
+      <div className="w-full bg-black text-[#CCFF00] py-2 border-b-2 border-black z-30 overflow-hidden relative h-8 flex items-center">
+        <ScrollVelocity
+          texts={[
+            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP"
+          ]}
+          velocity={20}
+          className="text-[10px] font-black tracking-widest uppercase"
+          parallaxClassName="py-0.5"
+          numCopies={8}
+        />
+      </div>
+
       {/* 1. Hero with dangle physics Lanyard */}
       <HeroSection />
 
@@ -49,14 +62,14 @@ export function HomePage() {
       <section 
         id="about" 
         ref={containerRef} 
-        className="relative h-[400vh] w-full bg-white border-t-4 border-black z-30"
+        className="relative h-[600vh] w-full bg-white border-t-4 border-black z-30"
       >
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-10 pointer-events-none">
           
           {/* Card 1: Origin */}
           <motion.div 
             style={{ y: y1, opacity: opacity1, scale: scale1 }}
-            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
           >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
@@ -88,7 +101,7 @@ export function HomePage() {
           {/* Card 2: Why I Build */}
           <motion.div 
             style={{ y: y2, opacity: opacity2, scale: scale2 }}
-            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
           >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
@@ -114,7 +127,7 @@ export function HomePage() {
           {/* Card 3: Learning Philosophy */}
           <motion.div 
             style={{ y: y3, opacity: opacity3, scale: scale3 }}
-            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
           >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
@@ -140,7 +153,7 @@ export function HomePage() {
           {/* Card 4: Current Mission */}
           <motion.div 
             style={{ y: y4, opacity: opacity4, scale: scale4 }}
-            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
           >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
@@ -183,7 +196,7 @@ export function HomePage() {
           {/* Card 5: Looking Ahead */}
           <motion.div 
             style={{ y: y5, opacity: opacity5, scale: scale5 }}
-            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
           >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
@@ -209,22 +222,18 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 3. Current Mission banner & ScrollVelocity Marquee */}
-      <section className="bg-black text-white py-16 border-y-4 border-black relative z-30 overflow-hidden">
-        <ScrollVelocity
-          texts={[
-            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP",
-            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP"
-          ]}
-          velocity={30}
-          className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#CCFF00]"
-          parallaxClassName="py-2"
-        />
-        
-        <div className="max-w-6xl mx-auto mt-12 flex flex-col items-center justify-center">
+      {/* 3. Current Mission banner */}
+      <section className="bg-black text-white py-12 px-6 border-y-4 border-black relative z-30 overflow-hidden">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <span className="w-3 h-3 rounded-full bg-[#CCFF00] animate-ping" />
+            <h4 className="font-black text-lg uppercase tracking-tight">
+              CURRENT MISSION: BUILDING NEXT-GEN WEB PRODUCTS
+            </h4>
+          </div>
           <Link
             to="/skills"
-            className="px-8 py-3 bg-[#CCFF00] hover:bg-white text-black font-black text-xs uppercase tracking-widest rounded-full border-2 border-black flex items-center gap-2 transition-colors shadow-[4px_4px_0_#CCFF00]"
+            className="px-6 py-2.5 bg-[#CCFF00] hover:bg-white text-black font-black text-xs uppercase tracking-widest rounded-full border-2 border-black flex items-center gap-2 transition-colors shadow-[4px_4px_0_#000]"
           >
             <span>Explore Toolkit</span>
             <FaArrowRight className="w-3.5 h-3.5" />
