@@ -18,11 +18,13 @@ const Logo = () => (
 
 const menuItems = [
   { label: 'home',           href: '/',               ariaLabel: 'Home',           rotation: -8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'skills',         href: '/skills',         ariaLabel: 'Skills',         rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'experience',     href: '/experience',     ariaLabel: 'Experience',     rotation: -6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'client work',    href: '/client-work',    ariaLabel: 'Client Work',    rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'certifications', href: '/certifications', ariaLabel: 'Certifications', rotation: -8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'contact',        href: '#contact',        ariaLabel: 'Contact',        rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'origin',         href: '#about',          ariaLabel: 'Origin',         rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'skills',         href: '/skills',         ariaLabel: 'Skills',         rotation: -6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'projects',       href: '/projects',       ariaLabel: 'Projects',       rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'client work',    href: '/client-work',    ariaLabel: 'Client Work',    rotation: -8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'experience',     href: '/experience',     ariaLabel: 'Experience',     rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'learning',       href: '/certifications', ariaLabel: 'Learning Archive', rotation: -6, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'contact',        href: '#contact',        ariaLabel: 'Contact',        rotation:  8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

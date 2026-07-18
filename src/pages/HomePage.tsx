@@ -12,45 +12,156 @@ export function HomePage() {
       {/* 1. Hero with dangle physics Lanyard */}
       <HeroSection />
 
-      {/* 2. About preview section (Origin -> Who I am -> Why CS -> Goals) */}
+      {/* 2. Origin (About preview section containing the five sections) */}
       <section id="about" className="py-24 px-6 md:px-10 bg-white border-t-4 border-black relative z-30">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Header left */}
-          <div>
-            <span className="inline-block bg-[#CCFF00] text-black font-black text-[10px] px-3.5 py-1 rounded-full mb-3 tracking-widest uppercase border-2 border-black">
-              ORIGIN STORY
-            </span>
-            <h3 className="text-4xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-              WHO IS<br />
-              <span className="text-[#0038FF]">ROHIT DUBEY?</span>
-            </h3>
+        <div className="max-w-5xl mx-auto flex flex-col gap-16">
+          
+          {/* SECTION 1 — Origin */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                SECTION 01
+              </span>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                ORIGIN
+              </h3>
+              <p className="text-black/50 text-xs font-bold uppercase tracking-wider mt-2 italic">
+                Every engineer starts somewhere. This is where my journey began.
+              </p>
+            </div>
+            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+              <p className="font-bold text-black text-base">
+                I am Rohit Dubey, a Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.
+              </p>
+              <p>
+                My journey into software development didn't begin with frameworks or complex technologies—it began with curiosity. I wanted to understand how websites were built, how applications worked behind the scenes, and how software could solve real-world problems.
+              </p>
+              <p>
+                Today, I'm building that foundation step by step. From learning core web technologies and data structures to exploring backend development and artificial intelligence, every project I create helps me understand not just <strong>how</strong> something works, but <strong>why</strong> it works.
+              </p>
+              <p className="font-bold text-[#0038FF]">
+                I believe strong fundamentals create better engineers, and that's the philosophy guiding my learning journey.
+              </p>
+            </div>
           </div>
 
-          {/* Context middle/right */}
-          <div className="lg:col-span-2 flex flex-col gap-6 text-black/75 text-sm font-medium leading-relaxed">
-            <p>
-              I am an engineer focused on building robust, high-performance web systems and AI integrations. My interest lies in bridging creative animations with structured, modular backend systems to treat web interfaces as polished digital products.
-            </p>
-            <p>
-              <strong>Why Computer Science?</strong> I believe engineering is about scalability, optimization, and solving real-world hurdles. Whether it is tuning WebGL rendering loops or organizing relational database query indexes, I enjoy optimizing performance bottlenecks.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
-              <div className="p-5 rounded-2xl bg-[#F8F9FA] border border-black/5 flex gap-3 items-start">
-                <FaGraduationCap className="text-[#0038FF] w-5 h-5 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h5 className="font-black text-black uppercase text-xs">How I Learn</h5>
-                  <p className="text-black/60 text-[11px] mt-1">Through direct research, code refactoring, and constructing production-grade tools from specification grids.</p>
-                </div>
+          <hr className="border-black/10" />
+
+          {/* SECTION 2 — Why I Build */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                SECTION 02
+              </span>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                WHY I BUILD
+              </h3>
+            </div>
+            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+              <p>
+                For me, software engineering is more than writing code—it's about solving problems with thoughtful, well-designed solutions.
+              </p>
+              <p>
+                I enjoy taking an idea, breaking it into smaller challenges, and gradually turning it into something people can use. Whether it's a productivity tool, an AI-powered application, or a client website, I find satisfaction in building software that is practical, reliable, and continuously improving.
+              </p>
+              <p>
+                Every project teaches me something new, and every challenge becomes another opportunity to grow as an engineer.
+              </p>
+            </div>
+          </div>
+
+          <hr className="border-black/10" />
+
+          {/* SECTION 3 — Learning Philosophy */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                SECTION 03
+              </span>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                LEARNING PHILOSOPHY
+              </h3>
+            </div>
+            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+              <p className="font-bold text-black">
+                I prefer learning from the ground up.
+              </p>
+              <p>
+                Rather than jumping directly into frameworks, I focus on understanding the technologies that power them. I study the fundamentals, build practical projects, experiment with different approaches, and continuously refine my work based on what I learn.
+              </p>
+              <p>
+                My goal isn't to collect as many technologies as possible—it's to build the knowledge and problem-solving skills needed to adapt to new ones throughout my career.
+              </p>
+            </div>
+          </div>
+
+          <hr className="border-black/10" />
+
+          {/* SECTION 4 — Current Mission */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                SECTION 04
+              </span>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                CURRENT MISSION
+              </h3>
+            </div>
+            <div className="lg:col-span-2 flex flex-col gap-6">
+              {/* Mission Card */}
+              <div 
+                className="bg-[#0038FF]/5 border-2 border-black rounded-[2rem] p-6 shadow-[6px_6px_0_#000] relative overflow-hidden"
+              >
+                <p className="font-black text-black text-sm uppercase leading-snug tracking-tight">
+                  Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
+                </p>
               </div>
-              <div className="p-5 rounded-2xl bg-[#F8F9FA] border border-black/5 flex gap-3 items-start">
-                <FaRocket className="text-[#0038FF] w-5 h-5 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h5 className="font-black text-black uppercase text-xs">Current Goals</h5>
-                  <p className="text-black/60 text-[11px] mt-1">Refining LLM fine-tuning schemas and constructing zero-latency interactive layouts.</p>
-                </div>
+
+              {/* Current Focus Points */}
+              <div className="flex flex-col gap-3 mt-2">
+                <h5 className="font-black text-xs uppercase tracking-wider text-black">
+                  Current Focus:
+                </h5>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-black/80 font-bold">
+                  {[
+                    'Master modern frontend development',
+                    'Strengthen Java and Data Structures & Algorithms',
+                    'Build scalable full-stack applications',
+                    'Explore AI engineering and intelligent systems',
+                    'Gain experience through real-world projects and freelance work'
+                  ].map((focus, i) => (
+                    <li key={i} className="flex items-center gap-2.5 bg-[#F8F9FA] border border-black/5 p-3 rounded-xl">
+                      <span className="w-2 h-2 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
+                      <span>{focus}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
+
+          <hr className="border-black/10" />
+
+          {/* SECTION 5 — Looking Ahead */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                SECTION 05
+              </span>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                LOOKING AHEAD
+              </h3>
+            </div>
+            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+              <p>
+                Technology evolves constantly, and I believe learning should never stop.
+              </p>
+              <p>
+                My long-term goal is to build software that combines intelligent systems with great user experiences while continuing to grow as a full-stack engineer. Whether I'm contributing to a team, building products, or working with clients, I want every project to reflect thoughtful engineering, continuous learning, and a commitment to creating meaningful solutions.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
