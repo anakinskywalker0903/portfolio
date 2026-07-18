@@ -6,6 +6,7 @@ import { ContactSection } from '@/components/ui/contact';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
 import { SiReact, SiTypescript, SiNextdotjs } from 'react-icons/si';
 import { FaArrowRight, FaRocket, FaCode, FaGraduationCap } from 'react-icons/fa';
+import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 
 export function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,29 +16,29 @@ export function HomePage() {
   });
 
   // Card 1: Origin
-  const y1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [0, 0, -700]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [1, 1, 0]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [1, 1, 0.9]);
+  const y1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [0, 0, -700]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [1, 1, 0]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [1, 1, 0.9]);
 
   // Card 2: Why I Build
-  const y2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [700, 700, 0, 0, -700]);
-  const opacity2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [0, 0, 1, 1, 0]);
-  const scale2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [0.9, 0.9, 1, 1, 0.9]);
+  const y2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [700, 700, 0, 0, -700]);
+  const opacity2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [0, 0, 1, 1, 0]);
+  const scale2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [0.9, 0.9, 1, 1, 0.9]);
 
   // Card 3: Learning Philosophy
-  const y3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [700, 700, 0, 0, -700]);
-  const opacity3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [0, 0, 1, 1, 0]);
-  const scale3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [0.9, 0.9, 1, 1, 0.9]);
+  const y3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [700, 700, 0, 0, -700]);
+  const opacity3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [0, 0, 1, 1, 0]);
+  const scale3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [0.9, 0.9, 1, 1, 0.9]);
 
   // Card 4: Current Mission
-  const y4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [700, 700, 0, 0, -700]);
-  const opacity4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [0, 0, 1, 1, 0]);
-  const scale4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [0.9, 0.9, 1, 1, 0.9]);
+  const y4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [700, 700, 0, 0, -700]);
+  const opacity4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [0, 0, 1, 1, 0]);
+  const scale4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [0.9, 0.9, 1, 1, 0.9]);
 
   // Card 5: Looking Ahead
-  const y5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [700, 700, 0, 0]);
-  const opacity5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [0, 0, 1, 1]);
-  const scale5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [0.9, 0.9, 1, 1]);
+  const y5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [700, 700, 0, 0]);
+  const opacity5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [0, 0, 1, 1]);
+  const scale5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [0.9, 0.9, 1, 1]);
 
   return (
     <div className="w-full relative bg-white">
@@ -208,21 +209,25 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 3. Current Mission banner */}
-      <section className="bg-black text-white py-12 px-6 border-y-4 border-black relative z-30 overflow-hidden">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <span className="w-3 h-3 rounded-full bg-[#CCFF00] animate-ping" />
-            <h4 className="font-black text-lg uppercase tracking-tight">
-              CURRENT MISSION: BUILDING NEXT-GEN WEB PRODUCTS
-            </h4>
-          </div>
+      {/* 3. Current Mission banner & ScrollVelocity Marquee */}
+      <section className="bg-black text-white py-16 border-y-4 border-black relative z-30 overflow-hidden">
+        <ScrollVelocity
+          texts={[
+            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP",
+            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP"
+          ]}
+          velocity={30}
+          className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#CCFF00]"
+          parallaxClassName="py-2"
+        />
+        
+        <div className="max-w-6xl mx-auto mt-12 flex flex-col items-center justify-center">
           <Link
             to="/skills"
-            className="px-6 py-2.5 bg-[#CCFF00] hover:bg-white text-black font-black text-xs uppercase tracking-widest rounded-full border-2 border-black flex items-center gap-2 transition-colors shadow-[4px_4px_0_#000]"
+            className="px-8 py-3 bg-[#CCFF00] hover:bg-white text-black font-black text-xs uppercase tracking-widest rounded-full border-2 border-black flex items-center gap-2 transition-colors shadow-[4px_4px_0_#CCFF00]"
           >
             <span>Explore Toolkit</span>
-            <FaArrowRight className="w-3 h-3" />
+            <FaArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </section>
