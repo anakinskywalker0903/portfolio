@@ -192,7 +192,7 @@ export const HeroSection = () => {
           <Suspense fallback={null}>
             {idCardFront && (
               <Lanyard
-                position={[0, 0, 22]}
+                position={[0, 0, 27]}
                 gravity={[0, -40, 0]}
                 fov={20}
                 transparent={true}
