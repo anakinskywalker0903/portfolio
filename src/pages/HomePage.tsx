@@ -7,6 +7,7 @@ import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-p
 import { SiReact, SiTypescript, SiNextdotjs } from 'react-icons/si';
 import { FaArrowRight, FaRocket, FaCode, FaGraduationCap } from 'react-icons/fa';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
+import { Grainient } from '@/components/ui/Grainient';
 
 export function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,8 +50,37 @@ export function HomePage() {
       <section 
         id="about" 
         ref={containerRef} 
-        className="relative h-[600vh] w-full bg-white border-t-4 border-black z-30"
+        className="relative h-[600vh] w-full bg-black border-t-4 border-black z-30"
       >
+        {/* Animated WebGL Grainient Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Grainient
+            color1="#CCFF00"
+            color2="#0038FF"
+            color3="#00083A"
+            timeSpeed={1.5}
+            colorBalance={0.0}
+            warpStrength={1.5}
+            warpFrequency={4.0}
+            warpSpeed={1.2}
+            warpAmplitude={40.0}
+            blendAngle={45.0}
+            blendSoftness={0.1}
+            rotationAmount={360.0}
+            noiseScale={1.5}
+            grainAmount={0.06}
+            grainScale={1.5}
+            grainAnimated={true}
+            contrast={1.2}
+            gamma={1.1}
+            saturation={1.3}
+            centerX={0.0}
+            centerY={0.0}
+            zoom={1.1}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+        </div>
+
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-10 pointer-events-none">
           
           {/* Card 1: Origin */}
