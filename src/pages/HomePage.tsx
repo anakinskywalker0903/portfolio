@@ -55,28 +55,28 @@ export function HomePage() {
         {/* Animated WebGL Grainient Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Grainient
-            color1="#CCFF00"
-            color2="#0038FF"
-            color3="#00083A"
-            timeSpeed={1.5}
-            colorBalance={0.0}
-            warpStrength={1.5}
-            warpFrequency={4.0}
-            warpSpeed={1.2}
-            warpAmplitude={40.0}
-            blendAngle={45.0}
-            blendSoftness={0.1}
-            rotationAmount={360.0}
-            noiseScale={1.5}
-            grainAmount={0.06}
-            grainScale={1.5}
-            grainAnimated={true}
-            contrast={1.2}
-            gamma={1.1}
-            saturation={1.3}
+            color1="#3b82f6"
+            color2="#fcfcfc"
+            color3="#54f63b"
+            timeSpeed={3.65}
+            colorBalance={0.06}
+            warpStrength={1.9}
+            warpFrequency={3.5}
+            warpSpeed={2.0}
+            warpAmplitude={50.0}
+            blendAngle={0.0}
+            blendSoftness={0.05}
+            rotationAmount={500.0}
+            noiseScale={2.0}
+            grainAmount={0.1}
+            grainScale={2.0}
+            grainAnimated={false}
+            contrast={1.5}
+            gamma={1.0}
+            saturation={1.0}
             centerX={0.0}
             centerY={0.0}
-            zoom={1.1}
+            zoom={1.05}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
         </div>
