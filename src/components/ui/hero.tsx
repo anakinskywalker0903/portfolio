@@ -136,19 +136,28 @@ export const HeroSection = () => {
 
           {/* "IN PROGRESS" row — smaller, muted, with a blinking cursor feel */}
           <div className="flex justify-end pr-[4%] md:pr-[8%] items-baseline gap-3">
-            <span
+            <TextType
+              text="AI ENGINEER"
+              as="span"
+              typingSpeed={100}
+              initialDelay={2400}
+              loop={false}
+              showCursor={false}
               className="text-[clamp(1rem,2.5vw,32px)] font-black uppercase tracking-[0.25em] text-white/35"
               style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}
-            >
-              AI ENGINEER
-            </span>
+            />
             <span className="text-[#CCFF00]/60 text-[clamp(0.9rem,2vw,24px)] font-black">+</span>
-            <h1
+            <TextType
+              text="IN PROGRESS"
+              as="h1"
+              typingSpeed={100}
+              initialDelay={3800}
+              loop={false}
+              showCursor={true}
+              cursorCharacter="|"
               className="text-[clamp(2.8rem,8.5vw,120px)] font-black leading-[0.88] tracking-tighter text-white/40 m-0 p-0 uppercase"
               style={headFont}
-            >
-              IN PROGRESS
-            </h1>
+            />
           </div>
 
         </div>

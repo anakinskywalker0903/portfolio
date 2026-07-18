@@ -73,19 +73,33 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </motion.button>
       </div>
 
-      {/* Persistent Floating Resume Action Button (Middle Right Edge) */}
-      <motion.button
-        onClick={() => setResumeOpen(true)}
-        initial={{ x: 20 }}
-        animate={{ x: 0 }}
-        whileHover={{ x: -6 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed right-0 top-[35%] -translate-y-1/2 z-40 bg-[#0038FF] text-white border-2 border-r-0 border-black pl-5 pr-6 py-3 rounded-l-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center gap-2.5 shadow-2xl transition-all duration-300 cursor-pointer group"
-      >
-        <FaFilePdf className="w-4 h-4 text-[#CCFF00] group-hover:scale-110 transition-transform" />
-        <span>RESUME</span>
-        <span className="w-2.5 h-2.5 rounded-full bg-[#CCFF00] animate-pulse" />
-      </motion.button>
+      {/* Persistent Right Sidebar: Resume Column */}
+      <div className="fixed right-6 bottom-1/2 translate-y-1/2 z-40 hidden md:flex flex-col gap-4">
+        <div 
+          className="flex flex-col items-center gap-4 px-3 py-6 rounded-full border border-white/20 bg-black/40 backdrop-blur-md shadow-2xl relative animate-in fade-in slide-in-from-right-8 duration-500"
+          style={{
+            boxShadow: '0 8px 32px 0 rgba(0, 56, 255, 0.15)',
+          }}
+        >
+          {/* Glow indicator at the top */}
+          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] mx-auto animate-pulse" />
+
+          {/* Resume hub button */}
+          <motion.button
+            onClick={() => setResumeOpen(true)}
+            whileHover={{ scale: 1.15, y: -2 }}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-black hover:bg-[#CCFF00] border border-white/10 hover:border-transparent transition-colors duration-300 relative group cursor-pointer"
+            aria-label="Open Resume Hub"
+          >
+            <FaFilePdf className="w-5 h-5 text-[#CCFF00] group-hover:text-black transition-colors" />
+
+            {/* Tooltip */}
+            <span className="absolute right-14 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 px-3 py-1.5 rounded-lg bg-black text-[#CCFF00] text-[10px] font-black uppercase tracking-widest pointer-events-none transition-all duration-300 shadow-xl border border-[#CCFF00]/20 whitespace-nowrap">
+              RESUME
+            </span>
+          </motion.button>
+        </div>
+      </div>
 
       {/* Main Page Content Wrapper with smooth entry transition */}
       <motion.main
