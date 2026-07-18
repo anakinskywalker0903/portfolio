@@ -171,50 +171,6 @@ export const HeroSection = () => {
           </Suspense>
         </CanvasErrorBoundary>
       </div>
-
-      {/* ── Stats strip ── */}
-      <div className="relative z-30 bg-white text-black rounded-t-[2.5rem] md:rounded-t-[3.5rem] px-6 py-12 md:px-10 md:py-16 shadow-[0_-20px_50px_rgba(0,0,0,0.2)] w-full">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-
-          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100">
-            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black">3+ YEARS<br />EXPERIENCE</h3>
-            <p className="text-[10px] md:text-xs text-black/60 font-bold mb-auto">Building production-grade products</p>
-            <div className="flex flex-col items-center bg-[#0038FF] rounded-[1.5rem] px-6 py-4 text-white shadow-lg mt-6 w-full max-w-[200px]">
-              <p className="text-[9px] font-bold uppercase tracking-wider mb-1">Projects Shipped</p>
-              <p className="text-2xl font-black">20+</p>
-            </div>
-            <div className="hidden md:block absolute -right-12 bottom-8 w-16 h-16 z-30"><ArrowBlack /></div>
-          </div>
-
-          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100">
-            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black">FULL STACK<br />BUILDER</h3>
-            <p className="text-[10px] md:text-xs text-black/60 font-bold mb-auto">React, Node.js, TypeScript, Tailwind</p>
-            <div className="relative w-full flex justify-center mt-6">
-              <div className="flex items-center bg-[#0038FF] rounded-full p-1.5 text-white shadow-lg">
-                <div className="bg-white/20 text-white font-bold text-sm px-4 py-2 rounded-full mr-2">Frontend</div>
-                <div className="font-bold text-xs px-4">+ Backend</div>
-              </div>
-              <div className="absolute -bottom-6 right-1/3 bg-[#CCFF00] rounded-full p-2.5 shadow-lg transform rotate-12 z-20">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 text-black stroke-current" fill="none" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </div>
-            </div>
-            <div className="hidden md:block absolute -right-12 bottom-8 w-16 h-16 z-30"><ArrowBlack /></div>
-          </div>
-
-          <div className="bg-[#F8F9FA] rounded-[2rem] p-8 flex flex-col items-center text-center relative h-64 border border-gray-100">
-            <h3 className="text-xl md:text-2xl uppercase leading-tight mb-2 font-black">DESIGN<br />OBSESSED</h3>
-            <p className="text-[10px] md:text-xs text-black/60 font-bold mb-auto">Clean UI, great UX, pixel-perfect builds</p>
-            <div className="flex flex-col items-center bg-[#CCFF00] rounded-[2rem] px-6 py-4 text-black shadow-lg mt-6 relative w-full max-w-[200px]">
-              <p className="text-[9px] font-bold uppercase tracking-wider mb-1">Client Satisfaction</p>
-              <p className="text-xl font-black">100%</p>
-              <div className="absolute -bottom-2 left-8 w-5 h-5 bg-[#CCFF00] transform rotate-45" />
-            </div>
-          </div>
-
-        </div>
-      </div>
     </section>
   );
 };
