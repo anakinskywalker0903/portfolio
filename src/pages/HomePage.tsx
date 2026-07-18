@@ -1,5 +1,6 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { HeroSection } from '@/components/ui/hero';
 import { ContactSection } from '@/components/ui/contact';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
@@ -7,160 +8,202 @@ import { SiReact, SiTypescript, SiNextdotjs } from 'react-icons/si';
 import { FaArrowRight, FaRocket, FaCode, FaGraduationCap } from 'react-icons/fa';
 
 export function HomePage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // Card 1: Origin
+  const y1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [0, 0, -700]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [1, 1, 0]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.12, 0.20], [1, 1, 0.9]);
+
+  // Card 2: Why I Build
+  const y2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [700, 700, 0, 0, -700]);
+  const opacity2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [0, 0, 1, 1, 0]);
+  const scale2 = useTransform(scrollYProgress, [0.08, 0.12, 0.20, 0.32, 0.40], [0.9, 0.9, 1, 1, 0.9]);
+
+  // Card 3: Learning Philosophy
+  const y3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [700, 700, 0, 0, -700]);
+  const opacity3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [0, 0, 1, 1, 0]);
+  const scale3 = useTransform(scrollYProgress, [0.28, 0.32, 0.40, 0.52, 0.60], [0.9, 0.9, 1, 1, 0.9]);
+
+  // Card 4: Current Mission
+  const y4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [700, 700, 0, 0, -700]);
+  const opacity4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [0, 0, 1, 1, 0]);
+  const scale4 = useTransform(scrollYProgress, [0.48, 0.52, 0.60, 0.72, 0.80], [0.9, 0.9, 1, 1, 0.9]);
+
+  // Card 5: Looking Ahead
+  const y5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [700, 700, 0, 0]);
+  const opacity5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [0, 0, 1, 1]);
+  const scale5 = useTransform(scrollYProgress, [0.68, 0.72, 0.80, 1.0], [0.9, 0.9, 1, 1]);
+
   return (
     <div className="w-full relative bg-white">
       {/* 1. Hero with dangle physics Lanyard */}
       <HeroSection />
 
-      {/* 2. Origin (About preview section containing the five sections) */}
-      <section id="about" className="py-24 px-6 md:px-10 bg-white border-t-4 border-black relative z-30">
-        <div className="max-w-5xl mx-auto flex flex-col gap-16">
+      {/* 2. Origin (About preview section containing the five sections with sticky deck transitions) */}
+      <section 
+        id="about" 
+        ref={containerRef} 
+        className="relative h-[400vh] w-full bg-white border-t-4 border-black z-30"
+      >
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-10 pointer-events-none">
           
-          {/* SECTION 1 — Origin */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Card 1: Origin */}
+          <motion.div 
+            style={{ y: y1, opacity: opacity1, scale: scale1 }}
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+          >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
                 SECTION 01
               </span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-1" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                 ORIGIN
               </h3>
-              <p className="text-black/50 text-xs font-bold uppercase tracking-wider mt-2 italic">
+              <p className="text-black/50 text-xs font-bold uppercase tracking-wider mb-6 italic">
                 Every engineer starts somewhere. This is where my journey began.
               </p>
+              <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+                <p className="font-bold text-black text-base">
+                  I am Rohit Dubey, a Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.
+                </p>
+                <p>
+                  My journey into software development didn't begin with frameworks or complex technologies—it began with curiosity. I wanted to understand how websites were built, how applications worked behind the scenes, and how software could solve real-world problems.
+                </p>
+                <p>
+                  Today, I'm building that foundation step by step. From learning core web technologies and data structures to exploring backend development and artificial intelligence, every project I create helps me understand not just <strong>how</strong> something works, but <strong>why</strong> it works.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-              <p className="font-bold text-black text-base">
-                I am Rohit Dubey, a Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.
-              </p>
-              <p>
-                My journey into software development didn't begin with frameworks or complex technologies—it began with curiosity. I wanted to understand how websites were built, how applications worked behind the scenes, and how software could solve real-world problems.
-              </p>
-              <p>
-                Today, I'm building that foundation step by step. From learning core web technologies and data structures to exploring backend development and artificial intelligence, every project I create helps me understand not just <strong>how</strong> something works, but <strong>why</strong> it works.
-              </p>
-              <p className="font-bold text-[#0038FF]">
-                I believe strong fundamentals create better engineers, and that's the philosophy guiding my learning journey.
-              </p>
-            </div>
-          </div>
+            <p className="font-bold text-[#0038FF] text-sm mt-4">
+              I believe strong fundamentals create better engineers, and that's the philosophy guiding my learning journey.
+            </p>
+          </motion.div>
 
-          <hr className="border-black/10" />
-
-          {/* SECTION 2 — Why I Build */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Card 2: Why I Build */}
+          <motion.div 
+            style={{ y: y2, opacity: opacity2, scale: scale2 }}
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+          >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
                 SECTION 02
               </span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                 WHY I BUILD
               </h3>
+              <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+                <p>
+                  For me, software engineering is more than writing code—it's about solving problems with thoughtful, well-designed solutions.
+                </p>
+                <p>
+                  I enjoy taking an idea, breaking it into smaller challenges, and gradually turning it into something people can use. Whether it's a productivity tool, an AI-powered application, or a client website, I find satisfaction in building software that is practical, reliable, and continuously improving.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-              <p>
-                For me, software engineering is more than writing code—it's about solving problems with thoughtful, well-designed solutions.
-              </p>
-              <p>
-                I enjoy taking an idea, breaking it into smaller challenges, and gradually turning it into something people can use. Whether it's a productivity tool, an AI-powered application, or a client website, I find satisfaction in building software that is practical, reliable, and continuously improving.
-              </p>
-              <p>
-                Every project teaches me something new, and every challenge becomes another opportunity to grow as an engineer.
-              </p>
-            </div>
-          </div>
+            <p className="font-bold text-[#0038FF] text-sm mt-4">
+              Every project teaches me something new, and every challenge becomes another opportunity to grow as an engineer.
+            </p>
+          </motion.div>
 
-          <hr className="border-black/10" />
-
-          {/* SECTION 3 — Learning Philosophy */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Card 3: Learning Philosophy */}
+          <motion.div 
+            style={{ y: y3, opacity: opacity3, scale: scale3 }}
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+          >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
                 SECTION 03
               </span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                 LEARNING PHILOSOPHY
               </h3>
+              <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+                <p className="font-bold text-black">
+                  I prefer learning from the ground up.
+                </p>
+                <p>
+                  Rather than jumping directly into frameworks, I focus on understanding the technologies that power them. I study the fundamentals, build practical projects, experiment with different approaches, and continuously refine my work based on what I learn.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-              <p className="font-bold text-black">
-                I prefer learning from the ground up.
-              </p>
-              <p>
-                Rather than jumping directly into frameworks, I focus on understanding the technologies that power them. I study the fundamentals, build practical projects, experiment with different approaches, and continuously refine my work based on what I learn.
-              </p>
-              <p>
-                My goal isn't to collect as many technologies as possible—it's to build the knowledge and problem-solving skills needed to adapt to new ones throughout my career.
-              </p>
-            </div>
-          </div>
+            <p className="font-bold text-[#0038FF] text-sm mt-4">
+              My goal isn't to collect as many technologies as possible—it's to build the knowledge and problem-solving skills needed to adapt to new ones throughout my career.
+            </p>
+          </motion.div>
 
-          <hr className="border-black/10" />
-
-          {/* SECTION 4 — Current Mission */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Card 4: Current Mission */}
+          <motion.div 
+            style={{ y: y4, opacity: opacity4, scale: scale4 }}
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+          >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
                 SECTION 04
               </span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                 CURRENT MISSION
               </h3>
-            </div>
-            <div className="lg:col-span-2 flex flex-col gap-6">
-              {/* Mission Card */}
-              <div 
-                className="bg-[#0038FF]/5 border-2 border-black rounded-[2rem] p-6 shadow-[6px_6px_0_#000] relative overflow-hidden"
-              >
-                <p className="font-black text-black text-sm uppercase leading-snug tracking-tight">
-                  Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
-                </p>
-              </div>
-
-              {/* Current Focus Points */}
-              <div className="flex flex-col gap-3 mt-2">
-                <h5 className="font-black text-xs uppercase tracking-wider text-black">
-                  Current Focus:
-                </h5>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-black/80 font-bold">
-                  {[
-                    'Master modern frontend development',
-                    'Strengthen Java and Data Structures & Algorithms',
-                    'Build scalable full-stack applications',
-                    'Explore AI engineering and intelligent systems',
-                    'Gain experience through real-world projects and freelance work'
-                  ].map((focus, i) => (
-                    <li key={i} className="flex items-center gap-2.5 bg-[#F8F9FA] border border-black/5 p-3 rounded-xl">
-                      <span className="w-2 h-2 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
-                      <span>{focus}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="flex flex-col gap-6">
+                {/* Mission Card */}
+                <div className="bg-[#0038FF]/5 border-2 border-black rounded-[2rem] p-6 shadow-[6px_6px_0_#000] relative overflow-hidden">
+                  <p className="font-black text-black text-sm uppercase leading-snug tracking-tight">
+                    Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <hr className="border-black/10" />
+            {/* Current Focus Points */}
+            <div className="flex flex-col gap-2 mt-4">
+              <h5 className="font-black text-xs uppercase tracking-wider text-black">
+                Current Focus:
+              </h5>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-black/80 font-bold">
+                {[
+                  'Master modern frontend development',
+                  'Strengthen Java & DSA',
+                  'Build scalable full-stack applications',
+                  'Explore AI engineering & intelligent systems',
+                ].map((focus, i) => (
+                  <li key={i} className="flex items-center gap-2 bg-[#F8F9FA] border border-black/5 p-2 rounded-xl">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
+                    <span className="truncate">{focus}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
 
-          {/* SECTION 5 — Looking Ahead */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Card 5: Looking Ahead */}
+          <motion.div 
+            style={{ y: y5, opacity: opacity5, scale: scale5 }}
+            className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto pointer-events-auto"
+          >
             <div>
               <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
                 SECTION 05
               </span>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                 LOOKING AHEAD
               </h3>
+              <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
+                <p>
+                  Technology evolves constantly, and I believe learning should never stop.
+                </p>
+                <p>
+                  My long-term goal is to build software that combines intelligent systems with great user experiences while continuing to grow as a full-stack engineer.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-2 flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-              <p>
-                Technology evolves constantly, and I believe learning should never stop.
-              </p>
-              <p>
-                My long-term goal is to build software that combines intelligent systems with great user experiences while continuing to grow as a full-stack engineer. Whether I'm contributing to a team, building products, or working with clients, I want every project to reflect thoughtful engineering, continuous learning, and a commitment to creating meaningful solutions.
-              </p>
-            </div>
-          </div>
+            <p className="font-bold text-[#0038FF] text-sm mt-4">
+              Whether I'm contributing to a team, building products, or working with clients, I want every project to reflect thoughtful engineering, continuous learning, and a commitment to creating meaningful solutions.
+            </p>
+          </motion.div>
 
         </div>
       </section>
