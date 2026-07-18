@@ -6,6 +6,7 @@ import { MdEmail } from 'react-icons/md';
 import { SocialSidebar } from '@/components/ui/SocialSidebar';
 import { ResumeModal } from '@/components/ui/ResumeModal';
 import BubbleMenu from '@/components/ui/BubbleMenu';
+import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 
 const Logo = () => (
   <Link
@@ -45,6 +46,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="w-full relative min-h-screen flex flex-col bg-white">
+      {/* Top scroll velocity ticker */}
+      <div className="w-full bg-black text-[#CCFF00] py-2 border-b-2 border-black z-30 overflow-hidden relative h-8 flex items-center">
+        <ScrollVelocity
+          texts={[
+            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP"
+          ]}
+          velocity={20}
+          className="text-[10px] font-black tracking-widest uppercase"
+          parallaxClassName="py-0.5"
+          numCopies={8}
+        />
+      </div>
       {/* Dynamic BubbleMenu linked to routes */}
       <BubbleMenu
         logo={<Logo />}

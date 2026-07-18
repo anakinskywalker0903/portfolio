@@ -42,19 +42,6 @@ export function HomePage() {
 
   return (
     <div className="w-full relative bg-white">
-      {/* Top scroll velocity ticker */}
-      <div className="w-full bg-black text-[#CCFF00] py-2 border-b-2 border-black z-30 overflow-hidden relative h-8 flex items-center">
-        <ScrollVelocity
-          texts={[
-            "BUILD • LEARN • ITERATE • SHIP • BUILD • LEARN • ITERATE • SHIP"
-          ]}
-          velocity={20}
-          className="text-[10px] font-black tracking-widest uppercase"
-          parallaxClassName="py-0.5"
-          numCopies={8}
-        />
-      </div>
-
       {/* 1. Hero with dangle physics Lanyard */}
       <HeroSection />
 
