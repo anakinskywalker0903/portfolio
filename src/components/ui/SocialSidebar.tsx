@@ -5,7 +5,7 @@ import { MdEmail } from 'react-icons/md';
 const socialLinks = [
   {
     icon: FaLinkedin,
-    href: 'https://linkedin.com/in/rohit-dubey',
+    href: 'https://www.linkedin.com/in/rohit--dubey03/',
     label: 'LinkedIn',
     color: '#0077B5',
   },
@@ -23,7 +23,7 @@ const socialLinks = [
   },
   {
     icon: FaWhatsapp,
-    href: 'https://wa.me/919999999999', // Placeholder number, easy to swap
+    href: 'https://wa.me/918777453162',
     label: 'WhatsApp',
     color: '#25D366',
   },

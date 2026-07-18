@@ -61,9 +61,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Persistent Left Sidebar: Social columns */}
       <SocialSidebar />
 
-      {/* Persistent Floating Resume Action Button (Bottom Right) */}
-      <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-2">
-        {/* Back to top utility button */}
+      {/* Persistent Floating Back-to-Top Button (Bottom Right) */}
+      <div className="fixed right-6 bottom-6 z-40">
         <motion.button
           onClick={scrollToTop}
           whileHover={{ scale: 1.1 }}
@@ -72,19 +71,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
         >
           <FaArrowUp className="w-4 h-4" />
         </motion.button>
-
-        {/* Floating Resume Button */}
-        <motion.button
-          onClick={() => setResumeOpen(true)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-5 py-3 rounded-full bg-[#0038FF] text-white border-2 border-black font-black text-xs uppercase tracking-widest flex items-center gap-2 shadow-2xl relative group"
-        >
-          <FaFilePdf className="w-4 h-4 text-[#CCFF00]" />
-          <span>RESUME</span>
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#CCFF00] animate-ping" />
-        </motion.button>
       </div>
+
+      {/* Persistent Floating Resume Action Button (Middle Right Edge) */}
+      <motion.button
+        onClick={() => setResumeOpen(true)}
+        initial={{ x: 20 }}
+        animate={{ x: 0 }}
+        whileHover={{ x: -6 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed right-0 top-[35%] -translate-y-1/2 z-40 bg-[#0038FF] text-white border-2 border-r-0 border-black pl-5 pr-6 py-3 rounded-l-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center gap-2.5 shadow-2xl transition-all duration-300 cursor-pointer group"
+      >
+        <FaFilePdf className="w-4 h-4 text-[#CCFF00] group-hover:scale-110 transition-transform" />
+        <span>RESUME</span>
+        <span className="w-2.5 h-2.5 rounded-full bg-[#CCFF00] animate-pulse" />
+      </motion.button>
 
       {/* Main Page Content Wrapper with smooth entry transition */}
       <motion.main
@@ -113,10 +114,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </p>
               <div className="flex gap-2.5 mt-2">
                 {[
-                  { icon: FaLinkedin, href: 'https://linkedin.com/in/rohit-dubey' },
+                  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/rohit--dubey03/' },
                   { icon: FaGithub, href: 'https://github.com/anakinskywalker0903' },
                   { icon: MdEmail, href: 'mailto:rohit@rohitdubey.dev' },
-                  { icon: FaWhatsapp, href: 'https://wa.me/919999999999' },
+                  { icon: FaWhatsapp, href: 'https://wa.me/918777453162' },
                 ].map((social, i) => {
                   const Icon = social.icon;
                   return (

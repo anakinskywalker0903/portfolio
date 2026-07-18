@@ -47,7 +47,7 @@ export const ContactSection = () => {
 
             {/* Info Cards */}
             {[
-              { label: 'Email', value: 'rohit@example.com', icon: '✉️', href: 'mailto:rohit@example.com' },
+              { label: 'Email', value: 'rohit@rohitdubey.dev', icon: '✉️', href: 'mailto:rohit@rohitdubey.dev' },
               { label: 'Location', value: 'India · Remote Worldwide', icon: '📍', href: '#' },
               { label: 'Availability', value: 'Open to freelance & full-time', icon: '🟢', href: '#' },
               { label: 'Response Time', value: 'Within 24 hours', icon: '⚡', href: '#' },
@@ -74,14 +74,15 @@ export const ContactSection = () => {
             {/* Social Links */}
             <div className="flex gap-3 flex-wrap mt-2">
               {[
-                { label: 'GitHub', href: '#' },
-                { label: 'LinkedIn', href: '#' },
-                { label: 'Twitter', href: '#' },
-                { label: 'Dribbble', href: '#' },
+                { label: 'GitHub', href: 'https://github.com/anakinskywalker0903' },
+                { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rohit--dubey03/' },
+                { label: 'WhatsApp', href: 'https://wa.me/918777453162' },
               ].map(s => (
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
                   className="px-4 py-2 rounded-full border-2 border-black text-xs font-black hover:bg-[#0038FF] hover:border-[#0038FF] hover:text-white transition-all"
                 >
                   {s.label}
