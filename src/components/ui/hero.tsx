@@ -1,6 +1,7 @@
 import { lazy, Suspense, Component, type ReactNode } from 'react';
 import { useIdCardTexture } from '@/components/ui/useIdCardTexture';
 import { TextType } from './TextType';
+import { usePreloaderDone } from './PreloaderContext';
 
 const Lanyard = lazy(() => import('@/components/ui/Lanyard'));
 
@@ -76,6 +77,7 @@ const shadow = '1px 1px 0 #001A99,2px 2px 0 #001A99,3px 3px 0 #001A99,4px 4px 0 
 const headFont: React.CSSProperties = { fontFamily: '"Arial Black", Impact, sans-serif', textShadow: shadow };
 
 export const HeroSection = () => {
+  const preloaderDone = usePreloaderDone();
   const idCardFront = useIdCardTexture({
     photoSrc:    '/rohit.jpg',
     name:        'Rohit Dubey',
@@ -108,56 +110,68 @@ export const HeroSection = () => {
         <div className="flex flex-col gap-0">
 
           <div className="flex justify-start pl-[5%] md:pl-[10%]">
-            <TextType
-              text="FULL-STACK"
-              as="h1"
-              typingSpeed={100}
-              loop={false}
-              showCursor={true}
-              cursorCharacter="|"
-              className="text-[clamp(3rem,9vw,130px)] font-black leading-[0.88] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase"
-              style={headFont}
-            />
+            {preloaderDone && (
+              <TextType
+                text="FULL-STACK"
+                as="h1"
+                typingSpeed={100}
+                loop={false}
+                showCursor={true}
+                cursorCharacter="|"
+                className="text-[clamp(3rem,9vw,130px)] font-black leading-[0.88] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase"
+                style={headFont}
+              />
+            )}
+            {/* Reserve height while preloader is still up */}
+            {!preloaderDone && <h1 className="text-[clamp(3rem,9vw,130px)] font-black leading-[0.88] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase opacity-0" style={headFont}>&nbsp;</h1>}
           </div>
 
           <div className="flex justify-center">
-            <TextType
-              text="DEVELOPER"
-              as="h1"
-              typingSpeed={100}
-              initialDelay={1200}
-              loop={false}
-              showCursor={true}
-              cursorCharacter="|"
-              className="text-[clamp(3.8rem,13vw,195px)] font-black leading-[0.88] tracking-tighter text-white m-0 p-0 uppercase"
-              style={headFont}
-            />
+            {preloaderDone && (
+              <TextType
+                text="DEVELOPER"
+                as="h1"
+                typingSpeed={100}
+                initialDelay={1200}
+                loop={false}
+                showCursor={true}
+                cursorCharacter="|"
+                className="text-[clamp(3.8rem,13vw,195px)] font-black leading-[0.88] tracking-tighter text-white m-0 p-0 uppercase"
+                style={headFont}
+              />
+            )}
+            {!preloaderDone && <h1 className="text-[clamp(3.8rem,13vw,195px)] font-black leading-[0.88] tracking-tighter text-white m-0 p-0 uppercase opacity-0" style={headFont}>&nbsp;</h1>}
           </div>
 
           {/* "IN PROGRESS" row — smaller, muted, with a blinking cursor feel */}
           <div className="flex justify-end pr-[4%] md:pr-[8%] items-baseline gap-3">
-            <TextType
-              text="AI ENGINEER"
-              as="span"
-              typingSpeed={100}
-              initialDelay={2400}
-              loop={false}
-              showCursor={false}
-              className="text-[clamp(1rem,2.5vw,32px)] font-black uppercase tracking-[0.25em] text-white/35"
-              style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}
-            />
+            {preloaderDone && (
+              <TextType
+                text="AI ENGINEER"
+                as="span"
+                typingSpeed={100}
+                initialDelay={2400}
+                loop={false}
+                showCursor={false}
+                className="text-[clamp(1rem,2.5vw,32px)] font-black uppercase tracking-[0.25em] text-white/35"
+                style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}
+              />
+            )}
             <span className="text-[#CCFF00]/60 text-[clamp(0.9rem,2vw,24px)] font-black">+</span>
-            <TextType
-              text="IN PROGRESS"
-              as="h1"
-              typingSpeed={100}
-              initialDelay={3800}
-              loop={false}
-              showCursor={true}
-              cursorCharacter="|"
-              className="text-[clamp(2.8rem,8.5vw,120px)] font-black leading-[0.88] tracking-tighter text-white/40 m-0 p-0 uppercase"
-              style={headFont}
-            />
+            {preloaderDone && (
+              <TextType
+                text="IN PROGRESS"
+                as="h1"
+                typingSpeed={100}
+                initialDelay={3800}
+                loop={false}
+                showCursor={true}
+                cursorCharacter="|"
+                className="text-[clamp(2.8rem,8.5vw,120px)] font-black leading-[0.88] tracking-tighter text-white/40 m-0 p-0 uppercase"
+                style={headFont}
+              />
+            )}
+            {!preloaderDone && <h1 className="text-[clamp(2.8rem,8.5vw,120px)] font-black leading-[0.88] tracking-tighter text-white/40 m-0 p-0 uppercase opacity-0" style={headFont}>&nbsp;</h1>}
           </div>
 
         </div>

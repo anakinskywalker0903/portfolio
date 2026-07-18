@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import { Layout } from '@/components/Layout';
@@ -9,6 +9,7 @@ import { ClientWorkPage } from '@/pages/ClientWorkPage';
 import { ExperiencePage } from '@/pages/ExperiencePage';
 import { LearningArchivePage } from '@/pages/LearningArchivePage';
 import { Preloader } from '@/components/ui/Preloader';
+import { PreloaderDoneContext } from '@/components/ui/PreloaderContext';
 
 // Scroll to top on every route transition
 function ScrollToTop() {
@@ -22,37 +23,39 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(() => {
-    // Run preloader once per session to avoid annoying returning visits during testing
-    return !sessionStorage.getItem('rd_preloaded');
-  });
+  // Always show preloader on every page load / refresh
+  const [loading, setLoading] = useState(true);
+  const [preloaderDone, setPreloaderDone] = useState(false);
 
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem('rd_preloaded', 'true');
     setLoading(false);
+    // Small extra delay to let the slide-up exit animation finish before typing starts
+    setTimeout(() => setPreloaderDone(true), 100);
   };
 
   return (
-    <Router>
-      <ScrollToTop />
+    <PreloaderDoneContext.Provider value={preloaderDone}>
+      <Router>
+        <ScrollToTop />
 
-      {/* Global Cinematic Preloader */}
-      <AnimatePresence mode="wait">
-        {loading && (
-          <Preloader onComplete={handlePreloaderComplete} />
-        )}
-      </AnimatePresence>
+        {/* Global Cinematic Preloader */}
+        <AnimatePresence mode="wait">
+          {loading && (
+            <Preloader onComplete={handlePreloaderComplete} />
+          )}
+        </AnimatePresence>
 
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/client-work" element={<ClientWorkPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/certifications" element={<LearningArchivePage />} />
-        </Routes>
-      </Layout>
-    </Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/client-work" element={<ClientWorkPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="/certifications" element={<LearningArchivePage />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </PreloaderDoneContext.Provider>
   );
 }

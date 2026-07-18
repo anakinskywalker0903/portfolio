@@ -65,19 +65,27 @@ export function Preloader({ onComplete }: PreloaderProps) {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
 
       {/* Main initials R.D. */}
-      <div className="relative flex items-center justify-center gap-1 mb-8 z-10">
-        {['R', '.', 'D', '.'].map((char, index) => (
+      <div className="relative flex items-center justify-center mb-8 z-10" style={{ letterSpacing: 0 }}>
+        {[
+          { char: 'R', isDot: false },
+          { char: '.', isDot: true },
+          { char: 'D', isDot: false },
+          { char: '.', isDot: true },
+        ].map(({ char, isDot }, index) => (
           <motion.span
             key={index}
             custom={index}
             initial="hidden"
             animate="visible"
             variants={letterVariants}
-            className="text-7xl md:text-9xl font-black uppercase tracking-tight text-white"
+            className="font-black uppercase text-white"
             style={{
               fontFamily: '"Arial Black", Impact, sans-serif',
-              textShadow: char !== '.' ? shadow3D : undefined,
-              color: char === '.' ? '#CCFF00' : 'white'
+              fontSize: isDot ? 'clamp(3rem, 8vw, 7rem)' : 'clamp(5rem, 12vw, 10rem)',
+              lineHeight: 1,
+              textShadow: !isDot ? shadow3D : undefined,
+              color: isDot ? '#CCFF00' : 'white',
+              marginLeft: isDot ? '-0.05em' : index > 0 ? '-0.05em' : 0,
             }}
           >
             {char}
