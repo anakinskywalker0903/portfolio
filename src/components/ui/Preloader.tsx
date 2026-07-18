@@ -70,7 +70,6 @@ export function Preloader({ onComplete }: PreloaderProps) {
           { char: 'R', isDot: false },
           { char: '.', isDot: true },
           { char: 'D', isDot: false },
-          { char: '.', isDot: true },
         ].map(({ char, isDot }, index) => (
           <motion.span
             key={index}
