@@ -91,21 +91,21 @@ export const HeroSection = () => {
     <section
       id="home"
       className="bg-[#0038FF] font-sans selection:bg-[#CCFF00] selection:text-black relative overflow-hidden w-full"
-      style={{ minHeight: '100svh' }}
+      style={{ height: '100svh', overflow: 'hidden' }}
     >
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />
 
       {/* ── Text layer ── */}
-      <div className="relative z-10 pointer-events-none w-full max-w-[1440px] mx-auto px-4 md:px-10 pt-24 md:pt-28 pb-10 flex flex-col justify-center min-h-[100svh]">
+      <div className="relative z-10 pointer-events-none w-full max-w-[1440px] mx-auto px-4 md:px-10 pt-16 md:pt-20 pb-4 flex flex-col justify-center h-full">
 
         {/* Glassmorphic availability pill */}
-        <div className="mb-6">
+        <div className="mb-2">
           <AvailabilityPill />
         </div>
 
         {/* Stacked headline — FULL-STACK / DEVELOPER / IN PROGRESS */}
-        <div className="flex flex-col gap-0.5 md:gap-1">
+        <div className="flex flex-col gap-0">
 
           <div className="flex justify-start pl-[5%] md:pl-[10%]">
             <TextType
@@ -163,7 +163,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Bottom: badge + bio */}
-        <div className="flex items-end gap-6 mt-8 pointer-events-auto">
+        <div className="flex items-end gap-6 mt-4 pointer-events-auto">
           <CircularBadge />
           <p className="text-white/45 text-sm font-medium leading-relaxed max-w-[240px] mb-2">
             Building polished, fast &amp; accessible digital products.<br />
@@ -178,7 +178,7 @@ export const HeroSection = () => {
           <Suspense fallback={null}>
             {idCardFront && (
               <Lanyard
-                position={[0, 0, 33]}
+                position={[0, 0, 28]}
                 gravity={[0, -40, 0]}
                 fov={20}
                 transparent={true}
