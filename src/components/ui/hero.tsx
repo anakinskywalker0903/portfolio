@@ -1,5 +1,6 @@
 import { lazy, Suspense, Component, type ReactNode } from 'react';
 import { useIdCardTexture } from '@/components/ui/useIdCardTexture';
+import { TextPressure } from './TextPressure';
 
 const Lanyard = lazy(() => import('@/components/ui/Lanyard'));
 
@@ -106,22 +107,30 @@ export const HeroSection = () => {
         {/* Stacked headline — FULL-STACK / DEVELOPER / IN PROGRESS */}
         <div className="flex flex-col gap-0.5 md:gap-1">
 
-          <div className="flex justify-start pl-[5%] md:pl-[10%]">
-            <h1
-              className="text-[clamp(3rem,9vw,130px)] font-black leading-[0.88] tracking-tighter text-[#CCFF00] m-0 p-0 uppercase"
-              style={headFont}
-            >
-              FULL-STACK
-            </h1>
+          <div className="w-full max-w-[85%] sm:max-w-[75%] pl-[5%] md:pl-[10%] h-[10vw] min-h-[50px] max-h-[140px] pointer-events-auto">
+            <TextPressure
+              text="FULL-STACK"
+              fontFamily="Roboto Flex"
+              fontUrl="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap"
+              width={true}
+              weight={true}
+              italic={true}
+              textColor="#CCFF00"
+              minFontSize={28}
+            />
           </div>
 
-          <div className="flex justify-center">
-            <h1
-              className="text-[clamp(3.8rem,13vw,195px)] font-black leading-[0.88] tracking-tighter text-white m-0 p-0 uppercase"
-              style={headFont}
-            >
-              DEVELOPER
-            </h1>
+          <div className="w-full max-w-[95%] sm:max-w-[85%] mx-auto h-[13vw] min-h-[70px] max-h-[200px] pointer-events-auto">
+            <TextPressure
+              text="DEVELOPER"
+              fontFamily="Roboto Flex"
+              fontUrl="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap"
+              width={true}
+              weight={true}
+              italic={true}
+              textColor="#FFFFFF"
+              minFontSize={36}
+            />
           </div>
 
           {/* "IN PROGRESS" row — smaller, muted, with a blinking cursor feel */}
