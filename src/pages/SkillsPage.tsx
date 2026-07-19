@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import {
-  SiReact, SiTypescript, SiNextdotjs, SiTailwindcss,
-  SiNodedotjs, SiExpress, SiPostgresql, SiMongodb,
-  SiFigma, SiGithub, SiDocker, SiPython, SiNumpy,
-  SiPandas, SiGit, SiPostman, SiVercel, SiRailway,
-  SiHtml5, SiCss, SiJavascript, SiMysql
+  SiReact, SiTypescript, SiTailwindcss,
+  SiNodedotjs, SiExpress, SiPostgresql, SiGithub,
+  SiPython, SiNumpy, SiPandas, SiGit, SiPostman,
+  SiVercel, SiRailway, SiHtml5, SiCss, SiJavascript, SiMysql,
+  SiFigma
 } from 'react-icons/si';
 import { DiJava } from 'react-icons/di';
 import { VscCode } from 'react-icons/vsc';
 import { GrDatabase } from 'react-icons/gr';
-import { TbBrain, TbLock, TbNetwork } from 'react-icons/tb';
+import { TbBrain, TbNetwork } from 'react-icons/tb';
 
 interface Skill {
   name: string;
@@ -24,6 +24,7 @@ interface Skill {
   color: string;
   description: string;
   projects: string[];
+  conceptsHeader: string;
   concepts: string[];
   learning: string;
 }
@@ -34,106 +35,97 @@ const skillDetails: Skill[] = [
     name: 'React',
     stage: 'ACTIVE',
     learningSince: 2025,
-    projectsCount: 6,
-    focus: 'State management & Hooks',
-    nextGoal: 'Master React Server Components',
+    projectsCount: 4,
+    focus: 'Building Portfolio & Brainstormzz',
+    nextGoal: 'Learn Authentication & Server Components',
     categories: ['Frontend'],
     Icon: SiReact,
     color: '#61DAFB',
-    description: 'Component-based UI development with declarative state flows, custom hooks cycle, and efficient rendering systems.',
-    projects: ['Personal Portfolio 2026', 'E-Commerce Platform', 'Real-Time Dashboard'],
-    concepts: ['React Hook Workflows', 'Context API & State', 'JSX Rendering Cycle', 'Routing & Data Fetching'],
-    learning: 'React 19 forms hooks (useActionState) and compiler compilation upgrades.'
+    description: 'Component-based UI development with hooks state management, component tree rendering, and responsive elements integration.',
+    projects: ['Personal Portfolio 2026', 'Brainstormzz Canvas', 'Interactive Dashboard'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Components & Nesting', 'Props Passing', 'useState & useEffect Hooks', 'Routing Integrations', 'REST API Integration', 'Responsive Design Rules'],
+    learning: 'React state rendering optimization and hooks triggers.'
   },
   {
     name: 'TypeScript',
     stage: 'PROJECT READY',
     learningSince: 2025,
-    projectsCount: 5,
-    focus: 'Strict typing & generics',
-    nextGoal: 'Build a custom state management system',
+    projectsCount: 3,
+    focus: 'Strict typing & generics in state',
+    nextGoal: 'Configure advanced compile check suites',
     categories: ['Languages', 'Frontend'],
     Icon: SiTypescript,
     color: '#3178C6',
-    description: 'Type-safe JavaScript development. Advanced typings, static analysis, type assertions, and compilation checks.',
+    description: 'Statically-typed JavaScript layout layer, enforcing strict contracts, interface layouts, and generic configurations.',
     projects: ['Interactive 3D Engine', 'Full-Stack Dashboard API'],
-    concepts: ['Interfaces & custom types', 'Generics & Utility Types', 'Strict Null Checks', 'TSConfig Configurations'],
-    learning: 'Branded/nominal typing structures for compile-time domain validation.'
-  },
-  {
-    name: 'Next.js',
-    stage: 'ACTIVE',
-    learningSince: 2026,
-    projectsCount: 3,
-    focus: 'App Router & server side loading',
-    nextGoal: 'Implement robust route caching & middleware handlers',
-    categories: ['Frontend'],
-    Icon: SiNextdotjs,
-    color: '#000000',
-    description: 'Modern React meta-framework. Server components routing, server actions execution, and static generation frameworks.',
-    projects: ['SaaS Analytics Portal', 'Case Study Site'],
-    concepts: ['App Router Layouts', 'Server vs. Client Components', 'Suspense & Streaming', 'SEO & Metadata API'],
-    learning: 'Dynamic caching rules and segment config options in App Router.'
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Interfaces & Type Aliases', 'Generics & Utility Types', 'Strict Type Checking configs', 'Integration with React/Vite'],
+    learning: 'Typing APIs response envelopes and custom event handlers.'
   },
   {
     name: 'Tailwind CSS',
     stage: 'ACTIVE',
     learningSince: 2025,
-    projectsCount: 10,
-    focus: 'Custom themes & responsive screens',
-    nextGoal: 'Optimize custom design utility setups',
+    projectsCount: 8,
+    focus: 'Theme custom configs & fluid layout variables',
+    nextGoal: 'Tailwind v4 optimization frameworks',
     categories: ['Frontend'],
     Icon: SiTailwindcss,
     color: '#38BDF8',
-    description: 'Utility-first styling approach for rapid, pixel-perfect user interface building and responsive styling sheets.',
-    projects: ['All current web builds', 'Component Libraries'],
-    concepts: ['Fluid Layout Systems', 'Dynamic Grid / Flexbox', 'Dark Mode Configs', 'Theme Extensions'],
-    learning: 'Custom CSS variable declarations inside Tailwind v4 configurations.'
+    description: 'Utility-first CSS styling classes, facilitating responsive layouts and immediate theme configurations without writing standalone CSS documents.',
+    projects: ['Main Portfolio Site', 'Landing Page templates'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Utility Classes Styling', 'Flexbox & Grid utilities', 'Responsive screen modifiers', 'Dark mode variant rules'],
+    learning: 'Fluid variable systems mapping using Tailwind custom themes.'
   },
   {
     name: 'HTML5',
     stage: 'FOUNDATION',
     learningSince: 2025,
     projectsCount: 12,
-    focus: 'Semantic markup & accessibility',
-    nextGoal: 'Implement WCAG 2.1 AA structures',
+    focus: 'Semantic elements hierarchy',
+    nextGoal: 'Implement full WCAG 2.1 AA accessibility layouts',
     categories: ['Frontend'],
     Icon: SiHtml5,
     color: '#E34F26',
-    description: 'Structural foundation of modern web documents. Semantic elements, schema mappings, and document flows.',
-    projects: ['Main Portfolio Shell', 'Landing Pages Collection'],
-    concepts: ['Semantic Layout Elements', 'Forms & Inputs Validation', 'DOM Structure Hierarchies', 'Meta Tagging for SEO'],
-    learning: 'ARIA roles mapping configurations for voice reader clients.'
+    description: 'Markup standard for web documents. Creating correct semantic elements to structures information for search bots and reader tools.',
+    projects: ['Main Website Shell', 'Landing Pages Collection'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Semantic Document Layouts', 'Forms & standard inputs', 'DOM structures & tags', 'Meta Tagging configs'],
+    learning: 'Adding ARIA descriptors to interactive buttons.'
   },
   {
     name: 'CSS3',
     stage: 'FOUNDATION',
     learningSince: 2025,
     projectsCount: 12,
-    focus: 'Modern layouts & transitions',
-    nextGoal: 'Advanced custom transitions & properties',
+    focus: 'Layout alignment & visual grids',
+    nextGoal: 'Advanced transitions & custom animation curves',
     categories: ['Frontend'],
     Icon: SiCss,
     color: '#1572B6',
-    description: 'Styling sheets for visual formatting. Custom layouts, animations, transitions, and theme controls.',
-    projects: ['Theme Custom Stylesheets', 'Card Parallax Animations'],
-    concepts: ['Flexbox & Grid Layouts', 'Responsive Media Queries', 'Custom Variables', 'Hover & Active States'],
-    learning: 'Container queries for advanced component-scoped responsive layouts.'
+    description: 'Styling layout sheet parameters, implementing custom positioning, media boundaries, flex columns, and click transitions.',
+    projects: ['Grid layout stylesheets', 'Cards parallax transitions'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Flexbox Layouts', 'CSS Grid Alignments', 'Media Queries (Mobile-first)', 'Hover/Active Transition states'],
+    learning: 'Designing layouts around container query limits.'
   },
   {
     name: 'JavaScript',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 8,
-    focus: 'Async patterns & core APIs',
-    nextGoal: 'Master memory profile management',
+    focus: 'Async network queries & JSON parsing',
+    nextGoal: 'Optimizing memory profile processing',
     categories: ['Languages', 'Frontend', 'Backend'],
     Icon: SiJavascript,
     color: '#F7DF1E',
-    description: 'Core scripting language of the web. Asynchronous operations, dynamic events, APIs integrations, and modular patterns.',
-    projects: ['Custom Canvas Animations', 'Form Validation Scripting'],
-    concepts: ['Promises & Async/Await', 'DOM Manipulation', 'Event Loops & Listeners', 'ES6+ Modules'],
-    learning: 'Built-in JavaScript garbage collection cycles and memory leaks profiling.'
+    description: 'Core scripting engine of web software. Async loops, event handlers, and data transformations.',
+    projects: ['Custom Canvas animations', 'Client validation logic'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['DOM events listening', 'Promises & async/await', 'Array Methods (map, filter, reduce)', 'ES6 Module imports'],
+    learning: 'JavaScript event loop call stack execution.'
   },
 
   // --- BACKEND ---
@@ -142,92 +134,82 @@ const skillDetails: Skill[] = [
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 4,
-    focus: 'Async server logic & scripts',
-    nextGoal: 'Build high-volume stream ingestion pipelines',
+    focus: 'Express routing & API integration',
+    nextGoal: 'Secure route authorization configurations',
     categories: ['Backend'],
     Icon: SiNodedotjs,
     color: '#339933',
-    description: 'Asynchronous event-driven JavaScript runtime environment, ideal for building scalable network servers.',
+    description: 'Event-driven, asynchronous JavaScript runtime enabling server-side execution of backend scripts.',
     projects: ['Real-Time WebSockets Hub', 'Image Compression Server'],
-    concepts: ['Event Loop Mechanics', 'File System Operations', 'Process Management', 'Server Scaling'],
-    learning: 'Native Node.js test-runner configurations for microservice suites.'
+    conceptsHeader: "WHAT I'VE BUILT",
+    concepts: ['REST APIs', 'Express Routing', 'Middleware', 'CRUD Operations', 'Environment Variables'],
+    learning: 'Built-in Node.js file system read/write stream operations.'
   },
   {
-    name: 'Express',
+    name: 'Express.js',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 4,
-    focus: 'REST APIs & routers',
-    nextGoal: 'Implement middleware rate-limiting patterns',
+    focus: 'Express Routing & Middleware',
+    nextGoal: 'Configure middleware error handling',
     categories: ['Backend'],
     Icon: SiExpress,
     color: '#000000',
-    description: 'Minimalist backend web framework for Node.js, providing robust tooling for API endpoints and requests processing.',
+    description: 'Minimalist web server framework for Node.js, simplifying routing configurations, request handling, and backend services setups.',
     projects: ['REST Backend APIs', 'Authentication Gateways'],
-    concepts: ['Routing Middleware', 'Request/Response Contexts', 'Error Boundary Middleware', 'CORS Configs'],
-    learning: 'Dynamic validation middlewares built using TS interface matching.'
+    conceptsHeader: "WHAT I'VE BUILT",
+    concepts: ['Route Controller setup', 'CORS & Header controls', 'Body-parser configurations', 'Custom router endpoints'],
+    learning: 'Typing Express request and response contexts.'
   },
   {
     name: 'REST APIs',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 6,
-    focus: 'Endpoint structures & headers',
-    nextGoal: 'Implement advanced versioning systems',
+    focus: 'Response structures & HTTP verbs',
+    nextGoal: 'Implement API versioning',
     categories: ['Backend'],
     Icon: TbNetwork,
     color: '#0038FF',
-    description: 'Designing RESTful HTTP architectures with clear resource hierarchies, HTTP status rules, and structured replies.',
+    description: 'Structuring stateless HTTP backends with unified resource routes, clean payload returns, and HTTP status codes.',
     projects: ['Recruiter Portal Endpoint', 'User Session Handlers'],
-    concepts: ['HTTP Verbs & Semantics', 'Status Code Conventions', 'JSON Response Payloads', 'Query Filtering/Sorting'],
-    learning: 'Designing idempotent APIs handling automatic retry headers.'
-  },
-  {
-    name: 'Authentication',
-    stage: 'LEARNING',
-    learningSince: 2026,
-    projectsCount: 2,
-    focus: 'JWT & local token storage',
-    nextGoal: 'Build multi-tenant authentication from scratch',
-    categories: ['Backend'],
-    Icon: TbLock,
-    color: '#FF007A',
-    description: 'Implementing secure verification protocols, login flows, hashing passwords, and protecting backend endpoints.',
-    projects: ['Dashboard Login Gate', 'Admin Route Guards'],
-    concepts: ['Password Hashing (bcrypt)', 'JWT Generation & Verification', 'Cookie Session Contexts', 'Route Protection Guards'],
-    learning: 'OAuth 2.0 protocol specifications and integration architectures.'
+    conceptsHeader: "WHAT I'VE BUILT",
+    concepts: ['HTTP Verbs (GET/POST/PUT/DELETE)', 'Status Code Conventions (200, 404, 500)', 'JSON payloads returning', 'Query parameters filters'],
+    learning: 'Structuring API versioning directories (/api/v1/...).'
   },
 
   // --- LANGUAGES ---
   {
     name: 'Java',
-    stage: 'FOUNDATION',
+    stage: 'LEARNING',
     learningSince: 2024,
     projectsCount: 3,
-    focus: 'OOP structures & compiler rules',
-    nextGoal: 'Learn Spring Boot backend setups',
+    focus: 'Learning through DSA problems',
+    nextGoal: 'Advanced DSA Exception Handling',
     categories: ['Languages'],
     Icon: DiJava,
     color: '#ED8B00',
     description: 'Class-based, object-oriented compiled programming language designed to have minimal implementation dependencies.',
     projects: ['CLI Inventory Manager', 'Bank Transaction Script'],
-    concepts: ['Classes & Object Blueprints', 'Inheritance & Polymorphism', 'Methods & Overloading', 'Basic Data Structures'],
-    learning: 'Modern Java stream API filters and map methods.'
+    conceptsHeader: "LEARNING FOCUS",
+    concepts: ['OOP principles', 'Collections framework', 'DSA implementations', 'Exception handling', 'File handling'],
+    learning: 'Java syntax compilation rules and algorithmic logic optimization.'
   },
   {
     name: 'Python',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 5,
-    focus: 'Data scripts & API integration',
-    nextGoal: 'Train custom local neural networks',
+    focus: 'Applied in AI Projects',
+    nextGoal: 'Implement custom analytics parsers',
     categories: ['Languages', 'AI / ML'],
     Icon: SiPython,
     color: '#3776AB',
     description: 'High-level general-purpose scripting language, optimal for data science, automation scripts, and AI integrations.',
     projects: ['Web Scraper Tool', 'Data Cleanup Runner'],
-    concepts: ['Data Types & Structures', 'Script Writing & Automation', 'File I/O Parsing', 'Package Configs (pip/venv)'],
-    learning: 'FastAPI structures for rapid Python microservice creation.'
+    conceptsHeader: "USED FOR",
+    concepts: ['AI APIs integration', 'Script writing & automation', 'NumPy operations', 'Pandas datasets cleanup', 'Data Processing'],
+    learning: 'Automating local file processing runs with OS library.'
   },
   {
     name: 'SQL',
@@ -235,61 +217,49 @@ const skillDetails: Skill[] = [
     learningSince: 2025,
     projectsCount: 3,
     focus: 'Relational queries & filters',
-    nextGoal: 'Write advanced query window routines',
+    nextGoal: 'Query optimization & indexes',
     categories: ['Languages', 'Databases'],
     Icon: GrDatabase,
     color: '#0038FF',
     description: 'Structured Query Language used to write, filter, join, and manage data entries stored in relational tables.',
     projects: ['Customer Ledger database', 'Reporting Dashboards'],
-    concepts: ['Select, Filter, & Sort', 'Table Joins (Inner/Outer)', 'Group By Aggregations', 'Schema Design Foundations'],
-    learning: 'Subquery optimizations and writing nested CTE operations.'
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Select, Filter, & Sort queries', 'Inner & Outer Table Joins', 'Group By & Aggregates', 'Basic Table Schema Design'],
+    learning: 'Optimizing nested subqueries and writing CTE queries.'
   },
 
   // --- DATABASES ---
-  {
-    name: 'PostgreSQL',
-    stage: 'PROJECT READY',
-    learningSince: 2025,
-    projectsCount: 3,
-    focus: 'Table designs & foreign keys',
-    nextGoal: 'Optimize slow queries using indexing plans',
-    categories: ['Databases'],
-    Icon: SiPostgresql,
-    color: '#4169E1',
-    description: 'Enterprise-grade open-source relational database system, supporting strict schema constraints and ACID compliance.',
-    projects: ['User Database Store', 'SaaS Client Repositories'],
-    concepts: ['Relational Schema Models', 'Primary & Foreign Keys', 'Data Normalization rules', 'Simple Query Indexing'],
-    learning: 'JSONB data types storage and performance queries.'
-  },
   {
     name: 'MySQL',
     stage: 'FOUNDATION',
     learningSince: 2025,
     projectsCount: 2,
-    focus: 'Schema setups & table joins',
-    nextGoal: 'Learn to configure replication arrays',
+    focus: 'Schema setups & joins',
+    nextGoal: 'Complex CTEs and windows functions',
     categories: ['Databases'],
     Icon: SiMysql,
     color: '#4479A1',
-    description: 'Widely-used relational database management system, powering millions of web applications and structured logging repositories.',
+    description: 'Relational database management system, powering millions of web applications and structured logging repositories.',
     projects: ['Blog database system', 'System logs collection'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Table Schema Setups', 'Primary Key Constraints', 'Basic Joins & Filters', 'Database Backup Triggers'],
-    learning: 'Row-level locking configurations for high-concurrency tables.'
+    learning: 'Relational database foreign key setups.'
   },
   {
-    name: 'MongoDB',
+    name: 'PostgreSQL',
     stage: 'PROJECT READY',
     learningSince: 2025,
-    projectsCount: 4,
-    focus: 'NoSQL schemas & aggregations',
-    nextGoal: 'Orchestrate scale-out sharding configurations',
+    projectsCount: 3,
+    focus: 'Relational modeling & Indexing',
+    nextGoal: 'Advanced window functions & CTEs',
     categories: ['Databases'],
-    Icon: SiMongodb,
-    color: '#47A248',
-    description: 'Document-based NoSQL database offering horizontal scaling, index optimization, and high performance object storage.',
-    projects: ['Content Management Backends', 'Logging Databases'],
-    concepts: ['Document Store Schemas', 'Aggregation Queries', 'Query Indexes & Filters', 'Mongoose Models Map'],
-    learning: 'Time-series data collections setups and storage plans.'
+    Icon: SiPostgresql,
+    color: '#4169E1',
+    description: 'Enterprise-grade open-source relational database system, supporting strict schema constraints and ACID compliance.',
+    projects: ['User Database Store', 'SaaS Client Repositories'],
+    conceptsHeader: "WHAT I'VE USED",
+    concepts: ['Relational Schema Models', 'Primary & Foreign Keys', 'Data Normalization rules', 'Simple Query Indexing'],
+    learning: 'JSONB data types storage and performance queries.'
   },
 
   // --- AI / ML ---
@@ -298,92 +268,82 @@ const skillDetails: Skill[] = [
     stage: 'FOUNDATION',
     learningSince: 2025,
     projectsCount: 2,
-    focus: 'Array operations & vector math',
-    nextGoal: 'Optimize custom dot-product math routines',
+    focus: 'Array operations & vectors',
+    nextGoal: 'Matrix dot-product operations',
     categories: ['AI / ML'],
     Icon: SiNumpy,
     color: '#013243',
     description: 'Fundamental package for scientific computing in Python, providing support for multi-dimensional array math operations.',
     projects: ['Linear algebra matrix solvers', 'Numerical math scripts'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Array Creation & Dimensions', 'Vectorized Math Operations', 'Array Slicing & Masking', 'Matrix Dot-Products'],
-    learning: 'NumPy C-extension integration details for faster loops.'
+    learning: 'Matrix transformations and slicing matrices.'
   },
   {
     name: 'Pandas',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 3,
-    focus: 'Data cleanup & DataFrame filters',
-    nextGoal: 'Advanced multi-index dataset parsing',
+    focus: 'DataFrame operations & cleanup',
+    nextGoal: 'Advanced multi-index transformations',
     categories: ['AI / ML'],
     Icon: SiPandas,
     color: '#150458',
     description: 'Flexible data analysis and manipulation library for Python, offering clean DataFrame structures to load and edit datasets.',
     projects: ['CSV parser tools', 'Log analysis scripts'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['DataFrame Creation', 'Data Cleaning & Dropping', 'Groupby Aggregations', 'CSV / JSON Ingestion'],
-    learning: 'Streaming large CSV payloads without overflow issues.'
+    learning: 'Clearing and parsing missing dataset columns.'
   },
   {
     name: 'OpenAI API',
     stage: 'ACTIVE',
     learningSince: 2025,
     projectsCount: 4,
-    focus: 'Structured outputs & completions',
-    nextGoal: 'Build dynamic multi-agent system arrays',
+    focus: 'ChatCompletions & Function calling',
+    nextGoal: 'Structured outputs with Zod schemas',
     categories: ['AI / ML'],
     Icon: TbBrain,
     color: '#412991',
     description: 'Integrating large language model endpoints into custom applications for chat operations, content parsing, and structured JSON output.',
     projects: ['Resume Generator API', 'Auto Code Reviewer'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Chat Completions API', 'System Prompts & Rules', 'Function/Tool Callbacks', 'JSON Mode Formatting'],
-    learning: 'Structured outputs using Zod schema constraints.'
-  },
-  {
-    name: 'RAG',
-    stage: 'LEARNING',
-    learningSince: 2026,
-    projectsCount: 2,
-    focus: 'Vector search context injection',
-    nextGoal: 'Master semantic cross-encoder reranking',
-    categories: ['AI / ML'],
-    Icon: TbBrain,
-    color: '#CCFF00',
-    description: 'Combining dynamic retrieval searches with large language models to supply custom, domain-specific background context to prompts.',
-    projects: ['Local documents questioner', 'Semantic search engine'],
-    concepts: ['Vector Search Database Context', 'Context Injection Setups', 'Text Chunking Strategies', 'Embeddings Generation API'],
-    learning: 'Chunking overlap tuning and cross-encoder search filters.'
+    learning: 'Structured outputs validation formats.'
   },
   {
     name: 'Prompt Engineering',
     stage: 'ACTIVE',
     learningSince: 2025,
     projectsCount: 5,
-    focus: 'Few-shot & reasoning templates',
-    nextGoal: 'Configure programmatic prompt test suites',
+    focus: 'Few-shot & Chain of Thought template validation',
+    nextGoal: 'Programmatic prompt evaluation checks',
     categories: ['AI / ML'],
     Icon: TbBrain,
     color: '#0038FF',
     description: 'Crafting, testing, and optimizing system prompts to get structured, reliable, and high-fidelity output from language models.',
     projects: ['Structured agents rules', 'Prompt templates tester'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['System Rules & Guidelines', 'Few-shot Learning Prompts', 'Chain-of-Thought Patterns', 'Context Windows Constraints'],
-    learning: 'Systematic test evaluations with custom parsing checks.'
+    learning: 'Automated prompt templates parser runs.'
   },
 
-  // --- TOOLS ---
+  // --- DEVELOPMENT TOOLS ---
   {
     name: 'Git',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 15,
     focus: 'Branch management & commits',
-    nextGoal: 'Master interactive rebase workflows',
+    nextGoal: 'Interactive rebasing',
     categories: ['Tools'],
     Icon: SiGit,
     color: '#F05032',
     description: 'Local distributed version control tool tracking edits, branches, merges, and commit history chains.',
     projects: ['All codebases repos', 'Open source contributions'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Committing & Staging', 'Branching & Merging', 'Resolving Staging Conflicts', 'Git Diff & Log Tools'],
-    learning: 'Custom pre-commit git hook automation scripts.'
+    learning: 'Git config rules and aliases setups.'
   },
   {
     name: 'GitHub',
@@ -391,74 +351,63 @@ const skillDetails: Skill[] = [
     learningSince: 2025,
     projectsCount: 15,
     focus: 'PR reviews & releases',
-    nextGoal: 'Write custom CI/CD action workflows',
+    nextGoal: 'GitHub Actions automation workflows',
     categories: ['Tools'],
     Icon: SiGithub,
     color: '#181717',
     description: 'Web-based hosting portal for Git repositories, facilitating team PR reviews, issues tracking, and release runs.',
     projects: ['Hosting current portfolio', 'GitHub Actions setups'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Pull Request Code Reviews', 'Issue Tracking Systems', 'GitHub Pages Deployments', 'Forking & Upstream Merges'],
-    learning: 'GitHub Actions automated unit-testing pipelines.'
+    learning: 'Writing basic actions configurations.'
   },
   {
     name: 'VS Code',
     stage: 'ACTIVE',
     learningSince: 2024,
     projectsCount: 20,
-    focus: 'Extensions & configurations',
-    nextGoal: 'Set up custom global keybindings',
+    focus: 'Workspace configs & extensions',
+    nextGoal: 'Configure custom keybindings',
     categories: ['Tools'],
     Icon: VscCode,
     color: '#007ACC',
     description: 'Extensible code editor providing rich syntax, lint tools integration, task configs, and terminal setups.',
     projects: ['All IDE development workspaces'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Extension Customizations', 'Integrated Terminal Setups', 'Debugger Workspace Setups', 'Workspace Settings Config'],
-    learning: 'Custom keyboard mapping rules for faster editing workflows.'
+    learning: 'Keyboard shortcuts configurations and tasks customization.'
   },
   {
     name: 'Postman',
     stage: 'ACTIVE',
     learningSince: 2025,
     projectsCount: 8,
-    focus: 'HTTP testing & contexts',
-    nextGoal: 'Configure automated collections check suites',
+    focus: 'HTTP testing & collections',
+    nextGoal: 'Automate validation scripts inside tests',
     categories: ['Tools'],
     Icon: SiPostman,
     color: '#FF6C37',
     description: 'API client tool allowing developers to execute, check, log, and automate REST HTTP endpoint requests.',
     projects: ['REST Backend Testing', 'Route validations logs'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['HTTP Request Generation', 'Environment Variables Config', 'Response Assertions Checks', 'Collection Running tools'],
-    learning: 'Scripting response validation assertions inside test tabs.'
+    learning: 'Response testing scripting commands.'
   },
   {
     name: 'Figma',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 4,
-    focus: 'Wireframes & auto layouts',
-    nextGoal: 'Configure advanced variable systems',
+    focus: 'Wireframes & layouts',
+    nextGoal: 'Variable design token mappings',
     categories: ['Tools'],
     Icon: SiFigma,
     color: '#F24E1E',
     description: 'Vector design editor and prototyping tool, ideal for visual layout mockups, user flows, and wireframing dashboards.',
     projects: ['App UX Wireframes', 'Client Site Mockups'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Auto Layout v5 Padding', 'Component Variants Config', 'Vector Framing Layouts', 'Interactive Web Prototyping'],
-    learning: 'Component token mappings for unified dark mode systems.'
-  },
-  {
-    name: 'Docker',
-    stage: 'EXPLORING',
-    learningSince: 2026,
-    projectsCount: 2,
-    focus: 'Dockerfile multistage building',
-    nextGoal: 'Deploy local multi-container swarm configurations',
-    categories: ['Tools'],
-    Icon: SiDocker,
-    color: '#2496ED',
-    description: 'Container platform standardizing application builds to execute reliably across development, testing, and production servers.',
-    projects: ['Local API Dev Environment', 'Deployable Backend containers'],
-    concepts: ['Dockerfile Formats', 'Multi-Container Compose files', 'Volume Bindings & Storage', 'Container Ports Mapping'],
-    learning: 'Local Swarm cluster deployments and network setups.'
+    learning: 'Custom token setups and styling alignments.'
   },
 
   // --- CLOUD ---
@@ -467,45 +416,48 @@ const skillDetails: Skill[] = [
     stage: 'ACTIVE',
     learningSince: 2025,
     projectsCount: 8,
-    focus: 'Frontend deploys & domain config',
-    nextGoal: 'Configure edge middleware redirect logic',
+    focus: 'Frontend deployments & caching',
+    nextGoal: 'Edge middleware configuration',
     categories: ['Cloud'],
     Icon: SiVercel,
     color: '#000000',
     description: 'Cloud platform optimized for frontend hosting, offering serverless builds, caching, and edge routing.',
     projects: ['Static Frontend Hosting', 'Portfolio deployments'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Static Web Hosting', 'Custom Domain Settings', 'Serverless Functions run', 'GitHub Deployment Webhooks'],
-    learning: 'Edge middleware cookie checking verification rules.'
+    learning: 'Deploying React apps through Git build targets.'
   },
   {
     name: 'Railway',
     stage: 'PROJECT READY',
     learningSince: 2025,
     projectsCount: 4,
-    focus: 'Backend deploys & databases',
-    nextGoal: 'Set up horizontal scaling alert hooks',
+    focus: 'Service deployments & databases',
+    nextGoal: 'Configure horizontal scaling rules',
     categories: ['Cloud'],
     Icon: SiRailway,
     color: '#000000',
     description: 'Infrastructure platform providing deployment environments for backend APIs, databases, cron jobs, and background workers.',
     projects: ['Backend API Deployments', 'Database Instances Hosting'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Backend Deployments', 'Database Instance Setups', 'Environment Variables config', 'Service Linking Network'],
-    learning: 'Internal private networking connections between services.'
+    learning: 'Linking backend environments to private databases.'
   },
   {
     name: 'Hostinger',
     stage: 'ACTIVE',
     learningSince: 2024,
     projectsCount: 3,
-    focus: 'DNS records & shared hosting',
-    nextGoal: 'Set up automated FTP publish tasks',
+    focus: 'Shared hosting & DNS setups',
+    nextGoal: 'Automated FTP release scripting',
     categories: ['Cloud'],
     Icon: SiVercel, // Fallback/Nice Cloud Icon
     color: '#673DE6',
     description: 'Hosting provider offering domain registration, shared hosting spaces, DNS control, and cPanel configuration setups.',
     projects: ['Shared Webspaces Config', 'DNS Records Mapping'],
+    conceptsHeader: "WHAT I'VE USED",
     concepts: ['Shared Webspaces Config', 'DNS Records Mapping (A/CNAME)', 'FTP Upload Connections', 'SSL Cert Setup Trigger'],
-    learning: 'Scripting Git action releases to publish files over SFTP.'
+    learning: 'Configuring domain names to resolve over custom DNS namespaces.'
   }
 ];
 
@@ -539,7 +491,7 @@ export function SkillsPage() {
     : filteredSkills[0] || selectedSkill;
 
   return (
-    <div className="w-full min-h-screen bg-white pt-32 pb-24 px-6 md:px-10 font-sans selection:bg-[#CCFF00] selection:text-black">
+    <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-32 pb-24 px-6 md:px-10 font-sans selection:bg-[#CCFF00] selection:text-black relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
@@ -750,10 +702,10 @@ export function SkillsPage() {
                 </p>
               </div>
 
-              {/* What I've Learned */}
+              {/* What I've Learned / Built */}
               <div>
                 <h4 className="text-[#CCFF00] text-[10px] font-black uppercase tracking-wider mb-1.5">
-                  WHAT I'VE LEARNED
+                  {finalSelected.conceptsHeader}
                 </h4>
                 <ul className="flex flex-col gap-1 text-xs text-white/75 font-semibold">
                   {finalSelected.concepts.map((concept, i) => (
