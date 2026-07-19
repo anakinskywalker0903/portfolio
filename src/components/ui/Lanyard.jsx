@@ -26,15 +26,7 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 const FRONT_UV_RECT = { x: 0,   y: 0, w: 0.5,  h: 0.755 };
 const BACK_UV_RECT  = { x: 0.5, y: 0, w: 0.5,  h: 0.757 };
 
-// ── Keeps Three.js rendering even when nothing moves ────────────────────────
-function KeepAlive() {
-  const { invalidate } = useThree();
-  useEffect(() => {
-    const id = setInterval(() => invalidate(), 1000 / 30);
-    return () => clearInterval(id);
-  }, [invalidate]);
-  return null;
-}
+
 
 // ── Public component ─────────────────────────────────────────────────────────
 export default function Lanyard({
@@ -86,7 +78,7 @@ export default function Lanyard({
       {visible && (
         <Canvas
           camera={{ position, fov }}
-          dpr={[1, isMobile ? 1.5 : 2]}
+          dpr={[1, 1.5]}
           gl={{
             alpha: transparent,
             antialias: true,
@@ -100,10 +92,9 @@ export default function Lanyard({
           }
           style={{ width: '100%', height: '100%', display: 'block' }}
         >
-          <KeepAlive />
           <ambientLight intensity={1.5} />
           <directionalLight intensity={1.5} position={[6, 12, 10]} />
-          <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+          <Physics gravity={gravity}>
             <Band
               isMobile={isMobile}
               frontImage={frontImage}
@@ -147,7 +138,7 @@ function Band({
 
   const segmentProps = {
     type: 'dynamic', canSleep: true, colliders: false,
-    angularDamping: 4, linearDamping: 4,
+    angularDamping: 8, linearDamping: 8,
   };
 
   const { nodes, materials } = useGLTF(cardGLB);
@@ -228,10 +219,10 @@ function Band({
     return Math.max(0.5, (topY - 1.8) / 3);
   }, [topY]);
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], segmentLength]);
-  useRopeJoint(j1,    j2, [[0, 0, 0], [0, 0, 0], segmentLength]);
-  useRopeJoint(j2,    j3, [[0, 0, 0], [0, 0, 0], segmentLength]);
-  useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]);
+  useSphericalJoint(fixed, j1, [[0, -segmentLength, 0], [0, 0, 0]]);
+  useSphericalJoint(j1,    j2, [[0, -segmentLength, 0], [0, 0, 0]]);
+  useSphericalJoint(j2,    j3, [[0, -segmentLength, 0], [0, 0, 0]]);
+  useSphericalJoint(j3,  card, [[0, -1.45, 0], [0, 0, 0]]);
 
   useEffect(() => {
     if (hovered) {
@@ -246,10 +237,14 @@ function Band({
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
+      const targetX = vec.x - dragged.x;
+      const targetY = vec.y - dragged.y;
+      const targetZ = vec.z - dragged.z;
+      const current = card.current.translation();
       card.current?.setNextKinematicTranslation({
-        x: vec.x - dragged.x,
-        y: vec.y - dragged.y,
-        z: vec.z - dragged.z,
+        x: THREE.MathUtils.lerp(current.x, targetX, 0.25),
+        y: THREE.MathUtils.lerp(current.y, targetY, 0.25),
+        z: THREE.MathUtils.lerp(current.z, targetZ, 0.25),
       });
     }
     if (fixed.current) {
@@ -283,17 +278,17 @@ function Band({
     <>
       <group position={[0, topY, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[segmentLength, 0, 0]} ref={j1} {...segmentProps}>
+        <RigidBody position={[0, -segmentLength, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[2 * segmentLength, 0, 0]} ref={j2} {...segmentProps}>
+        <RigidBody position={[0, -2 * segmentLength, 0]} ref={j2} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[3 * segmentLength, 0, 0]} ref={j3} {...segmentProps}>
+        <RigidBody position={[0, -3 * segmentLength, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
         <RigidBody
-          position={[3 * segmentLength, -1.45, 0]}
+          position={[0, -3 * segmentLength - 1.45, 0]}
           ref={card}
           {...segmentProps}
           type={dragged ? 'kinematicPosition' : 'dynamic'}
