@@ -1,57 +1,142 @@
-import { motion } from 'motion/react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { FaGithub, FaExternalLinkAlt, FaChartLine, FaPuzzlePiece, FaLightbulb } from 'react-icons/fa';
 
 const projectCaseStudies = [
   {
-    title: 'Personal Portfolio 2026',
-    subtitle: 'High-Performance 3D Digital Product Hub',
-    tags: ['React', 'Three.js', 'React-Three-Rapier', 'GSAP', 'Vite'],
-    role: 'Lead Architect & Creative Developer',
-    timeline: '2026',
-    problem: 'Typical portfolios feel static and lack engineering character. Recruiter drop-offs are high because they fail to see interactive engineering competence within 15 seconds.',
-    research: 'Studied gamification loops, interactive physics damping setups, and high-performance WebGL asset code-splitting (using dynamic imports and Lazy loading) to ensure sub-1 second initial paint speeds.',
-    architecture: 'Uses Vite for bundler speeds, Tailwind CSS v4 for utility architecture, React Three Fiber for WebGL scene orchestration, and Rapier as a lightweight WASM-based physics engine.',
+    title: 'NoteLift',
+    subtitle: 'Chrome Extension for Highlight Extraction & Revision Notes',
+    tags: ['JavaScript (ES6)', 'Chrome Extensions API', 'Local Storage', 'Manifest V3'],
+    role: 'Concept, Architecture & Logic Design (AI-assisted syntax & implementation)',
+    timeline: '2025',
+    problem: 'Students face friction extracting and organizing text highlights from PDFs and web articles into clean study sheets without subscription accounts or cloud dependencies.',
+    research: 'Studied context-menu text selection event models, DOM Range APIs, and local storage limits, designing a local-first offline database layout.',
+    architecture: 'Local-only Chrome Extension architecture utilizing Manifest V3 background scripts, content scripts injection, and client popup interface.',
     features: [
-      'Interactive 3D physics ID Card with collision bounds.',
-      'GSAP-powered staggers with fluid, organic spring motions.',
-      'Categorized tech stack gauges that animate on scroll intersections.',
-      'Multi-version resume builder modal offering targeted document exports.',
+      'Extract highlighted page selections instantly via context menus.',
+      'Organize notes into custom modules and subjects lists.',
+      '100% offline, local-first data model with zero cloud databases dependencies.',
+      'Export gathered summaries instantly as clean Markdown or TXT files.',
     ],
-    challenges: 'High-tension joint stretching during camera zoom adjustments caused the physics engine solver to crash and yield NaN coordinates, making the canvas disappear.',
-    lessons: 'Solved joint crashes by initializing the rigid bodies hanging vertically straight down (matching local offset lengths to joint connection lengths) to ensure zero tension on mount.',
-    demoUrl: 'https://rohitdubey.dev',
-    githubUrl: 'https://github.com/anakinskywalker0903/portfolio',
-    metrics: { count: '60fps', label: 'Consistent Performance' },
+    challenges: 'Capturing text selections reliably across cross-origin iframe documents without triggering browser security blocks.',
+    lessons: 'Programmed strict validation listeners on window bounds and fallback handlers on parent containers to safely retrieve text selections on complex sites.',
+    demoUrl: 'https://chromewebstore.google.com', // Replace with direct store URL if needed
+    githubUrl: 'https://github.com/anakinskywalker0903/notelift',
+    metrics: { count: 'SHIPPED', label: 'Live on Chrome Web Store' },
   },
   {
-    title: 'SaaS Analytics Engine',
-    subtitle: 'Real-Time Logging & Metrics Dashboard',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Express', 'Tailwind'],
-    role: 'Full-Stack Developer',
+    title: 'Brainstormzz',
+    subtitle: 'AI-Powered Collaborative Idea Whiteboard',
+    tags: ['React 18', 'Tailwind CSS', 'HTML5 Canvas', 'OpenAI API', 'Vite'],
+    role: 'Concept, UI Design & Canvas Logic (AI-assisted execution)',
     timeline: '2025',
-    problem: 'Managing distributed logs across client nodes was chaotic, with standard dashboards lagging heavily during high-throughput metric aggregation cycles.',
-    research: 'Evaluated SQL indexing models, time-series data partition systems, and optimized WebSockets state-merging structures on the frontend.',
-    architecture: 'Next.js frontend connected to a Node.js gateway. PostgreSQL database runs partitioned schemas, and Express routers server aggregated caches.',
+    problem: 'Standard brainstorming tools lack visual layout grids, requiring manual translation from dry AI text prompt completions into structured flowchart blocks.',
+    research: 'Developed dynamic node-drawing logic on HTML5 Canvas. Switched from Chrome Gemini Nano local API to OpenAI API post-hackathon for processing quality.',
+    architecture: 'Client-side React 18 application integrating HTML5 Canvas event triggers and a secure Node.js routing server query framework.',
     features: [
-      'Real-time streaming charts with dynamic metric aggregation filters.',
-      'Partitioned document storage managing 100k+ logs daily.',
-      'WebSockets engine synchronizing concurrent client updates.',
+      'Single prompt turns into 6 categorized visual suggestion blocks.',
+      'Interactive infinite whiteboard-style Canvas drawing space.',
+      'Instant summarize, translate, and expand buttons.',
+      'Paid cloud OpenAI API integration for stable data parsing.',
     ],
-    challenges: 'High concurrency cycles caused the memory footprint to spike when concurrent logs overflowed the socket stream buffer.',
-    lessons: 'Implemented a sliding window back-pressure controller and throttled log commits using sliding arrays to stabilize CPU consumption.',
-    demoUrl: '#',
-    githubUrl: '#',
-    metrics: { count: '<120ms', label: 'API Response Time' },
+    challenges: 'OpenAI API completion responses occasionally drifted from the rigid JSON schema template, crashing the node-drawing scripts.',
+    lessons: 'Configured strict JSON schemas inside system prompts parameters to guarantee returned AI outputs map correctly to frontend canvas coordinates.',
+    demoUrl: 'https://brainstormzz.vercel.app', // Update if live
+    githubUrl: 'https://github.com/anakinskywalker0903/brainstormzz',
+    metrics: { count: 'GPT-4o', label: 'AI Generation Core' },
   },
+  {
+    title: 'AI Career Engine',
+    subtitle: 'Resume Analyzer & Career Matching Hub',
+    tags: ['React 18', 'Node.js', 'Express', 'Anthropic Claude API', 'pdfjs-dist', 'Railway'],
+    role: 'Full-Stack Layouts, Backend Logic Scoping (AI-assisted implementation)',
+    timeline: '2025',
+    problem: 'Job seekers lack direct, quantitative evaluations of how their resumes match target job openings and lack custom roadmap learning objectives.',
+    research: 'Studied PDF binary extraction streams and programmed a custom resume evaluation formula (50% skill overlap + 50% personality indicators alignment).',
+    architecture: 'Vite/React client deployed on Vercel connecting to a Node.js/Express backend service hosted on Railway using Claude API pipelines.',
+    features: [
+      'Discovery Mode: Personality quiz + Resume → Top 3 career role matches.',
+      'Optimization Mode: Resume + Job Desc → Match percentage and gaps checklist.',
+      'Generates a personalized, step-by-step 12-week skills roadmap.',
+      'Local PDF parsing via client-side pdfjs-dist buffer loaders.',
+    ],
+    challenges: 'Parsing multi-column structured PDF resumes resulted in scrambled text coordinates, distorting key skill terms extraction.',
+    lessons: 'Implemented character token cleaning algorithms on raw text streams to preserve structural layouts context before AI analysis.',
+    demoUrl: 'https://careerengine.vercel.app', // Update if live
+    githubUrl: 'https://github.com/anakinskywalker0903/career-engine',
+    metrics: { count: 'CLAUDE', label: 'AI Processing Engine' },
+  },
+  {
+    title: 'SSB Practice Simulator',
+    subtitle: 'Services Selection Board timed exam simulator',
+    tags: ['React', 'Vercel', 'Custom Timer Loops', 'UX Design'],
+    role: 'Core Timer Logic, Test-Flow Algorithms (AI-assisted styling blocks)',
+    timeline: '2025',
+    problem: 'SSB aspirants struggle to train for timed psychological screenings (WAT, PPDT, SRT) due to a lack of realistic, time-restricted simulation environments.',
+    research: 'Analyzed Services Selection Board official timings rules and designed distraction-free keyboard shortcuts arrays.',
+    architecture: 'React-rendered browser flow utilizing synchronous timer states and asset preload arrays.',
+    features: [
+      'Realistic Word Association (WAT) & Situation Reaction (SRT) timed simulators.',
+      'Picture Perception & Description Test (PPDT) image simulation.',
+      'Fullscreen UI mode to match testing center constraints.',
+      'Randomized, no-repeat image and word banks logic.',
+    ],
+    challenges: 'Programmatic timing loops would occasionally drift on older browsers, desynchronizing the slide updates.',
+    lessons: 'Refactored timing calculations to reference absolute browser timestamps offsets rather than standard setInterval loops.',
+    demoUrl: 'https://ssbsimulator.vercel.app',
+    githubUrl: 'https://github.com/anakinskywalker0903/ssb-simulator',
+    metrics: { count: '100%', label: 'Exam Timer Accuracy' },
+  },
+  {
+    title: 'InstaSave Navigator',
+    subtitle: 'Chrome Extension for Archive Navigation (Development Paused)',
+    tags: ['JavaScript (ES6)', 'Chrome Extensions API', 'DOM Observers'],
+    role: 'Concept & Viewport DOM Logic (AI-assisted implementation)',
+    timeline: '2025',
+    problem: 'Instagram does not provide an option to sort saved bookmarks chronologically, forcing users to scroll endlessly to access early saves.',
+    research: 'Studied Instagram dynamic feed container IDs and analyzed infinite scrolling DOM nodes extensions.',
+    architecture: 'Manifest V3 Chrome Extension inject content script tracking scrolling heights and bookmark offsets.',
+    features: [
+      'One-click navigation path to the oldest saved bookmark page.',
+      'Automated scroll container tracking observer scripts.',
+    ],
+    challenges: 'Instagram anti-bot automation algorithms flag and block fast programmatic scroll adjustments.',
+    lessons: 'Development paused (~7 months ago) due to Instagram platform anti-automation blocks; framed as a platform-imposed barrier.',
+    demoUrl: '#',
+    githubUrl: 'https://github.com/anakinskywalker0903/instasave-navigator',
+    metrics: { count: 'PAUSED', label: 'Blocked by Anti-Bot Rules' },
+  },
+  {
+    title: 'RailDost',
+    subtitle: 'Indian Railways Route Visualizer (Development Paused)',
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'Leaflet.js'],
+    role: 'Concept & Mapping Coordinates Integrations (AI-assisted)',
+    timeline: '2025',
+    problem: 'Travelers lack an interactive route visualizer showing transit overlay comparisons for multi-leg railway routes.',
+    research: 'Analyzed geoJSON track coordinates systems and Leaflet.js route polyline draws.',
+    architecture: 'Client-side mapping interface drawing polyline geoJSON coordinate arrays over Leaflet.js canvases.',
+    features: [
+      'Comparative travel times display overlay meters.',
+      'Hardcoded route samples fallback mapping (after API pull).',
+    ],
+    challenges: 'No stable public Indian Railways data source; the free third-party routing API was pulled by its creator.',
+    lessons: 'Configured hardcoded station arrays to maintain visual integrity; paused development until a stable routing feed becomes available.',
+    demoUrl: '#',
+    githubUrl: 'https://github.com/anakinskywalker0903/raildost',
+    metrics: { count: 'PAUSED', label: 'API Revoked by Provider' },
+  }
 ];
 
 export function ProjectsPage() {
+  const [activeProjectIdx, setActiveProjectIdx] = useState(0);
+  const project = projectCaseStudies[activeProjectIdx];
+
   return (
-    <div className="w-full min-h-screen bg-[#F8F9FA] pt-32 pb-24 px-6 md:px-10">
-      <div className="max-w-4xl mx-auto">
+    <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-32 pb-24 px-6 md:px-10">
+      <div className="max-w-5xl mx-auto">
         
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-10 border-b border-black/5 pb-8">
           <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full mb-4 tracking-widest uppercase">
             CASE STUDIES
           </span>
@@ -63,20 +148,46 @@ export function ProjectsPage() {
             <span className="text-[#0038FF]">PROJECTS</span>
           </h2>
           <p className="text-black/50 text-sm max-w-md font-medium leading-relaxed mt-4">
-            Deep dive case studies covering structural design, performance metrics, key architectural hurdles, and lessons learned.
+            Deep dive case studies detailing design decisions, architectural parameters, real-world hurdles, and lessons learned.
           </p>
         </div>
 
-        {/* Case Studies Stack */}
-        <div className="flex flex-col gap-16">
-          {projectCaseStudies.map((project, idx) => (
+        {/* Case Study Card with Dynamic Slide Transition */}
+        <div className="relative">
+          
+          {/* Circular Selector row just above the card */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 px-2">
+            <span className="text-[10px] font-black uppercase text-black/40 tracking-wider">
+              Project Case Study (0{activeProjectIdx + 1} / 0{projectCaseStudies.length})
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {projectCaseStudies.map((_, index) => {
+                const isActive = activeProjectIdx === index;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setActiveProjectIdx(index)}
+                    className={`w-11 h-11 rounded-full border-2 flex items-center justify-center text-xs font-black transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-black text-[#CCFF00] border-black shadow-[2px_2px_0_#0038FF] -translate-x-0.5 -translate-y-0.5'
+                        : 'bg-white/40 backdrop-blur-sm text-black border-black/10 hover:border-black hover:bg-white'
+                    }`}
+                  >
+                    0{index + 1}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
             <motion.article
               key={project.title}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white border-[3px] border-black rounded-[2.5rem] overflow-hidden shadow-xl"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white/60 backdrop-blur-md border-[3px] border-black rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Header Bar */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-black p-8 bg-[#0038FF]/5 gap-4">
@@ -97,14 +208,16 @@ export function ProjectsPage() {
                   >
                     <FaGithub /> Repo
                   </a>
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-4 py-2 border-2 border-black rounded-full text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-sm"
-                  >
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
+                  {project.demoUrl !== '#' && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-4 py-2 border-2 border-black rounded-full text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-sm"
+                    >
+                      <FaExternalLinkAlt /> Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
 
@@ -127,7 +240,7 @@ export function ProjectsPage() {
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tags.map(t => (
-                        <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
+                        <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-white/60 px-2.5 py-1 rounded-full text-black/70">
                           {t}
                         </span>
                       ))}
@@ -135,12 +248,12 @@ export function ProjectsPage() {
                   </div>
 
                   {/* Highlights Card */}
-                  <div className="bg-[#0038FF] text-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden">
+                  <div className="bg-[#1E2026] text-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden border-2 border-black">
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:1rem_1rem]" />
                     <span className="text-[9px] font-black text-[#CCFF00] tracking-widest uppercase block mb-1">
                       {project.metrics.label}
                     </span>
-                    <span className="text-3xl font-black">{project.metrics.count}</span>
+                    <span className="text-2xl font-black">{project.metrics.count}</span>
                   </div>
                 </div>
 
@@ -148,7 +261,7 @@ export function ProjectsPage() {
                 <div className="md:col-span-2 flex flex-col gap-6">
                   {/* Problem & Research */}
                   <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 mt-1 border border-red-200">
                       <FaChartLine className="w-4 h-4" />
                     </div>
                     <div>
@@ -160,7 +273,7 @@ export function ProjectsPage() {
 
                   {/* Architecture & Features */}
                   <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#0038FF] flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#0038FF] flex items-center justify-center flex-shrink-0 mt-1 border border-blue-200">
                       <FaPuzzlePiece className="w-4 h-4" />
                     </div>
                     <div>
@@ -179,7 +292,7 @@ export function ProjectsPage() {
 
                   {/* Key Hurdles & Lessons */}
                   <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 mt-1 border border-yellow-200">
                       <FaLightbulb className="w-4 h-4" />
                     </div>
                     <div>
@@ -196,7 +309,7 @@ export function ProjectsPage() {
 
               </div>
             </motion.article>
-          ))}
+          </AnimatePresence>
         </div>
 
       </div>
