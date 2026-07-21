@@ -80,6 +80,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
         staggerDelay={0.1}
       />
 
+      {/* Global "← Back to Home" button on subpages */}
+      {location.pathname !== '/' && (
+        <div className="fixed top-24 left-4 md:left-8 z-40">
+          <Link
+            to="/"
+            className="flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 border-2 border-black rounded-full bg-white text-black text-[10px] md:text-xs font-black uppercase tracking-wider hover:bg-[#CCFF00] hover:shadow-[4px_4px_0px_0px_#000000] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <span>← Back <span className="hidden sm:inline">to Home</span></span>
+          </Link>
+        </div>
+      )}
+
       {/* Persistent Left Sidebar: Social columns */}
       <SocialSidebar />
 

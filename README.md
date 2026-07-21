@@ -1,32 +1,44 @@
-# React + TypeScript + Vite
+# Rohit Dubey — Engineering Portfolio Hub (2026)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A premium, high-performance web portfolio built to showcase personal engineering milestones, production applications, verified internship experience, and professional client case studies.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*   **Framework**: React 19 (TypeScript)
+*   **Build Tool**: Vite (optimized asset pipelining)
+*   **Styling**: Tailwind CSS (custom utility skins)
+*   **Animations**: Motion (Framer Motion) & Custom CSS Keyframes
+*   **3D Elements**: React Three Fiber, Three.js, & Rapier Physics (3D Dangle Lanyard)
+*   **Hosting & Deployment**: Vercel
 
-## React Compiler
+## 📂 Core Pages & Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1.  **Home Page (`/`)**: Cinematic opening preloader, dynamic availability indicators, and interactive 3D physics-based dangle Lanyard displaying developer ID badge.
+2.  **Projects (`/projects`)**: Scoped grid displaying production builds (NoteLift, NoteLift-AI, Brainstormzz, SSB Simulator, InstaSave, RailDost) with verified contribution notes.
+3.  **Client Work (`/client-work`)**: Clean client case studies page featuring DevInterio website redesign and upcoming CGI architecture portals (Jaas Visual).
+4.  **Experience (`/experience`)**: Chronological timeline displaying verified AKS Ecosystem Web Development Internship.
+5.  **Learning & Certifications (`/learning-archive`)**: Categorized certification registry featuring Featured credentials (Oracle Java, IIT NPTEL Cloud, UMich Applied ML, GitHub LinkedIn) and learning collection pathways. Includes stateful inline PDF viewing without page redirections.
+6.  **Global Shell Navigation**: Unified `Layout` component with a responsive floating `← Back to Home` breadcrumb button that dynamically hides on the home view.
 
-## Expanding the Oxlint configuration
+## 🛠️ Local Development & Commands
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### Prerequisites
+Make sure you have Node.js installed on your machine.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Installation
+Clone the repository and install the dependencies:
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Dev Server
+Start the local hot-reloaded development server:
+```bash
+npm run dev
+```
+
+### Production Build
+Build the minified production bundle to the `dist/` directory:
+```bash
+npm run build
+```

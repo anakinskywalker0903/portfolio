@@ -4,139 +4,186 @@ import { FaAward, FaHourglassHalf, FaCompass, FaExternalLinkAlt, FaBookOpen } fr
 import { IoClose } from 'react-icons/io5';
 
 const archiveItems = [
+  // --- FEATURED ---
   {
     id: 'ORACLE-JAVA-2026',
-    name: 'Oracle Certified Associate, Java SE 8 Programmer / Foundations',
+    name: 'Oracle Certified Foundations Associate, Java',
     issuer: 'Oracle University',
     year: '2026',
     icon: '☕',
     hours: '40 hours',
-    category: 'professional',
+    category: 'featured',
     desc: 'Demonstrates foundational knowledge of Java technology and programming, covering core concepts, data structures, and OOP methodologies.',
     learnt: 'Java syntax, object-oriented concepts (inheritance, encapsulation, polymorphism), control flow structures, exception handling, data structures, and APIs.',
     skills: ['Java', 'OOP', 'Data Structures', 'Exception Handling'],
-    verifyUrl: 'https://education.oracle.com',
-  },
-  {
-    id: 'AWS-DEV-2024',
-    name: 'AWS Certified Developer',
-    issuer: 'Amazon Web Services',
-    year: '2024',
-    icon: '☁️',
-    hours: '45 hours',
-    category: 'professional',
-    desc: 'Associate-level certification covering AWS deployment, security pipelines, and cloud-native architecture.',
-    learnt: 'IAM policies, serverless Lambdas, API Gateway, DynamoDB indexing, ECS container deployment, CloudFormation templating.',
-    skills: ['AWS Lambda', 'DynamoDB', 'Cloud Security', 'Containerization'],
-    verifyUrl: 'https://aws.amazon.com/verification',
+    verifyUrl: '/certficates/eCertificate.pdf',
   },
   {
     id: 'NPTEL-CLOUD-2026',
-    name: 'Cloud Computing (12-Week Course)',
+    name: 'Cloud Computing (12-Week Course - Elite)',
     issuer: 'NPTEL (IIT Kharagpur)',
     year: '2026',
     icon: '🌥️',
     hours: '60 hours',
-    category: 'academic',
+    category: 'featured',
     desc: 'A rigorous academic course covering the fundamental design, models, resource virtualization, and architecture of cloud infrastructure.',
     learnt: 'Cloud design models, SaaS/PaaS/IaaS setups, hypervisors, resource allocation, storage virtualization, MapReduce frameworks.',
     skills: ['Cloud Architecture', 'Virtualization', 'Resource Scheduling', 'MapReduce'],
-    verifyUrl: 'https://nptel.ac.in',
+    verifyUrl: '/certficates/NPTEL26CS55S105240514304822312.pdf',
   },
   {
     id: 'UMICH-AML-2026',
     name: 'Applied Machine Learning in Python',
-    issuer: 'University of Michigan / Coursera',
+    issuer: 'University of Michigan (Coursera)',
     year: '2026',
     icon: '🐍',
     hours: '40 hours',
-    category: 'specialization',
+    category: 'featured',
     desc: 'Advanced machine learning course covering data analysis, predictive modeling, clustering, and deep evaluation strategies.',
     learnt: 'Supervised & unsupervised learning algorithms, scikit-learn interfaces, SVM regression, decision trees, cross-validation metrics.',
     skills: ['Python', 'Scikit-Learn', 'Feature Engineering', 'Model Evaluation'],
-    verifyUrl: 'https://coursera.org/verify',
+    verifyUrl: '/certficates/Coursera 7RSUPVFLCPS3.pdf',
   },
   {
-    id: 'META-REACT-2023',
-    name: 'Meta React Developer',
-    issuer: 'Meta / Coursera',
-    year: '2023',
-    icon: '⚛️',
-    hours: '120 hours',
-    category: 'specialization',
-    desc: 'Professional front-end certification focused on production React concepts, state management, testing, and UX interfaces.',
-    learnt: 'React hooks mechanics, context management, Jest unit testing, React Testing Library, responsive design grids, profiling components.',
-    skills: ['React Hooks', 'Jest & RTL', 'Component Design', 'Lighthouse Optimization'],
-    verifyUrl: 'https://coursera.org/verify',
+    id: 'LINKEDIN-GH-2026',
+    name: 'Career Essentials in GitHub Professional Certificate',
+    issuer: 'LinkedIn Learning × GitHub',
+    year: '2026',
+    icon: '🐙',
+    hours: '15 hours',
+    category: 'featured',
+    desc: 'Professional credentials pathway validating workflows optimization, automated actions, and enterprise collaboration.',
+    learnt: 'Repository environments management, actions configuration settings, collaboration pipelines, Copilot configurations, and search parameters.',
+    skills: ['GitHub Actions', 'GitHub Copilot', 'Project Management', 'Workflow Automation'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Career Essentials in GitHub Professional Certificate.pdf',
   },
-  {
-    id: 'GOOG-UX-2023',
-    name: 'Google UX Design',
-    issuer: 'Google / Coursera',
-    year: '2023',
-    icon: '🎨',
-    hours: '180 hours',
-    category: 'specialization',
-    desc: 'End-to-end user experience certification detailing research methodologies, wireframing, interactive prototyping, and handoff standards.',
-    learnt: 'User personas, empathy maps, low/high fidelity wireframing (Figma), usability tests, WCAG AA accessibility compliance, responsive interface design.',
-    skills: ['User Research', 'Wireframing', 'Prototyping', 'Figma auto-layout'],
-    verifyUrl: 'https://coursera.org/verify',
-  },
-  {
-    id: 'MDB-DEV-2022',
-    name: 'MongoDB Developer',
-    issuer: 'MongoDB University',
-    year: '2022',
-    icon: '🍃',
-    hours: '30 hours',
-    category: 'specialization',
-    desc: 'Specialized document database course covering performance structures, schema validation, and pipeline analytics.',
-    learnt: 'Document schema design patterns, complex aggregation queries, performance profiling with indexing, transaction ACID management.',
-    skills: ['NoSQL Schemas', 'Aggregation Pipelines', 'Query Profiling', 'Scaling Database Indexes'],
-    verifyUrl: 'https://learn.mongodb.com',
-  },
-  {
-    id: 'MS-TS-2022',
-    name: 'TypeScript Professional',
-    issuer: 'Microsoft / LinkedIn Learning',
-    year: '2022',
-    icon: '🔷',
-    hours: '25 hours',
-    category: 'specialization',
-    desc: 'Advanced type-safety systems, code refactoring, compiler configuration, and design pattern scaling.',
-    learnt: 'Conditional and mapped types, utility helpers, interface generics, custom decorators, code transpilation options.',
-    skills: ['Generics & Utility Types', 'Transpilation Configuration', 'Decorators', 'Strict Type Guards'],
-    verifyUrl: 'https://www.linkedin.com/learning',
-  },
-];
 
-const categories = [
+  // --- GITHUB SERIES ---
   {
-    key: 'professional',
-    title: 'Professional Certifications',
-    description: 'Industry-standard validations verifying production-grade competencies.',
+    id: 'GH-ACTIONS',
+    name: 'Practical GitHub Actions',
+    issuer: 'LinkedIn Learning × GitHub',
+    year: '2026',
+    icon: '⚙️',
+    hours: '4 hours',
+    category: 'github-series',
+    desc: 'Practical implementation of CI/CD pipelines, custom runners, environment variables, and build automation sequences.',
+    learnt: 'Workflow YAML setups, actions triggers, custom runners deployments, artifacts storage triggers, secure keys parameters.',
+    skills: ['CI/CD Pipelines', 'GitHub Actions', 'Automation Scripting'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Practical GitHub Actions.pdf',
   },
   {
-    key: 'academic',
-    title: 'University & Academic Learning',
-    description: 'Rigorous computer science courses certified by leading universities.',
+    id: 'GH-COPILOT',
+    name: 'Practical GitHub Copilot',
+    issuer: 'LinkedIn Learning × GitHub',
+    year: '2026',
+    icon: '🤖',
+    hours: '3 hours',
+    category: 'github-series',
+    desc: 'Leveraging AI-assisted prompt triggers, context boundaries, code completions, and debug assistants inline.',
+    learnt: 'Prompt engineering patterns, security completions check, refactoring helpers, inline tests generation.',
+    skills: ['GitHub Copilot', 'AI Pair Programming', 'Refactoring Helpers'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Practical GitHub Copilot.pdf',
   },
   {
-    key: 'specialization',
-    title: 'Online Specializations',
-    description: 'Advanced skill pathways in architecture, libraries, and design frameworks.',
+    id: 'GH-SEARCH',
+    name: 'Practical GitHub Code Search',
+    issuer: 'LinkedIn Learning × GitHub',
+    year: '2026',
+    icon: '🔍',
+    hours: '3 hours',
+    category: 'github-series',
+    desc: 'Advanced search syntax, indexing codes, locating security configurations, and scoping codebases.',
+    learnt: 'Regex code locator, scoping branches metadata, security audits mapping, cross-repo matching syntax.',
+    skills: ['Code Auditing', 'Search Syntax', 'Repository Indexing'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Practical GitHub Code Search.pdf',
   },
+  {
+    id: 'GH-COLLAB',
+    name: 'Practical GitHub Project Management and Collaboration',
+    issuer: 'LinkedIn Learning × GitHub',
+    year: '2026',
+    icon: '👥',
+    hours: '5 hours',
+    category: 'github-series',
+    desc: 'Managing team project boards, issue trackers, pull request review gates, and branch protections.',
+    learnt: 'Milestones planning, branch locks policies, peer review workflows, conflict resolutions, tags management.',
+    skills: ['Project Boards', 'Review Gates', 'Conflict Resolution'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Practical GitHub Project Management and Collaboration.pdf',
+  },
+
+  // --- DATA SERIES ---
+  {
+    id: 'PBI-DESKTOP',
+    name: 'Learning Power BI Desktop',
+    issuer: 'Microsoft / LinkedIn Learning',
+    year: '2026',
+    icon: '📊',
+    hours: '5 hours',
+    category: 'data-series',
+    desc: 'Visualizing relational data, database connects, and cleaning modeling parameters.',
+    learnt: 'Power Query cleaning filters, data models schemas, measures calculations, interactive visuals grids.',
+    skills: ['Power BI Desktop', 'Data Cleaning', 'Relational Schemas'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Learning Power BI Desktop.pdf',
+  },
+  {
+    id: 'PBI-DASH',
+    name: 'Power BI Dashboards for Beginners',
+    issuer: 'Microsoft / LinkedIn Learning',
+    year: '2026',
+    icon: '📈',
+    hours: '4 hours',
+    category: 'data-series',
+    desc: 'Designing dashboard metrics layouts, sharing portals, and analytics report setups.',
+    learnt: 'Visual layout rules, reports publishing setups, key metrics cards, slicers controllers.',
+    skills: ['Dashboard Design', 'Business Analytics', 'Reporting Portals'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Power BI Dashboards for Beginners.pdf',
+  },
+  {
+    id: 'DASH-PYTHON',
+    name: 'Data Visualization in Python with Dash',
+    issuer: 'LinkedIn Learning',
+    year: '2026',
+    icon: '🐍',
+    hours: '6 hours',
+    category: 'data-series',
+    desc: 'Building Python-powered analytics web dashboards using Plotly and Dash frameworks.',
+    learnt: 'Dash layout components, reactive input-output decorators callbacks, Plotly charts rendering, CSS skins styling.',
+    skills: ['Dash Framework', 'Plotly Charts', 'Python callbacks'],
+    verifyUrl: '/certficates/CertificateOfCompletion_Data Visualization in Python with Dash.pdf',
+  },
+
+  // --- ACHIEVEMENTS ---
+  {
+    id: 'FIN-QUIZ-2026',
+    name: 'National Financial Literacy Quiz 2026',
+    issuer: 'National Financial Authorities',
+    year: '2026',
+    icon: '🏆',
+    hours: '2 hours',
+    category: 'achievements',
+    desc: 'Certificate of Participation validating knowledge of core personal finance parameters, investment basics, and digital transaction securities.',
+    learnt: 'Digital payments safety checks, basic credit scoring parameters, interest rate indexes calculations, assets diversification rules.',
+    skills: ['Financial Literacy', 'Personal Finance Basics', 'Digital Payments Security'],
+    verifyUrl: '/certficates/Certificate_8777453162_29012026083726.pdf',
+  }
 ];
 
 export function LearningArchivePage() {
   const [activeItem, setActiveItem] = useState<typeof archiveItems[0] | null>(null);
+  const [showPdf, setShowPdf] = useState(false);
+
+  const featuredItems = archiveItems.filter(item => item.category === 'featured');
+  const githubSeriesItems = archiveItems.filter(item => item.category === 'github-series');
+  const dataAnalyticsItems = archiveItems.filter(item => item.category === 'data-series');
+  const achievementItems = archiveItems.filter(item => item.category === 'achievements');
 
   return (
-    <div className="w-full min-h-screen bg-white pt-32 pb-24 px-6 md:px-10">
-      <div className="max-w-4xl mx-auto">
+    <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-32 pb-24 px-6 md:px-10">
+      <div className="max-w-5xl mx-auto">
         
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 border-b border-black/5 pb-8">
           <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full mb-4 tracking-widest uppercase">
             LEARNING LOG
           </span>
@@ -148,82 +195,161 @@ export function LearningArchivePage() {
             <span className="text-[#0038FF]">LEARNING</span>
           </h2>
           <p className="text-black/50 text-sm max-w-md font-medium leading-relaxed mt-4">
-            Click on any credential card to explore details regarding hours, curriculum covered, skills gained, and verification links.
+            A structured repository of verified certifications, deep specialized training courses, and academic milestones.
           </p>
         </div>
 
-        {/* Currently Learning Section */}
-        <div className="mb-16 border-[3px] border-black rounded-[2.5rem] p-8 bg-black text-white relative overflow-hidden shadow-[8px_8px_0_#CCFF00]">
-          {/* Decorative blur glow */}
-          <div className="absolute right-0 top-0 w-48 h-48 bg-[#0038FF]/30 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="flex-1">
-              <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3.5 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                CURRENT OBJECTIVES
-              </span>
-              <h3 className="text-2xl font-black uppercase tracking-tight" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                CURRENTLY LEARNING
-              </h3>
-              <p className="text-white/60 text-xs font-medium leading-relaxed mt-2 max-w-lg">
-                Actively expanding computational engineering models, system design layers, and artificial intelligence frameworks.
-              </p>
-            </div>
-            <div className="w-full md:w-auto flex-shrink-0 flex flex-col gap-2.5">
-              {[
-                'Modern Full-Stack Development',
-                'Data Structures & Algorithms (Java)',
-                'Artificial Intelligence & Agentic Workflows',
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-5 py-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
-                  <span className="text-xs font-black uppercase tracking-wider text-white/90">{item}</span>
+        {/* Featured Section */}
+        <div className="mb-16">
+          <h3 className="text-xl font-black text-black uppercase tracking-tight mb-6 pb-2 border-b-2 border-black/10 flex items-center gap-2">
+            <FaAward className="text-[#0038FF] w-5 h-5" /> Featured Certifications
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {featuredItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveItem(item);
+                  setShowPdf(false);
+                }}
+                className="text-left bg-white border-[3px] border-black rounded-[2rem] p-6 shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300 flex items-start gap-4 cursor-pointer group relative"
+              >
+                <div className="text-3xl flex-shrink-0 bg-black/5 w-12 h-12 rounded-full flex items-center justify-center border-2 border-black/10 group-hover:border-black transition-all">
+                  {item.icon}
                 </div>
-              ))}
-            </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-[8px] font-black uppercase bg-[#0038FF]/10 text-[#0038FF] border border-[#0038FF]/10 px-2 py-0.5 rounded-full tracking-wider block w-fit mb-1.5">
+                    {item.issuer} • {item.year}
+                  </span>
+                  <h4 className="font-black text-black text-sm uppercase leading-tight group-hover:text-[#0038FF] transition-colors pr-6">
+                    {item.name}
+                  </h4>
+                  <div className="flex flex-wrap gap-1 mt-4">
+                    {item.skills && item.skills.map((s, i) => (
+                      <span key={i} className="text-[8px] font-black uppercase bg-[#CCFF00] text-black border border-black px-2.5 py-0.5 rounded-full">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Floating link arrow icon */}
+                <div className="absolute top-6 right-6 text-black/30 group-hover:text-[#0038FF] transition-colors">
+                  <FaExternalLinkAlt className="w-3.5 h-3.5" />
+                </div>
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Categories Group list */}
-        <div className="flex flex-col gap-16">
-          {categories.map((cat) => {
-            const items = archiveItems.filter((item) => item.category === cat.key);
-            return (
-              <div key={cat.key} className="flex flex-col gap-6 border-t-2 border-black/10 pt-10">
-                <div>
-                  <h3 className="text-xl font-black text-black uppercase tracking-tight">
-                    {cat.title}
-                  </h3>
-                  <p className="text-black/50 text-xs font-medium mt-1">
-                    {cat.description}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {items.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setActiveItem(item)}
-                      className="text-left bg-[#F8F9FA] hover:bg-white border-2 border-transparent hover:border-black rounded-3xl p-6 transition-all duration-300 flex items-start gap-4 shadow-sm group cursor-pointer"
-                    >
-                      <div className="text-3xl flex-shrink-0">{item.icon}</div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-black text-black text-sm uppercase leading-tight truncate group-hover:text-[#0038FF] transition-colors">
-                          {item.name}
-                        </h4>
-                        <p className="text-black/50 text-[10px] font-bold uppercase tracking-wider mt-1 truncate">
-                          {item.issuer}
-                        </p>
-                        <span className="inline-block mt-3 text-[9px] font-black uppercase bg-[#0038FF]/5 text-[#0038FF] px-2 py-0.5 rounded-full border border-[#0038FF]/10">
-                          {item.hours}
-                        </span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+        {/* Collections Section */}
+        <div className="mb-16">
+          <h3 className="text-xl font-black text-black uppercase tracking-tight mb-6 pb-2 border-b-2 border-black/10">
+            📂 Learning Collections
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* GitHub Learning Series */}
+            <div className="border-[3px] border-black rounded-[2.5rem] p-6 bg-white shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <span className="text-[9px] font-black uppercase bg-[#CCFF00] text-black border border-black px-2.5 py-1 rounded-full tracking-wider block w-fit mb-3">
+                  GITHUB LEARNING SERIES (4)
+                </span>
+                <h4 className="font-black text-lg text-black uppercase leading-tight">
+                  GitHub Ecosystem Suite
+                </h4>
+                <p className="text-black/60 text-xs mt-2 leading-relaxed font-medium">
+                  4 specialized courses covering GitHub Actions, Copilot automation, Code Search, and collaborative Project management pipelines.
+                </p>
               </div>
-            );
-          })}
+              <div className="mt-6 flex flex-col gap-2 border-t border-black/5 pt-4">
+                {githubSeriesItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveItem(item);
+                      setShowPdf(false);
+                    }}
+                    className="text-left py-2.5 px-3.5 hover:bg-black/5 rounded-xl flex items-center justify-between text-xs font-black uppercase text-black/70 hover:text-black transition-all group cursor-pointer border border-transparent hover:border-black/10"
+                  >
+                    <span className="truncate max-w-[260px] tracking-wide">⚙️ {item.name}</span>
+                    <span className="text-[9px] font-black uppercase text-black/40 group-hover:text-[#0038FF] flex items-center gap-1.5 flex-shrink-0">
+                      Details ➔
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Data Analytics Series */}
+            <div className="border-[3px] border-black rounded-[2.5rem] p-6 bg-white shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+              <div>
+                <span className="text-[9px] font-black uppercase bg-[#CCFF00] text-black border border-black px-2.5 py-1 rounded-full tracking-wider block w-fit mb-3">
+                  DATA ANALYTICS & VISUALIZATION (3)
+                </span>
+                <h4 className="font-black text-lg text-black uppercase leading-tight">
+                  Business Intelligence Stack
+                </h4>
+                <p className="text-black/60 text-xs mt-2 leading-relaxed font-medium">
+                  3 specialized courses covering Microsoft Power BI Desktop dashboard architectures and Python-powered visualization using Dash.
+                </p>
+              </div>
+              <div className="mt-6 flex flex-col gap-2 border-t border-black/5 pt-4">
+                {dataAnalyticsItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveItem(item);
+                      setShowPdf(false);
+                    }}
+                    className="text-left py-2.5 px-3.5 hover:bg-black/5 rounded-xl flex items-center justify-between text-xs font-black uppercase text-black/70 hover:text-black transition-all group cursor-pointer border border-transparent hover:border-black/10"
+                  >
+                    <span className="truncate max-w-[260px] tracking-wide">📊 {item.name}</span>
+                    <span className="text-[9px] font-black uppercase text-black/40 group-hover:text-[#0038FF] flex items-center gap-1.5 flex-shrink-0">
+                      Details ➔
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Achievements Section */}
+        <div className="mb-12">
+          <h3 className="text-xl font-black text-black uppercase tracking-tight mb-6 pb-2 border-b-2 border-black/10">
+            🏆 Achievements
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {achievementItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActiveItem(item);
+                  setShowPdf(false);
+                }}
+                className="text-left bg-white border-[3px] border-black rounded-[2rem] p-6 shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#CCFF00] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300 flex items-start gap-4 cursor-pointer group relative"
+              >
+                <div className="text-3xl flex-shrink-0 bg-black/5 w-12 h-12 rounded-full flex items-center justify-center border-2 border-black/10 group-hover:border-black transition-all">
+                  {item.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-[8px] font-black uppercase bg-[#CCFF00] text-black border border-black px-2 py-0.5 rounded-full tracking-wider block w-fit mb-1.5">
+                    {item.issuer} • {item.year}
+                  </span>
+                  <h4 className="font-black text-black text-sm uppercase leading-tight group-hover:text-[#0038FF] transition-colors pr-6">
+                    {item.name}
+                  </h4>
+                  <span className="inline-block mt-3 text-[9px] font-black uppercase bg-black/5 text-black px-2.5 py-0.5 rounded-full border border-black/10">
+                    Quiz Participation Certificate
+                  </span>
+                </div>
+                <div className="absolute top-6 right-6 text-black/30 group-hover:text-[#CCFF00] transition-colors">
+                  <FaExternalLinkAlt className="w-3.5 h-3.5" />
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Overlay Modal for Certificate details */}
@@ -235,7 +361,10 @@ export function LearningArchivePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setActiveItem(null)}
+                onClick={() => {
+                  setActiveItem(null);
+                  setShowPdf(false);
+                }}
                 className="absolute inset-0 bg-black/70 backdrop-blur-md"
               />
 
@@ -245,7 +374,7 @@ export function LearningArchivePage() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 16 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                className="relative w-full max-w-lg bg-white border-[3px] border-black rounded-[2.5rem] shadow-2xl overflow-hidden z-10 flex flex-col"
+                className="relative w-full max-w-xl bg-white border-[3px] border-black rounded-[2.5rem] shadow-2xl overflow-hidden z-10 flex flex-col"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between px-8 py-6 border-b-2 border-black bg-[#CCFF00]/10">
@@ -261,70 +390,95 @@ export function LearningArchivePage() {
                     </div>
                   </div>
                   <button
-                    onClick={() => setActiveItem(null)}
-                    className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all flex-shrink-0"
+                    onClick={() => {
+                      setActiveItem(null);
+                      setShowPdf(false);
+                    }}
+                    className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all flex-shrink-0 cursor-pointer"
                   >
                     <IoClose className="w-4 h-4" />
                   </button>
                 </div>
 
-                {/* Details */}
-                <div className="p-8 flex flex-col gap-5">
-                  {/* Overview */}
-                  <div>
-                    <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                      <FaAward /> Overview
-                    </h4>
-                    <p className="text-black/70 text-xs font-medium leading-relaxed">
-                      {activeItem.desc}
-                    </p>
-                  </div>
-
-                  {/* What I Learnt */}
-                  <div>
-                    <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                      <FaBookOpen /> What I Learnt
-                    </h4>
-                    <p className="text-black/70 text-xs font-medium leading-relaxed">
-                      {activeItem.learnt}
-                    </p>
-                  </div>
-
-                  {/* Skills Gained */}
-                  <div>
-                    <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                      <FaCompass /> Skills Gained
-                    </h4>
-                    <div className="flex flex-wrap gap-1.5">
-                      {activeItem.skills.map((s, i) => (
-                        <span key={i} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
-                          {s}
-                        </span>
-                      ))}
+                {/* Conditional Body: PDF Viewer vs Details Text */}
+                {showPdf ? (
+                  <div className="p-4 bg-zinc-900 flex flex-col gap-4">
+                    <iframe
+                      src={activeItem.verifyUrl}
+                      className="w-full h-[55vh] rounded-2xl border-[3px] border-black bg-white"
+                      title="Certificate PDF Viewer"
+                    />
+                    <div className="flex justify-between items-center text-white text-xs font-bold px-2">
+                      <button
+                        onClick={() => setShowPdf(false)}
+                        className="text-[#CCFF00] hover:text-white transition-colors cursor-pointer uppercase font-black tracking-wider"
+                      >
+                        ◀ Back to Details
+                      </button>
+                      <span className="text-white/50">Local Archive Viewer</span>
                     </div>
                   </div>
+                ) : (
+                  <>
+                    {/* Details Info */}
+                    <div className="p-8 flex flex-col gap-5">
+                      {/* Overview */}
+                      <div>
+                        <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                          <FaAward /> Overview
+                        </h4>
+                        <p className="text-black/70 text-xs font-medium leading-relaxed">
+                          {activeItem.desc}
+                        </p>
+                      </div>
 
-                  {/* Hours completed */}
-                  <div>
-                    <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                      <FaHourglassHalf /> Course Time
-                    </h4>
-                    <p className="text-black/70 text-xs font-bold">
-                      {activeItem.hours} completed
-                    </p>
-                  </div>
-                </div>
+                      {/* What I Learnt */}
+                      <div>
+                        <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                          <FaBookOpen /> What I Learnt
+                        </h4>
+                        <p className="text-black/70 text-xs font-medium leading-relaxed">
+                          {activeItem.learnt}
+                        </p>
+                      </div>
 
-                {/* Footer / ID Action */}
-                <div className="px-8 py-5 bg-[#F8F9FA] border-t-2 border-black flex items-center justify-between text-xs font-bold text-black/50">
-                  <span>ID: {activeItem.id}</span>
-                  <button
-                    onClick={() => window.open(activeItem.verifyUrl || '#', '_blank')}
-                    className="flex items-center gap-1.5 text-black hover:text-[#0038FF] transition-colors cursor-pointer"
-                  >
-                    Preview Certificate <FaExternalLinkAlt className="w-3 h-3" />
-                  </button>
-                </div>
+                      {/* Skills Gained */}
+                      <div>
+                        <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                          <FaCompass /> Skills Gained
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {activeItem.skills && activeItem.skills.map((s, i) => (
+                            <span key={i} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Hours completed */}
+                      <div>
+                        <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                          <FaHourglassHalf /> Course Time
+                        </h4>
+                        <p className="text-black/70 text-xs font-bold">
+                          {activeItem.hours} completed
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Footer / View Certificate Trigger */}
+                    <div className="px-8 py-5 bg-[#F8F9FA] border-t-2 border-black flex items-center justify-between text-xs font-bold text-black/50">
+                      <span>ID: {activeItem.id}</span>
+                      <button
+                        onClick={() => setShowPdf(true)}
+                        className="flex items-center gap-1.5 text-black hover:text-[#0038FF] transition-colors cursor-pointer uppercase font-black tracking-wider"
+                      >
+                        View Certificate <FaExternalLinkAlt className="w-3 h-3 text-[#0038FF]" />
+                      </button>
+                    </div>
+                  </>
+                )}
               </motion.div>
             </div>
           )}

@@ -186,8 +186,7 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* ── Lanyard overlay (Commented out temporarily) ── */}
-      {/*
+      {/* ── Lanyard overlay ── */}
       <div className="absolute inset-0 z-20" style={{ pointerEvents: 'auto' }}>
         <CanvasErrorBoundary>
           <Suspense fallback={null}>
@@ -205,7 +204,6 @@ export const HeroSection = () => {
           </Suspense>
         </CanvasErrorBoundary>
       </div>
-      */}
     </section>
   );
 };
