@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { FaBriefcase, FaHandshake, FaQuoteLeft, FaExternalLinkAlt } from 'react-icons/fa';
 
 const clientEngagements = [
@@ -21,18 +21,40 @@ const clientEngagements = [
       { label: 'devinterio.in', url: 'https://devinterio.in' }
     ],
     logo: '/devinterio-logo.png'
+  },
+  {
+    id: '02',
+    name: 'Visualization Portfolio Showcase',
+    client: 'Jaas Visual',
+    year: '2024 (Upcoming)',
+    category: 'Frontend Architecture & CGI Showcase',
+    desc: 'Engineering the official web showcase for Jaas Visual, a high-end 3D architectural visualization and rendering studio. Designed to stream high-definition architectural renders smoothly across all viewports.',
+    requirements: 'Rebuild the studio’s portfolio from scratch, achieving photorealistic CGI rendering showcases that load instantly. Program layout frameworks that adapt fluidly, handling massive image assets without visual stutter.',
+    development: 'Programmed responsive layouts using Syne & Inter CSS variables. Developed custom preloader layers, layout animations sheets, and lightweight navigation menus. Built modular PHP structure partials in preparation for backend deployment stages.',
+    outcome: 'Upcoming release. Development build is fully complete on the frontend, with local layout previews successfully validated and remote domain settings configured.',
+    testimonial: 'Rohit’s frontend implementation matches our design visions perfectly. The preloader sequences and fluid scrolling layouts bring our visualization works to life.',
+    img: '/jaas.jpg', // Redesigned site screenshot
+    tags: ['HTML5', 'CSS3', 'JavaScript (ES6)', 'Architectural CGI Showcase', 'Preloading Reels', 'UI Animations'],
+    links: [
+      { label: 'jaasvisual.com', url: '#' }
+    ],
+    logo: '/jaas-logo.png'
   }
 ];
 
 export function ClientWorkPage() {
+  const [activeClientIdx, setActiveClientIdx] = useState(0);
   const [activeScreenshot, setActiveScreenshot] = useState<string | null>(null);
+  const [previewTitle, setPreviewTitle] = useState('');
+
+  const item = clientEngagements[activeClientIdx];
 
   return (
     <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-32 pb-24 px-6 md:px-10">
       <div className="max-w-5xl mx-auto">
         
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-10 border-b border-black/5 pb-8">
           <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full mb-4 tracking-widest uppercase">
             CLIENT PROJECTS
           </span>
@@ -48,20 +70,49 @@ export function ClientWorkPage() {
           </p>
         </div>
 
-        {/* Clients Stack */}
-        <div className="flex flex-col gap-12">
-          {clientEngagements.map((item, idx) => (
+        {/* Case Study Card with Dynamic Slide Transition */}
+        <div className="relative">
+          
+          {/* Circular Selector row just above the card */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 px-2">
+            <span className="text-[10px] font-black uppercase text-black/40 tracking-wider">
+              Client Engagement (0{activeClientIdx + 1} / 0{clientEngagements.length})
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {clientEngagements.map((_, index) => {
+                const isActive = activeClientIdx === index;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setActiveClientIdx(index)}
+                    className={`w-11 h-11 rounded-full border-2 flex items-center justify-center text-xs font-black transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-black text-[#CCFF00] border-black shadow-[2px_2px_0_#0038FF] -translate-x-0.5 -translate-y-0.5'
+                        : 'bg-white/40 backdrop-blur-sm text-black border-black/10 hover:border-black hover:bg-white'
+                    }`}
+                  >
+                    0{index + 1}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.25 }}
               className="flex flex-col lg:flex-row border-[3px] border-black rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300 bg-white/60 backdrop-blur-md"
             >
               {/* Left Side: Thumbnail & Summary */}
               <div
-                onClick={() => setActiveScreenshot(item.img)}
+                onClick={() => {
+                  setActiveScreenshot(item.img);
+                  setPreviewTitle(`${item.client} Layout Preview`);
+                }}
                 className="w-full lg:w-[360px] flex-shrink-0 relative h-64 lg:h-auto min-h-[300px] border-b-[3px] lg:border-b-0 lg:border-r-[3px] border-black cursor-pointer overflow-hidden group/img"
               >
                 <img
@@ -141,7 +192,7 @@ export function ClientWorkPage() {
                         "{item.testimonial}"
                       </p>
                       <span className="text-[9.5px] font-black text-[#CCFF00] uppercase tracking-wider block mt-2.5">
-                        — Devinterio Management Team
+                        — {item.client} Management Team
                       </span>
                     </div>
                   </div>
@@ -160,28 +211,41 @@ export function ClientWorkPage() {
                   {/* Action Link Row */}
                   <div className="flex flex-wrap gap-2">
                     <button
-                      onClick={() => setActiveScreenshot(item.img)}
+                      onClick={() => {
+                        setActiveScreenshot(item.img);
+                        setPreviewTitle(`${item.client} Layout Preview`);
+                      }}
                       className="text-[9.5px] font-black uppercase tracking-wider bg-white border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-white transition-colors flex items-center gap-1 shadow-sm cursor-pointer"
                     >
                       👁️ Preview Layout
                     </button>
                     {item.links.map(l => (
-                      <a
-                        key={l.label}
-                        href={l.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00] border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-[#CCFF00] transition-colors flex items-center gap-1 shadow-sm"
-                      >
-                        <FaExternalLinkAlt className="w-2.5 h-2.5" /> {l.label}
-                      </a>
+                      l.url !== '#' ? (
+                        <a
+                          key={l.label}
+                          href={l.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00] border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-[#CCFF00] transition-colors flex items-center gap-1 shadow-sm"
+                        >
+                          <FaExternalLinkAlt className="w-2.5 h-2.5" /> {l.label}
+                        </a>
+                      ) : (
+                        <span
+                          key={l.label}
+                          className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00]/30 border-2 border-black/20 px-3.5 py-1.5 rounded-full text-black/40 flex items-center gap-1 select-none cursor-not-allowed"
+                          title="Site launching soon"
+                        >
+                          ⏳ {l.label} (Soon)
+                        </span>
+                      )
                     ))}
                   </div>
                 </div>
 
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
 
       </div>
@@ -189,13 +253,19 @@ export function ClientWorkPage() {
       {/* Lightbox Modal */}
       {activeScreenshot && (
         <div
-          onClick={() => setActiveScreenshot(null)}
+          onClick={() => {
+            setActiveScreenshot(null);
+            setPreviewTitle('');
+          }}
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
         >
           <div className="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
             {/* Close Button */}
             <button
-              onClick={() => setActiveScreenshot(null)}
+              onClick={() => {
+                setActiveScreenshot(null);
+                setPreviewTitle('');
+              }}
               className="absolute -top-12 right-0 text-white hover:text-[#CCFF00] font-black text-sm uppercase tracking-wider flex items-center gap-1 bg-black/40 px-3 py-1.5 rounded-full border border-white/20 cursor-pointer"
             >
               Close ✕
@@ -207,7 +277,7 @@ export function ClientWorkPage() {
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
             />
             <p className="text-white/60 text-xs mt-4 font-bold uppercase tracking-wider pointer-events-none">
-              Devinterio Redesigned Layout Preview
+              {previewTitle}
             </p>
           </div>
         </div>
