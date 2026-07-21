@@ -46,6 +46,7 @@ function AnimatedSkillGauge({ value, gaugePrimaryColor, gaugeSecondaryColor }: {
 
 export function HomePage() {
   const [activeCert, setActiveCert] = useState<any | null>(null);
+  const [showPdf, setShowPdf] = useState(false);
 
   const oracleCert = {
     id: 'ORACLE-JAVA-2026',
@@ -57,7 +58,7 @@ export function HomePage() {
     desc: 'Demonstrates foundational knowledge of Java technology and programming, covering core concepts, data structures, and OOP methodologies.',
     learnt: 'Java syntax, object-oriented concepts (inheritance, encapsulation, polymorphism), control flow structures, exception handling, data structures, and APIs.',
     skills: ['Java', 'OOP', 'Data Structures', 'Exception Handling'],
-    verifyUrl: 'https://education.oracle.com',
+    verifyUrl: '/certficates/eCertificate.pdf',
   };
 
   const mlCert = {
@@ -70,7 +71,7 @@ export function HomePage() {
     desc: 'Advanced machine learning course covering data analysis, predictive modeling, clustering, and deep evaluation strategies.',
     learnt: 'Supervised & unsupervised learning algorithms, scikit-learn interfaces, SVM regression, decision trees, cross-validation metrics.',
     skills: ['Python', 'Scikit-Learn', 'Feature Engineering', 'Model Evaluation'],
-    verifyUrl: 'https://coursera.org/verify',
+    verifyUrl: '/certficates/Coursera 7RSUPVFLCPS3.pdf',
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -606,7 +607,10 @@ export function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <button
-              onClick={() => setActiveCert(oracleCert)}
+              onClick={() => {
+                setActiveCert(oracleCert);
+                setShowPdf(false);
+              }}
               className="text-left p-6 rounded-[2rem] border-[3px] border-black flex items-start gap-4 shadow-[6px_6px_0_#000] hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer block w-full"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
@@ -621,7 +625,10 @@ export function HomePage() {
               </div>
             </button>
             <button
-              onClick={() => setActiveCert(mlCert)}
+              onClick={() => {
+                setActiveCert(mlCert);
+                setShowPdf(false);
+              }}
               className="text-left p-6 rounded-[2rem] border-[3px] border-black flex items-start gap-4 shadow-[6px_6px_0_#000] hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer block w-full"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
@@ -684,63 +691,85 @@ export function HomePage() {
                 </button>
               </div>
 
-              {/* Details */}
-              <div className="p-8 flex flex-col gap-5">
-                {/* Overview */}
-                <div>
-                  <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                    <FaAward /> Overview
-                  </h4>
-                  <p className="text-black/70 text-xs font-medium leading-relaxed">
-                    {activeCert.desc}
-                  </p>
-                </div>
-
-                {/* What I Learnt */}
-                <div>
-                  <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                    <FaBookOpen /> What I Learnt
-                  </h4>
-                  <p className="text-black/70 text-xs font-medium leading-relaxed">
-                    {activeCert.learnt}
-                  </p>
-                </div>
-
-                {/* Skills Gained */}
-                <div>
-                  <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                    <FaCompass /> Skills Gained
-                  </h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {activeCert.skills.map((s: string, i: number) => (
-                      <span key={i} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
-                        {s}
-                      </span>
-                    ))}
+              {/* Conditional Body: PDF Viewer vs Details Text */}
+              {showPdf ? (
+                <div className="p-4 bg-zinc-900 flex flex-col gap-4">
+                  <iframe
+                    src={activeCert.verifyUrl}
+                    className="w-full h-[55vh] rounded-2xl border-[3px] border-black bg-white"
+                    title="Certificate PDF Viewer"
+                  />
+                  <div className="flex justify-between items-center text-white text-xs font-bold px-2">
+                    <button
+                      onClick={() => setShowPdf(false)}
+                      className="text-[#CCFF00] hover:text-white transition-colors cursor-pointer uppercase font-black tracking-wider"
+                    >
+                      ◀ Back to Details
+                    </button>
+                    <span className="text-white/50">Local Archive Viewer</span>
                   </div>
                 </div>
+              ) : (
+                <>
+                  {/* Details */}
+                  <div className="p-8 flex flex-col gap-5">
+                    {/* Overview */}
+                    <div>
+                      <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                        <FaAward /> Overview
+                      </h4>
+                      <p className="text-black/70 text-xs font-medium leading-relaxed">
+                        {activeCert.desc}
+                      </p>
+                    </div>
 
-                {/* Hours completed */}
-                <div>
-                  <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
-                    <FaHourglassHalf /> Course Time
-                  </h4>
-                  <p className="text-black/70 text-xs font-bold">
-                    {activeCert.hours} completed
-                  </p>
-                </div>
-              </div>
+                    {/* What I Learnt */}
+                    <div>
+                      <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                        <FaBookOpen /> What I Learnt
+                      </h4>
+                      <p className="text-black/70 text-xs font-medium leading-relaxed">
+                        {activeCert.learnt}
+                      </p>
+                    </div>
 
-              {/* Footer / ID Action */}
-              <div className="px-8 py-5 bg-[#F8F9FA] border-t-2 border-black flex items-center justify-between text-xs font-bold text-black/50">
-                <span>ID: {activeCert.id}</span>
-                <button
-                  onClick={() => window.open(activeCert.verifyUrl || '#', '_blank')}
-                  className="flex items-center gap-1.5 text-black hover:text-[#0038FF] transition-colors cursor-pointer"
-                >
-                  Preview Certificate <FaExternalLinkAlt className="w-3 h-3" />
-                </button>
-              </div>
+                    {/* Skills Gained */}
+                    <div>
+                      <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                        <FaCompass /> Skills Gained
+                      </h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeCert.skills.map((s: string, i: number) => (
+                          <span key={i} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Hours completed */}
+                    <div>
+                      <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                        <FaHourglassHalf /> Course Time
+                      </h4>
+                      <p className="text-black/70 text-xs font-bold">
+                        {activeCert.hours} completed
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Footer / ID Action */}
+                  <div className="px-8 py-5 bg-[#F8F9FA] border-t-2 border-black flex items-center justify-between text-xs font-bold text-black/50">
+                    <span>ID: {activeCert.id}</span>
+                    <button
+                      onClick={() => setShowPdf(true)}
+                      className="flex items-center gap-1.5 text-black hover:text-[#0038FF] transition-colors cursor-pointer uppercase font-black tracking-wider"
+                    >
+                      View Certificate <FaExternalLinkAlt className="w-3 h-3 text-[#0038FF]" />
+                    </button>
+                  </div>
+                </>
+              )}
             </motion.div>
           </div>
         )}

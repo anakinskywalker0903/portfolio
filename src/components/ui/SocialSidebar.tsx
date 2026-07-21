@@ -17,7 +17,7 @@ const socialLinks = [
   },
   {
     icon: MdEmail,
-    href: 'mailto:rohit@rohitdubey.dev',
+    href: 'mailto:rohitdubey39005@gmail.com',
     label: 'Email',
     color: '#EA4335',
   },

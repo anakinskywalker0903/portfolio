@@ -164,7 +164,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {[
                   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/rohit--dubey03/' },
                   { icon: FaGithub, href: 'https://github.com/anakinskywalker0903' },
-                  { icon: MdEmail, href: 'mailto:rohit@rohitdubey.dev' },
+                  { icon: MdEmail, href: 'mailto:rohitdubey39005@gmail.com' },
                   { icon: FaWhatsapp, href: 'https://wa.me/918777453162' },
                 ].map((social, i) => {
                   const Icon = social.icon;

@@ -100,7 +100,7 @@ export const ContactSection = () => {
           >
             <div className="flex flex-col gap-2">
               {[
-                { label: 'Email', value: 'rohit@rohitdubey.dev', icon: '✉️', href: 'mailto:rohit@rohitdubey.dev' },
+                { label: 'Email', value: 'rohitdubey39005@gmail.com', icon: '✉️', href: 'mailto:rohitdubey39005@gmail.com' },
                 { label: 'Location', value: 'India · Remote Worldwide', icon: '📍', href: '#' },
                 { label: 'Availability', value: 'Open to freelance & full-time', icon: '🟢', href: '#' },
                 { label: 'Response Time', value: 'Within 24 hours', icon: '⚡', href: '#' },
