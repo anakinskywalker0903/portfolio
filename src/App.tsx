@@ -1,31 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import { Layout } from '@/components/Layout';
 import { HomePage } from '@/pages/HomePage';
-import { SkillsPage } from '@/pages/SkillsPage';
-import { ProjectsPage } from '@/pages/ProjectsPage';
-import { ClientWorkPage } from '@/pages/ClientWorkPage';
-import { ExperiencePage } from '@/pages/ExperiencePage';
-import { LearningArchivePage } from '@/pages/LearningArchivePage';
 import { Preloader } from '@/components/ui/Preloader';
 import { PreloaderDoneContext } from '@/components/ui/PreloaderContext';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
-// Scroll to top on every route transition
+// Lazy load pages to decrease initial chunk bundle weights
+const SkillsPage = lazy(() => import('@/pages/SkillsPage').then(m => ({ default: m.SkillsPage })));
+const ProjectsPage = lazy(() => import('@/pages/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const ClientWorkPage = lazy(() => import('@/pages/ClientWorkPage').then(m => ({ default: m.ClientWorkPage })));
+const ExperiencePage = lazy(() => import('@/pages/ExperiencePage').then(m => ({ default: m.ExperiencePage })));
+const LearningArchivePage = lazy(() => import('@/pages/LearningArchivePage').then(m => ({ default: m.LearningArchivePage })));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+
+import { initGA, trackPageView } from '@/lib/analytics';
+
+// Scroll to top & track page view on every route transition
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    trackPageView(pathname);
   }, [pathname]);
 
   return null;
 }
 
+// Brutalist loading fallback component
+function LoadingFallback() {
+  return (
+    <div className="w-full min-h-[60vh] bg-white flex flex-col items-center justify-center gap-4">
+      <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full tracking-widest uppercase border border-black animate-pulse">
+        LOADING PAGE...
+      </span>
+    </div>
+  );
+}
+
 export default function App() {
-  // Always show preloader on every page load / refresh
   const [loading, setLoading] = useState(true);
   const [preloaderDone, setPreloaderDone] = useState(false);
+
+  // Initialize GA4 once on mount
+  useEffect(() => {
+    initGA();
+  }, []);
 
   // Block devtools inspection in production builds, while allowing it in development
   useEffect(() => {
@@ -61,33 +83,37 @@ export default function App() {
 
   const handlePreloaderComplete = () => {
     setLoading(false);
-    // Small extra delay to let the slide-up exit animation finish before typing starts
     setTimeout(() => setPreloaderDone(true), 100);
   };
 
   return (
-    <PreloaderDoneContext.Provider value={preloaderDone}>
-      <Router>
-        <ScrollToTop />
+    <ErrorBoundary>
+      <PreloaderDoneContext.Provider value={preloaderDone}>
+        <Router>
+          <ScrollToTop />
 
-        {/* Global Cinematic Preloader */}
-        <AnimatePresence mode="wait">
-          {loading && (
-            <Preloader onComplete={handlePreloaderComplete} />
-          )}
-        </AnimatePresence>
+          {/* Global Cinematic Preloader */}
+          <AnimatePresence mode="wait">
+            {loading && (
+              <Preloader onComplete={handlePreloaderComplete} />
+            )}
+          </AnimatePresence>
 
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/client-work" element={<ClientWorkPage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/certifications" element={<LearningArchivePage />} />
-          </Routes>
-        </Layout>
-      </Router>
-    </PreloaderDoneContext.Provider>
+          <Layout>
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/client-work" element={<ClientWorkPage />} />
+                <Route path="/experience" element={<ExperiencePage />} />
+                <Route path="/certifications" element={<LearningArchivePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </Router>
+      </PreloaderDoneContext.Provider>
+    </ErrorBoundary>
   );
 }

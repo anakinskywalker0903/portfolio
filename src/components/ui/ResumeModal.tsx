@@ -6,6 +6,7 @@ import { FaFilePdf, FaDownload, FaEye } from 'react-icons/fa';
 import aiResume from '@/assets/resumes/Rohit_s_Resume_AI.pdf';
 import frontendResume from '@/assets/resumes/Rohit_s_Resume_Frontend.pdf';
 import sdeResume from '@/assets/resumes/Rohit_s_Resume_SDE.pdf';
+import { trackResumeDownload, trackResumePreview } from '@/lib/analytics';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -16,20 +17,26 @@ const resumeVersions = [
   {
     id: 'ai-engineer',
     role: 'AI Engineer',
-    description: 'Focused on LLMs, RAG pipelines, fine-tuning, and machine learning architectures.',
+    description: 'LLMs, RAG pipelines, fine-tuning, vector DBs, and AI architectures.',
     fileUrl: aiResume,
+    summary: 'Full-Stack & AI Engineer specializing in LLM integrations, RAG workflows, PyTorch, OpenAI/Claude APIs, and scalable Web Apps.',
+    skills: ['Python', 'TypeScript', 'LangChain / LlamaIndex', 'OpenAI & Claude API', 'PyTorch', 'Vector DBs (Pinecone/Chroma)', 'React / Next.js', 'FastAPI / Node.js']
   },
   {
     id: 'full-stack-sde',
     role: 'Full Stack / SDE',
-    description: 'End-to-end web applications, system design, robust APIs, and database engineering.',
+    description: 'End-to-end web applications, system design, REST & GraphQL APIs, and databases.',
     fileUrl: sdeResume,
+    summary: 'Full-Stack Software Development Engineer proficient in React, Next.js, Node.js, Express, PostgreSQL, MongoDB, Docker, and Cloud Deployments.',
+    skills: ['React & Next.js', 'Node.js & Express', 'TypeScript', 'PostgreSQL / Prisma', 'MongoDB', 'Docker & AWS', 'REST & GraphQL APIs', 'Tailwind CSS']
   },
   {
     id: 'frontend',
     role: 'Frontend Developer',
-    description: 'Creative animations, pixel-perfect layouts, responsive design, and rich UI/UX products.',
+    description: 'Creative animations, pixel-perfect design systems, responsive UI/UX.',
     fileUrl: frontendResume,
+    summary: 'Frontend Engineer focused on building high-performance, pixel-perfect, accessible user interfaces with Framer Motion, GSAP, and Tailwind CSS.',
+    skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion & GSAP', 'Vite & Webpack', 'UI/UX Architecture', 'Web Performance & Accessibility']
   },
 ];
 
@@ -41,136 +48,180 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     onClose();
   };
 
-  const handleAction = (type: 'preview' | 'download', version: typeof resumeVersions[0]) => {
-    if (type === 'preview') {
-      setActivePreview(version);
-    } else {
-      const link = document.createElement('a');
-      link.href = version.fileUrl;
-      link.download = `${version.role.replace(/\s+/g, '_')}_Resume_Rohit_Dubey.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+  const handleDownload = (version: typeof resumeVersions[0]) => {
+    trackResumeDownload(version.role);
+    const link = document.createElement('a');
+    link.href = version.fileUrl;
+    link.download = `Rohit_Dubey_${version.role.replace(/\s+/g, '_')}_Resume.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handlePreview = (version: typeof resumeVersions[0]) => {
+    trackResumePreview(version.role);
+    setActivePreview(version);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center pt-20 pb-4 px-3 sm:px-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="absolute inset-0 bg-black/75 backdrop-blur-md"
+            className="absolute inset-0 bg-black/85 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
+          {/* Centered Modal Container with safe top clearance */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 16 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className={`relative w-full ${activePreview ? 'max-w-5xl h-[85vh]' : 'max-w-2xl'} bg-white border-[3px] border-black rounded-[2.5rem] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh] transition-all duration-300`}
+            className={`relative w-full ${
+              activePreview ? 'max-w-4xl h-[78vh]' : 'max-w-xl'
+            } bg-white border-[3px] border-black rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden z-[70] flex flex-col max-h-[82vh] my-auto transition-all duration-300`}
           >
             {activePreview ? (
               <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#121212]">
-                {/* PDF Header controls */}
-                <div className="flex items-center justify-between px-6 py-4 bg-black border-b-2 border-black/10 z-10 flex-shrink-0">
-                  <div className="flex items-center gap-3">
+                {/* PDF Header Controls */}
+                <div className="flex items-center justify-between px-4 sm:px-6 py-3 bg-black border-b-2 border-white/10 z-10 flex-shrink-0">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                     <button
                       onClick={() => setActivePreview(null)}
-                      className="px-4 py-1.5 rounded-full border-2 border-white/20 text-xs font-black uppercase text-white hover:bg-[#CCFF00] hover:text-black hover:border-black transition-all cursor-pointer"
+                      className="px-3 py-1.5 rounded-full border border-white/30 text-[10px] sm:text-xs font-black uppercase text-white hover:bg-[#CCFF00] hover:text-black transition-all cursor-pointer flex-shrink-0"
                     >
                       ← Back
                     </button>
-                    <span className="font-bold text-sm text-white uppercase tracking-wider">{activePreview.role} Resume Preview</span>
+                    <span className="font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider truncate">
+                      {activePreview.role}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
+
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     <button
-                      onClick={() => handleAction('download', activePreview)}
-                      className="flex items-center gap-1.5 px-4 py-1.5 bg-[#CCFF00] text-black font-black text-xs rounded-full border-2 border-black hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      onClick={() => handleDownload(activePreview)}
+                      className="flex items-center gap-1 px-3 py-1.5 bg-[#CCFF00] text-black font-black text-[10px] sm:text-xs rounded-full border border-black hover:scale-105 transition-all cursor-pointer"
                     >
-                      <FaDownload className="w-3.5 h-3.5" /> Download PDF
+                      <FaDownload className="w-3 h-3" /> Download
                     </button>
                     <button
                       onClick={handleClose}
-                      className="w-8 h-8 rounded-full border-2 border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer"
+                      className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all cursor-pointer"
                     >
                       <IoClose className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
 
-                {/* PDF Frame wrapper */}
-                <div className="flex-1 w-full bg-[#1e1e1e] relative overflow-y-auto">
-                  <iframe
-                    src={`${activePreview.fileUrl}#toolbar=0&navpanes=0&view=FitH`}
-                    title={`${activePreview.role} Resume Preview`}
-                    className="w-full border-none bg-[#1e1e1e] block"
-                    style={{ height: '1400px' }}
-                    scrolling="no"
-                  />
+                {/* Resume In-Modal Viewer */}
+                <div className="flex-1 w-full bg-[#1A1C23] text-white p-4 sm:p-6 overflow-y-auto flex flex-col gap-5">
+                  <div className="bg-[#242731] border border-white/10 rounded-2xl p-5 shadow-lg">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4 mb-4">
+                      <div>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-[#CCFF00] block mb-1">
+                          ROHIT DUBEY • {activePreview.role.toUpperCase()}
+                        </span>
+                        <h4 className="text-lg font-black uppercase text-white leading-tight">
+                          Executive Resume Summary
+                        </h4>
+                      </div>
+                      <button
+                        onClick={() => handleDownload(activePreview)}
+                        className="px-4 py-2 rounded-xl bg-[#CCFF00] text-black font-black text-xs uppercase tracking-wider flex items-center gap-1.5 w-fit cursor-pointer"
+                      >
+                        <FaDownload /> Get Official PDF
+                      </button>
+                    </div>
+
+                    <p className="text-white/80 text-xs font-medium leading-relaxed mb-4">
+                      {activePreview.summary}
+                    </p>
+
+                    <div>
+                      <span className="text-[9px] font-black uppercase text-white/40 tracking-wider block mb-2">
+                        Core Competencies &amp; Tech Stack
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activePreview.skills.map((skill) => (
+                          <span key={skill} className="text-[9.5px] font-black uppercase bg-[#0038FF]/20 text-[#CCFF00] border border-[#0038FF]/40 px-2.5 py-1 rounded-full">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Embedded PDF iframe fallback */}
+                  <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#121212] min-h-[360px] flex-1">
+                    <iframe
+                      src={`${activePreview.fileUrl}#toolbar=0&navpanes=0&view=FitH`}
+                      title={`${activePreview.role} Resume PDF`}
+                      className="w-full h-full min-h-[400px] border-none"
+                    />
+                  </div>
                 </div>
               </div>
             ) : (
               <>
                 {/* Header */}
-                <div className="flex items-center justify-between px-8 py-6 border-b-2 border-black bg-[#0038FF]/5">
+                <div className="flex items-center justify-between px-6 sm:px-8 py-4 sm:py-5 border-b-2 border-black bg-[#0038FF]/5">
                   <div>
                     <span className="inline-block bg-[#CCFF00] text-black text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-1 border border-black">
                       RECRUITER HUB
                     </span>
-                    <h3 className="text-2xl font-black text-black tracking-tight uppercase" style={{ fontFamily: '"Arial Black", sans-serif' }}>
+                    <h3 className="text-lg sm:text-2xl font-black text-black tracking-tight uppercase" style={{ fontFamily: '"Arial Black", sans-serif' }}>
                       CHOOSE RESUME
                     </h3>
                   </div>
                   
                   <button
                     onClick={handleClose}
-                    className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer"
                   >
-                    <IoClose className="w-5 h-5" />
+                    <IoClose className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 </div>
 
-                {/* Content List */}
-                <div className="p-8 flex-1 overflow-y-auto flex flex-col gap-4">
+                {/* Resume Version Cards */}
+                <div className="p-4 sm:p-6 flex-1 overflow-y-auto flex flex-col gap-3">
                   {resumeVersions.map((version) => (
                     <div
                       key={version.id}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl border-2 border-transparent hover:border-black bg-[#F8F9FA] hover:bg-white transition-all duration-300 group"
+                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border-2 border-black/10 hover:border-black bg-[#F8F9FA] hover:bg-white transition-all duration-200"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#0038FF]/10 text-[#0038FF] flex items-center justify-center flex-shrink-0 group-hover:bg-[#0038FF] group-hover:text-white transition-colors duration-300">
-                          <FaFilePdf className="w-5 h-5" />
+                      <div className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-[#0038FF] text-white flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
+                          <FaFilePdf className="w-4 h-4" />
                         </div>
                         <div>
-                          <h4 className="font-black text-black text-lg leading-tight uppercase">
+                          <h4 className="font-black text-black text-sm sm:text-base leading-tight uppercase">
                             {version.role}
                           </h4>
-                          <p className="text-black/60 text-xs mt-1 max-w-md font-medium leading-relaxed">
+                          <p className="text-black/60 text-xs mt-0.5 max-w-sm font-medium leading-relaxed">
                             {version.description}
                           </p>
                         </div>
                       </div>
 
-                      {/* Actions */}
-                      <div className="flex items-center gap-2 sm:self-center">
+                      {/* Action Buttons */}
+                      <div className="flex items-center gap-2 mt-2 sm:mt-0 flex-shrink-0">
                         <button
-                          onClick={() => handleAction('preview', version)}
-                          className="px-4 py-2 text-xs font-black uppercase tracking-wider border-2 border-black rounded-full hover:bg-black hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+                          onClick={() => handlePreview(version)}
+                          className="flex-1 sm:flex-initial px-3.5 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider border-2 border-black rounded-full hover:bg-black hover:text-white flex items-center justify-center gap-1 transition-colors cursor-pointer"
                         >
-                          <FaEye className="w-3.5 h-3.5" />
+                          <FaEye className="w-3 h-3" />
                           Preview
                         </button>
                         <button
-                          onClick={() => handleAction('download', version)}
-                          className="px-4 py-2 text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black border-2 border-black text-black hover:text-white rounded-full flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+                          onClick={() => handleDownload(version)}
+                          className="flex-1 sm:flex-initial px-3.5 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black border-2 border-black text-black hover:text-white rounded-full flex items-center justify-center gap-1 transition-colors shadow-sm cursor-pointer"
                         >
-                          <FaDownload className="w-3.5 h-3.5" />
+                          <FaDownload className="w-3 h-3" />
                           Download
                         </button>
                       </div>
@@ -179,7 +230,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 bg-[#F8F9FA] border-t-2 border-black text-center text-black/50 text-[10px] font-black uppercase tracking-wider">
+                <div className="p-3.5 bg-[#F8F9FA] border-t-2 border-black text-center text-black/50 text-[9px] sm:text-[10px] font-black uppercase tracking-wider">
                   Rohit Dubey • Engineering Portfolio 2026
                 </div>
               </>

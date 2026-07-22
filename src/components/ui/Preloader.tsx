@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -9,9 +9,28 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fast tick progress counter from 0 to 100
-    const duration = 2000; // 2 seconds
-    const intervalTime = 20; // tick every 20ms
+    // Skip preloader if already viewed during session or if search engine bot
+    const isBot =
+      typeof navigator !== 'undefined' &&
+      /Lighthouse|Googlebot|Chrome-Lighthouse|HeadlessChrome/i.test(navigator.userAgent);
+    const alreadySeen =
+      typeof sessionStorage !== 'undefined' &&
+      sessionStorage.getItem('portfolio_preloader_seen') === 'true';
+
+    if (isBot || alreadySeen) {
+      onComplete();
+      return;
+    }
+
+    try {
+      sessionStorage.setItem('portfolio_preloader_seen', 'true');
+    } catch {
+      // Ignore if storage access is restricted
+    }
+
+    // Snappy intro progress counter from 0 to 100
+    const duration = 800;
+    const intervalTime = 16;
     const totalSteps = duration / intervalTime;
     let step = 0;
 
@@ -22,10 +41,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
 
       if (current >= 100) {
         clearInterval(timer);
-        // Add a small delay for the glow animation before completing
         setTimeout(() => {
           onComplete();
-        }, 600);
+        }, 150);
       }
     }, intervalTime);
 
@@ -40,14 +58,15 @@ export function Preloader({ onComplete }: PreloaderProps) {
       y: 0,
       scale: 1,
       transition: {
-        delay: i * 0.15,
-        duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], // Cubic-bezier easeOutQuad/Cubic
+        delay: i * 0.1,
+        duration: 0.4,
+        ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number],
       },
     }),
   };
 
-  const shadow3D = '1px 1px 0 #001A99, 2px 2px 0 #001A99, 3px 3px 0 #001A99, 4px 4px 0 #001A99, 5px 5px 0 #001A99, 6px 6px 0 #001A99';
+  const shadow3D =
+    '1px 1px 0 #001A99, 2px 2px 0 #001A99, 3px 3px 0 #001A99, 4px 4px 0 #001A99, 5px 5px 0 #001A99';
 
   return (
     <motion.div
@@ -55,8 +74,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
       exit={{ 
         y: '-100vh',
         transition: { 
-          duration: 0.95, 
-          ease: [0.85, 0, 0.15, 1] as [number, number, number, number] // Custom easing for premium slide-up feel
+          duration: 0.5, 
+          ease: [0.85, 0, 0.15, 1] as [number, number, number, number]
         }
       }}
       className="fixed inset-0 z-[999] bg-[#00083A] flex flex-col items-center justify-center select-none"
@@ -115,4 +134,5 @@ export function Preloader({ onComplete }: PreloaderProps) {
     </motion.div>
   );
 }
+
 export default Preloader;

@@ -1,0 +1,70 @@
+{
+  "name": "Rohit Dubey",
+  "email": "rohitdubey39005@gmail.com",
+  "website": "rohitdubey.dev",
+  "socials": {
+    "linkedin": "https://www.linkedin.com/in/rohit--dubey03/",
+    "github": "https://github.com/anakinskywalker0903",
+    "whatsapp": "https://wa.me/918777453162"
+  },
+  "homeStatus": {
+    "currentObjectives": [
+      "Master modern frontend development",
+      "Strengthen Java & DSA",
+      "Build scalable full-stack applications",
+      "Explore AI engineering & intelligent systems"
+    ]
+  },
+  "aboutDeck": [
+    {
+      "id": "origin",
+      "title": "Origin",
+      "subtitle": "Every engineer starts somewhere. This is where my journey began.",
+      "paragraphs": [
+        "I am Rohit Dubey, a Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.",
+        "My journey into software development didn't begin with frameworks or complex technologies—it began with curiosity. I wanted to understand how websites were built, how applications worked behind the scenes, and how software could solve real-world problems.",
+        "Today, I'm building that foundation step by step. From learning core web technologies and data structures to exploring backend development and artificial intelligence, every project I create helps me understand not just how something works, but why it works."
+      ],
+      "footer": "I believe strong fundamentals create better engineers, and that's the philosophy guiding my learning journey."
+    },
+    {
+      "id": "why-i-build",
+      "title": "Why I Build",
+      "subtitle": "",
+      "paragraphs": [
+        "For me, software engineering is more than writing code—it's about solving problems with thoughtful, well-designed solutions.",
+        "I enjoy taking an idea, breaking it into smaller challenges, and gradually turning it into something people can use. Whether it's a productivity tool, an AI-powered application, or a client website, I find satisfaction in building software that is practical, reliable, and continuously improving."
+      ],
+      "footer": "Every project teaches me something new, and every challenge becomes another opportunity to grow as an engineer."
+    },
+    {
+      "id": "learning-philosophy",
+      "title": "Learning Philosophy",
+      "subtitle": "",
+      "paragraphs": [
+        "I prefer learning from the ground up.",
+        "Rather than jumping directly into frameworks, I focus on understanding the technologies that power them. I study the fundamentals, build practical projects, experiment with different approaches, and continuously refine my work based on what I learn."
+      ],
+      "footer": "My goal isn't to collect as many technologies as possible—it's to build the knowledge and problem-solving skills needed to adapt to new ones throughout my career."
+    },
+    {
+      "id": "current-mission",
+      "title": "Current Mission",
+      "subtitle": "",
+      "paragraphs": [
+        "Building a strong foundation in Full-Stack Development and Artificial Intelligence through consistent learning, real-world projects, and continuous improvement."
+      ],
+      "footer": ""
+    },
+    {
+      "id": "looking-ahead",
+      "title": "Looking Ahead",
+      "subtitle": "",
+      "paragraphs": [
+        "Technology evolves constantly, and I believe learning should never stop.",
+        "My long-term goal is to build software that combines intelligent systems with great user experiences while continuing to grow as a full-stack engineer."
+      ],
+      "footer": "Whether I'm contributing to a team, building products, or working with clients, I want every project to reflect thoughtful engineering, continuous learning, and a commitment to creating meaningful solutions."
+    }
+  ]
+}

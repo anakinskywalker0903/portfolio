@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { FaFilePdf, FaArrowUp, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaArrowUp, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import { SocialSidebar } from '@/components/ui/SocialSidebar';
+import { RightActionDock } from '@/components/ui/SocialSidebar';
 import { ResumeModal } from '@/components/ui/ResumeModal';
 import BubbleMenu from '@/components/ui/BubbleMenu';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
@@ -27,14 +27,14 @@ const Logo = () => (
 );
 
 const menuItems = [
-  { label: 'home',           href: '/',               ariaLabel: 'Home',           rotation: -8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'origin',         href: '#about',          ariaLabel: 'Origin',         rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'skills',         href: '/skills',         ariaLabel: 'Skills',         rotation: -6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'projects',       href: '/projects',       ariaLabel: 'Projects',       rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'client work',    href: '/client-work',    ariaLabel: 'Client Work',    rotation: -8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'experience',     href: '/experience',     ariaLabel: 'Experience',     rotation:  6,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'learning',       href: '/certifications', ariaLabel: 'Learning Archive', rotation: -6, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
-  { label: 'contact',        href: '#contact',        ariaLabel: 'Contact',        rotation:  8,  hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'home',           href: '/',               ariaLabel: 'Home',           rotation: -6, translateY: -14, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'about',          href: '#about',          ariaLabel: 'About',          rotation:  5, translateY:  12, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'skills',         href: '/skills',         ariaLabel: 'Skills',         rotation: -4, translateY:  -8, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'projects',       href: '/projects',       ariaLabel: 'Projects',       rotation:  6, translateY:  16, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'client work',    href: '/client-work',    ariaLabel: 'Client Work',    rotation: -5, translateY: -12, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'experience',     href: '/experience',     ariaLabel: 'Experience',     rotation:  7, translateY:  10, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'certifications', href: '/certifications', ariaLabel: 'Certifications', rotation: -4, translateY:  -8, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
+  { label: 'contact',        href: '#contact',        ariaLabel: 'Contact',        rotation:  5, translateY:  14, hoverStyles: { bgColor: '#CCFF00', textColor: '#000000' } },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -45,13 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleMenuClick = (item: typeof menuItems[0]) => {
-    // If contact clicked, smooth scroll to contact section (which is in the footer/contact area on all pages)
-    if (item.href.startsWith('#')) {
-      const el = document.querySelector(item.href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
 
   return (
     <div className="w-full relative min-h-screen flex flex-col bg-white">
@@ -77,7 +71,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         useFixedPosition={true}
         animationEase="back.out(1.7)"
         animationDuration={0.48}
-        staggerDelay={0.1}
+        onOpenResume={() => setResumeOpen(true)}
       />
 
       {/* Global "← Back to Home" button on subpages */}
@@ -92,47 +86,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
       )}
 
-      {/* Persistent Left Sidebar: Social columns */}
-      <SocialSidebar />
+      {/* Persistent Right Action Dock (Resume + Social Channels) */}
+      <RightActionDock onResumeOpen={() => setResumeOpen(true)} />
 
       {/* Persistent Floating Back-to-Top Button (Bottom Right) */}
-      <div className="fixed right-6 bottom-6 z-40">
+      <div className="fixed right-3 sm:right-6 bottom-4 sm:bottom-6 z-40">
         <motion.button
           onClick={scrollToTop}
           whileHover={{ scale: 1.1 }}
-          className="w-12 h-12 rounded-full border-2 border-black bg-white flex items-center justify-center text-black hover:bg-[#CCFF00] shadow-lg transition-colors duration-300"
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-black bg-white flex items-center justify-center text-black hover:bg-[#CCFF00] shadow-lg transition-colors duration-300 cursor-pointer"
+          aria-label="Back to top"
           title="Back to Top"
         >
-          <FaArrowUp className="w-4 h-4" />
+          <FaArrowUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </motion.button>
-      </div>
-
-      {/* Persistent Right Sidebar: Resume Column */}
-      <div className="fixed right-6 bottom-1/2 translate-y-1/2 z-40 hidden md:flex flex-col gap-4">
-        <div 
-          className="flex flex-col items-center gap-4 px-3 py-6 rounded-full border border-white/20 bg-black/40 backdrop-blur-md shadow-2xl relative animate-in fade-in slide-in-from-right-8 duration-500"
-          style={{
-            boxShadow: '0 8px 32px 0 rgba(0, 56, 255, 0.15)',
-          }}
-        >
-          {/* Glow indicator at the top */}
-          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] mx-auto animate-pulse" />
-
-          {/* Resume hub button */}
-          <motion.button
-            onClick={() => setResumeOpen(true)}
-            whileHover={{ scale: 1.15, y: -2 }}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-white/70 hover:text-black hover:bg-[#CCFF00] border border-white/10 hover:border-transparent transition-colors duration-300 relative group cursor-pointer"
-            aria-label="Open Resume Hub"
-          >
-            <FaFilePdf className="w-5 h-5 text-[#CCFF00] group-hover:text-black transition-colors" />
-
-            {/* Tooltip */}
-            <span className="absolute right-14 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 px-3 py-1.5 rounded-lg bg-black text-[#CCFF00] text-[10px] font-black uppercase tracking-widest pointer-events-none transition-all duration-300 shadow-xl border border-[#CCFF00]/20 whitespace-nowrap">
-              RESUME
-            </span>
-          </motion.button>
-        </div>
       </div>
 
       {/* Main Page Content Wrapper with smooth entry transition */}
@@ -151,9 +118,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <footer className="bg-black text-white py-16 px-6 md:px-10 border-t-4 border-black relative z-10 w-full mt-auto">
         <div className="max-w-6xl mx-auto flex flex-col gap-12">
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-8 items-start">
             {/* Branding Column */}
-            <div className="md:col-span-2 flex flex-col gap-4">
+            <div className="md:col-span-2 xl:col-span-2 flex flex-col gap-4">
               <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full w-fit tracking-wider uppercase">
                 ROHIT DUBEY
               </span>
@@ -221,7 +188,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             {/* Profile Card Column */}
-            <div className="flex justify-center md:justify-end md:col-span-1 overflow-visible">
+            <div className="flex justify-center xl:justify-end md:col-span-2 xl:col-span-1 overflow-visible mt-6 xl:mt-0 pr-8 xl:pr-0">
               <ProfileCard
                 name="Rohit Dubey"
                 title="AI & Full-Stack Developer"
@@ -237,7 +204,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 innerGradient="transparent"
                 onContactClick={() => {
                   const el = document.getElementById('contact');
-                  el?.scrollIntoView({ behavior: 'smooth' });
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.location.href = '/#contact';
+                  }
                 }}
               />
             </div>

@@ -127,19 +127,21 @@
   }
 }
 
-/* === Overlay === */
+/* === Overlay Backdrop === */
 .bubble-menu-items {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  pointer-events: none;
+  justify-content: space-between;
+  pointer-events: auto;
   z-index: 98;
-  /* Themed overlay backdrop */
   background: rgba(0, 56, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 80px 20px 24px 20px;
+  overflow-y: auto;
 }
 
 .bubble-menu-items.fixed {
@@ -150,143 +152,373 @@
   position: absolute;
 }
 
-/* === Pill List === */
+/* === 1. Top Personalized Tagline Header === */
+.bubble-menu-items .overlay-tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 16px;
+  gap: 2px;
+}
+
+.bubble-menu-items .overlay-tagline .tagline-title {
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.bubble-menu-items .overlay-tagline .tagline-sub {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: #CCFF00;
+  text-transform: uppercase;
+}
+
+.bubble-menu-items .overlay-tagline .tagline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Liquid Glass shimmer reflection */
+.bubble-menu-items .overlay-tagline .tagline-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  animation: liquidShimmer 3s ease-in-out infinite;
+}
+
+@keyframes liquidShimmer {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.bubble-menu-items .overlay-tagline .status-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #CCFF00;
+  box-shadow: 0 0 10px #CCFF00, 0 0 4px #CCFF00;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* === Menu Items Grid/List === */
 .bubble-menu-items .pill-list {
   list-style: none;
   margin: 0;
-  padding: 0 24px;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0;
-  row-gap: 8px;
+  row-gap: clamp(1.2rem, 2.5vh, 2.8rem);
+  column-gap: 0;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  pointer-events: auto;
-  justify-content: stretch;
+  max-width: 1100px;
 }
 
 .bubble-menu-items .pill-list .pill-col {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: stretch;
-  flex: 0 0 calc(100% / 3);
-  box-sizing: border-box;
-  padding: 4px;
 }
 
-/* Last row centering for 6 items (2 per last row) */
-.bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(3) {
-  margin-left: calc(100% / 6);
-}
-.bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-  margin-left: calc(100% / 3);
+/* Items 1 to 6 take 3 columns (33.333%) */
+.bubble-menu-items .pill-list .pill-col:nth-child(-n+6) {
+  flex: 0 0 calc((100% - (2 * clamp(0.5rem, 1.5vw, 1.5rem))) / 3);
 }
 
-/* === Pill Link === */
+.bubble-menu-items .pill-list .pill-col:nth-child(3n+2) {
+  margin-left: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+.bubble-menu-items .pill-list .pill-col:nth-child(3n+3) {
+  margin-left: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+/* Items 7 and 8 take 2 columns (50% each) */
+.bubble-menu-items .pill-list .pill-col:nth-child(7),
+.bubble-menu-items .pill-list .pill-col:nth-child(8) {
+  flex: 0 0 calc((100% - clamp(0.5rem, 1.5vw, 1.5rem)) / 2);
+}
+
+.bubble-menu-items .pill-list .pill-col:nth-child(8) {
+  margin-left: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+
+/* === Pill Button === */
 .bubble-menu-items .pill-link {
-  --pill-bg: rgba(255,255,255,0.08);
-  --pill-color: #ffffff;
-  --pill-border: rgba(255, 255, 255, 0.15);
-  --item-rot: 0deg;
-  --pill-min-h: 140px;
-  --hover-bg: #CCFF00;
-  --hover-color: #000000;
-
   width: 100%;
-  min-height: var(--pill-min-h);
-  padding: clamp(1.2rem, 2.5vw, 6rem) 0;
-  font-size: clamp(1.6rem, 3.5vw, 3.5rem);
-  font-weight: 900;
+  min-height: 76px;
+  height: clamp(70px, 9vh, 96px);
+  border-radius: 999px;
+  background: var(--pill-bg, rgba(255, 255, 255, 0.08));
+  color: var(--pill-color, #ffffff);
+  text-decoration: none;
   font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(1.4rem, 2.6vw, 3rem);
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  line-height: 0;
-  border-radius: 999px;
-  background: var(--pill-bg);
-  color: var(--pill-color);
-  text-decoration: none;
-  border: 2px solid var(--pill-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
   will-change: transform;
-  box-sizing: border-box;
-  white-space: nowrap;
+  position: relative;
   overflow: hidden;
-  height: 10px;
 }
 
-@media (min-width: 900px) {
-  .bubble-menu-items .pill-link {
-    transform: rotate(var(--item-rot));
-  }
+.bubble-menu-items .pill-link:hover {
+  transform: rotate(var(--item-rot)) translateY(var(--item-ty)) scale(1.05);
+  background: var(--hover-bg);
+  color: var(--hover-color);
+  border-color: var(--hover-bg);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+}
 
-  .bubble-menu-items .pill-link:hover {
-    transform: rotate(var(--item-rot)) scale(1.05);
-    background: var(--hover-bg);
-    color: var(--hover-color);
-    border-color: var(--hover-bg);
-    box-shadow: 0 8px 32px rgba(204, 255, 0, 0.25);
-  }
-
-  .bubble-menu-items .pill-link:active {
-    transform: rotate(var(--item-rot)) scale(0.94);
-  }
+/* === 2. Active Page Standout Style === */
+.bubble-menu-items .pill-link.active-pill {
+  background: #000000 !important;
+  color: #CCFF00 !important;
+  border: 2.5px solid #CCFF00 !important;
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.45), inset 0 0 12px rgba(204, 255, 0, 0.15) !important;
 }
 
 .bubble-menu-items .pill-link .pill-label {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   will-change: transform, opacity;
-  height: 1.2em;
-  line-height: 1.2;
+  line-height: 1;
 }
 
-/* === Mobile === */
+.bubble-menu-items .pill-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.45em;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #CCFF00;
+  opacity: 0.85;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(204, 255, 0, 0.3);
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.bubble-menu-items .pill-link.active-pill .pill-num {
+  color: #000000;
+  background: #CCFF00;
+  border-color: #CCFF00;
+}
+
+.bubble-menu-items .active-badge {
+  font-size: 0.38em;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #000000;
+  background: #CCFF00;
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+/* === 3. Recruiter Quick Action CTA Bar === */
+.bubble-menu-items .overlay-cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.bubble-menu-items .overlay-cta-bar .cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.bubble-menu-items .overlay-cta-bar .cta-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.bubble-menu-items .overlay-cta-bar .primary-cta {
+  background: #CCFF00 !important;
+  color: #000000 !important;
+  border-color: #CCFF00 !important;
+  box-shadow: 0 4px 14px rgba(204, 255, 0, 0.3);
+}
+
+.bubble-menu-items .overlay-cta-bar .primary-cta:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* === 6. Domain & Branding Footer === */
+.bubble-menu-items .overlay-domain-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.bubble-menu-items .overlay-domain-footer .footer-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.bubble-menu-items .overlay-domain-footer .domain-text {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bubble-menu-items .overlay-domain-footer .domain-text strong {
+  color: #CCFF00;
+}
+
+/* === Mobile Layout Optimization (iPhone SE, S20, Pixel 7, iPhone 14) === */
 @media (max-width: 899px) {
   .bubble-menu-items {
-    align-items: flex-start;
-    padding-top: 120px;
+    padding-top: 66px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+  }
+
+  .bubble-menu-items .overlay-tagline {
+    margin-bottom: 6px;
+    gap: 1px;
+  }
+
+  .bubble-menu-items .overlay-tagline .tagline-title {
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+  }
+
+  .bubble-menu-items .overlay-tagline .tagline-sub {
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+  }
+
+  .bubble-menu-items .overlay-tagline .tagline-badge {
+    margin-top: 2px;
+    font-size: 8px;
+    padding: 2px 8px;
   }
 
   .bubble-menu-items .pill-list {
-    row-gap: 10px;
+    row-gap: 5px;
+    padding: 0;
   }
 
   .bubble-menu-items .pill-list .pill-col {
-    flex: 0 0 100%;
+    flex: 0 0 100% !important;
     margin-left: 0 !important;
-    overflow: visible;
-    padding: 0 8px;
+    padding: 0;
   }
 
+  /* Compact Pill Height (40px) for perfect mobile vertical ratio */
   .bubble-menu-items .pill-link {
-    font-size: clamp(1.4rem, 4vw, 2.5rem);
-    padding: clamp(1rem, 2vw, 2rem) 0;
-    min-height: 80px;
+    font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    min-height: 40px;
+    height: 40px;
+    border-radius: 999px;
   }
 
   .bubble-menu-items .pill-link:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
     background: var(--hover-bg);
     color: var(--hover-color);
     border-color: var(--hover-bg);
   }
 
   .bubble-menu-items .pill-link:active {
-    transform: scale(0.94);
+    transform: scale(0.96);
+  }
+
+  .bubble-menu-items .overlay-cta-bar {
+    margin-top: 6px;
+    gap: 4px;
+  }
+
+  .bubble-menu-items .overlay-cta-bar .cta-btn {
+    padding: 4.5px 10px;
+    font-size: 9.5px;
+  }
+
+  .bubble-menu-items .overlay-domain-footer {
+    margin-top: 6px;
+  }
+
+  .bubble-menu-items .overlay-domain-footer .domain-text {
+    font-size: 9.5px;
   }
 }
 
-/* === Background grid pattern inside overlay === */
+/* === Background Grid Pattern === */
 .bubble-menu-items::before {
   content: '';
   position: absolute;

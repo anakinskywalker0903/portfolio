@@ -1,0 +1,21 @@
+[
+  {
+    "role": "Web Development Intern",
+    "company": "AKS Ecosystem (aksecosystem.in)",
+    "duration": "May 31, 2026 — Present",
+    "type": "Internship (Ecosystem Frontend)",
+    "responsibilities": [
+      "Engineering the responsive landing portal and core dashboard interfaces for the AKS product ecosystem, handling multiple simultaneous web projects.",
+      "Developed core frontend versions for Upsilon and Upsilon Landing sites using React and Tailwind CSS, designing custom configuration themes and spacing rules.",
+      "Configured Google Cloud Console OAuth authentication credentials, client IDs, and redirect URI handlers for aksquestion.",
+      "Constructed database schemas, established tables, and mapped NeonDB PostgreSQL connection adapters.",
+      "Collaborated daily within a team of 4 tech developers, reporting directly to the Tech Lead and coordinating requirements updates."
+    ],
+    "technologies": ["React", "Tailwind CSS", "PostgreSQL", "Vite", "Google Console", "Git"],
+    "achievements": [
+      "Successfully launched Upsilon Landing version and integrated dark mode features.",
+      "Handled Google OAuth credentials setups.",
+      "Constructed NeonDB database table columns."
+    ]
+  }
+]

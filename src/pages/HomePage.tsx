@@ -4,12 +4,18 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { HeroSection } from '@/components/ui/hero';
 import { ContactSection } from '@/components/ui/contact';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
-import { SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiJavascript } from 'react-icons/si';
-import { FaArrowRight, FaRocket, FaCode, FaGraduationCap, FaAward, FaHourglassHalf, FaCompass, FaExternalLinkAlt, FaBookOpen } from 'react-icons/fa';
+import { SiReact, SiTailwindcss, SiJavascript } from 'react-icons/si';
+import { FaArrowRight, FaAward, FaHourglassHalf, FaCompass, FaExternalLinkAlt, FaBookOpen } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
-import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import { Grainient } from '@/components/ui/Grainient';
 import { InteractiveGridPattern } from '@/components/ui/InteractiveGridPattern';
+
+import { useSEO } from '@/hooks/useSEO';
+
+import projectsData from '@/data/projects.json';
+import clientWorkData from '@/data/client-work.json';
+import certificationsData from '@/data/certifications.json';
+import siteData from '@/data/site.json';
 
 // Custom animated skill gauge component
 function AnimatedSkillGauge({ value, gaugePrimaryColor, gaugeSecondaryColor }: { value: number; gaugePrimaryColor: string; gaugeSecondaryColor: string }) {
@@ -45,34 +51,13 @@ function AnimatedSkillGauge({ value, gaugePrimaryColor, gaugeSecondaryColor }: {
 }
 
 export function HomePage() {
+  useSEO('Home', 'Personal portfolio of Rohit Dubey - AI & Full-Stack Developer. Showcasing engineering project case studies, client outcomes, skills toolkit, and internships.');
   const [activeCert, setActiveCert] = useState<any | null>(null);
   const [showPdf, setShowPdf] = useState(false);
 
-  const oracleCert = {
-    id: 'ORACLE-JAVA-2026',
-    name: 'Oracle Certified Associate, Java SE 8 Programmer / Foundations',
-    issuer: 'Oracle University',
-    year: '2026',
-    icon: '☕',
-    hours: '40 hours',
-    desc: 'Demonstrates foundational knowledge of Java technology and programming, covering core concepts, data structures, and OOP methodologies.',
-    learnt: 'Java syntax, object-oriented concepts (inheritance, encapsulation, polymorphism), control flow structures, exception handling, data structures, and APIs.',
-    skills: ['Java', 'OOP', 'Data Structures', 'Exception Handling'],
-    verifyUrl: '/certficates/eCertificate.pdf',
-  };
-
-  const mlCert = {
-    id: 'UMICH-AML-2026',
-    name: 'Applied Machine Learning in Python',
-    issuer: 'University of Michigan / Coursera',
-    year: '2026',
-    icon: '🐍',
-    hours: '40 hours',
-    desc: 'Advanced machine learning course covering data analysis, predictive modeling, clustering, and deep evaluation strategies.',
-    learnt: 'Supervised & unsupervised learning algorithms, scikit-learn interfaces, SVM regression, decision trees, cross-validation metrics.',
-    skills: ['Python', 'Scikit-Learn', 'Feature Engineering', 'Model Evaluation'],
-    verifyUrl: '/certficates/Coursera 7RSUPVFLCPS3.pdf',
-  };
+  const featuredProject = projectsData.find(p => p.featured) || projectsData[0];
+  const latestClient = clientWorkData[0];
+  const featuredCerts = certificationsData.featured.slice(0, 2);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -170,157 +155,71 @@ export function HomePage() {
 
           {/* Cards — all absolutely positioned, animated by scroll */}
           <div className="absolute inset-0 flex items-center justify-center px-6 md:px-10 pointer-events-none">
+            {siteData.aboutDeck.map((card, idx) => {
+              const transformObj = [
+                { y: y1, opacity: opacity1, scale: scale1 },
+                { y: y2, opacity: opacity2, scale: scale2 },
+                { y: y3, opacity: opacity3, scale: scale3 },
+                { y: y4, opacity: opacity4, scale: scale4 },
+                { y: y5, opacity: opacity5, scale: scale5 }
+              ][idx];
+              const isCurrentMission = card.id === 'current-mission';
 
-            {/* Card 1: Origin */}
-            <motion.div
-              style={{ y: y1, opacity: opacity1, scale: scale1 }}
-              className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
-            >
-              <div>
-                <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                  SECTION 01
-                </span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-1" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                  ORIGIN
-                </h3>
-                <p className="text-black/50 text-xs font-bold uppercase tracking-wider mb-6 italic">
-                  Every engineer starts somewhere. This is where my journey began.
-                </p>
-                <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-                  <p className="font-bold text-black text-base">
-                    I am Rohit Dubey, a Computer Science student specializing in Artificial Intelligence and Machine Learning at VIT Bhopal University.
-                  </p>
-                  <p>
-                    My journey into software development didn't begin with frameworks or complex technologies—it began with curiosity. I wanted to understand how websites were built, how applications worked behind the scenes, and how software could solve real-world problems.
-                  </p>
-                  <p>
-                    Today, I'm building that foundation step by step. From learning core web technologies and data structures to exploring backend development and artificial intelligence, every project I create helps me understand not just <strong>how</strong> something works, but <strong>why</strong> it works.
-                  </p>
-                </div>
-              </div>
-              <p className="font-bold text-[#0038FF] text-sm mt-4">
-                I believe strong fundamentals create better engineers, and that's the philosophy guiding my learning journey.
-              </p>
-            </motion.div>
-
-            {/* Card 2: Why I Build */}
-            <motion.div
-              style={{ y: y2, opacity: opacity2, scale: scale2 }}
-              className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
-            >
-              <div>
-                <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                  SECTION 02
-                </span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                  WHY I BUILD
-                </h3>
-                <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-                  <p>
-                    For me, software engineering is more than writing code—it's about solving problems with thoughtful, well-designed solutions.
-                  </p>
-                  <p>
-                    I enjoy taking an idea, breaking it into smaller challenges, and gradually turning it into something people can use. Whether it's a productivity tool, an AI-powered application, or a client website, I find satisfaction in building software that is practical, reliable, and continuously improving.
-                  </p>
-                </div>
-              </div>
-              <p className="font-bold text-[#0038FF] text-sm mt-4">
-                Every project teaches me something new, and every challenge becomes another opportunity to grow as an engineer.
-              </p>
-            </motion.div>
-
-            {/* Card 3: Learning Philosophy */}
-            <motion.div
-              style={{ y: y3, opacity: opacity3, scale: scale3 }}
-              className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
-            >
-              <div>
-                <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                  SECTION 03
-                </span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                  LEARNING PHILOSOPHY
-                </h3>
-                <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-                  <p className="font-bold text-black">
-                    I prefer learning from the ground up.
-                  </p>
-                  <p>
-                    Rather than jumping directly into frameworks, I focus on understanding the technologies that power them. I study the fundamentals, build practical projects, experiment with different approaches, and continuously refine my work based on what I learn.
-                  </p>
-                </div>
-              </div>
-              <p className="font-bold text-[#0038FF] text-sm mt-4">
-                My goal isn't to collect as many technologies as possible—it's to build the knowledge and problem-solving skills needed to adapt to new ones throughout my career.
-              </p>
-            </motion.div>
-
-            {/* Card 4: Current Mission */}
-            <motion.div
-              style={{ y: y4, opacity: opacity4, scale: scale4 }}
-              className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
-            >
-              <div>
-                <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                  SECTION 04
-                </span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                  CURRENT MISSION
-                </h3>
-                <div className="flex flex-col gap-6">
-                  <div className="bg-[#0038FF]/5 border-2 border-black rounded-[2rem] p-6 shadow-[6px_6px_0_#000] relative overflow-hidden">
-                    <p className="font-black text-black text-sm uppercase leading-snug tracking-tight">
-                      Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
-                    </p>
+              return (
+                <motion.div
+                  key={card.id}
+                  style={transformObj}
+                  className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
+                >
+                  <div>
+                    <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
+                      SECTION 0{idx + 1}
+                    </span>
+                    <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-1 text-left" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                      {card.title}
+                    </h3>
+                    {card.subtitle && (
+                      <p className="text-black/50 text-xs font-bold uppercase tracking-wider mb-6 italic text-left">
+                        {card.subtitle}
+                      </p>
+                    )}
+                    <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed text-left">
+                      {card.paragraphs.map((p, i) => (
+                        <p key={i} className={idx === 0 && i === 0 ? "font-bold text-black text-base" : ""}>
+                          {isCurrentMission ? (
+                            <span className="font-black text-black text-sm uppercase leading-snug tracking-tight">
+                              Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
+                            </span>
+                          ) : p}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2 mt-4">
-                <h5 className="font-black text-xs uppercase tracking-wider text-black">
-                  Current Focus:
-                </h5>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-black/80 font-bold">
-                  {[
-                    'Master modern frontend development',
-                    'Strengthen Java & DSA',
-                    'Build scalable full-stack applications',
-                    'Explore AI engineering & intelligent systems',
-                  ].map((focus, i) => (
-                    <li key={i} className="flex items-center gap-2 bg-[#F8F9FA] border border-black/5 p-2 rounded-xl">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
-                      <span className="truncate">{focus}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
 
-            {/* Card 5: Looking Ahead */}
-            <motion.div
-              style={{ y: y5, opacity: opacity5, scale: scale5 }}
-              className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
-            >
-              <div>
-                <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                  SECTION 05
-                </span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-6" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                  LOOKING AHEAD
-                </h3>
-                <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed">
-                  <p>
-                    Technology evolves constantly, and I believe learning should never stop.
-                  </p>
-                  <p>
-                    My long-term goal is to build software that combines intelligent systems with great user experiences while continuing to grow as a full-stack engineer.
-                  </p>
-                </div>
-              </div>
-              <p className="font-bold text-[#0038FF] text-sm mt-4">
-                Whether I'm contributing to a team, building products, or working with clients, I want every project to reflect thoughtful engineering, continuous learning, and a commitment to creating meaningful solutions.
-              </p>
-            </motion.div>
-
+                  {isCurrentMission ? (
+                    <div className="flex flex-col gap-2 mt-4 text-left">
+                      <h5 className="font-black text-xs uppercase tracking-wider text-black">
+                        Current Focus:
+                      </h5>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-black/80 font-bold">
+                        {siteData.homeStatus.currentObjectives.map((focus, i) => (
+                          <li key={i} className="flex items-center gap-2 bg-[#F8F9FA] border border-black/5 p-2 rounded-xl">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
+                            <span className="truncate">{focus}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    card.footer && (
+                      <p className="font-bold text-[#0038FF] text-sm mt-4 text-left">
+                        {card.footer}
+                      </p>
+                    )
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Progress dots — bottom center */}
@@ -392,30 +291,33 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
-            {[
-              { name: 'Tailwind CSS', level: 100, Icon: SiTailwindcss, color: '#06B6D4', desc: 'Utility-First Styling' },
-              { name: 'JavaScript', level: 80, Icon: SiJavascript, color: '#F7DF1E', desc: 'Dynamic Interactivity' },
-              { name: 'React', level: 70, Icon: SiReact, color: '#61DAFB', desc: 'Component-Based UI' },
-            ].map((skill) => (
-              <div key={skill.name} className="bg-white rounded-3xl p-8 border-2 border-black/5 flex flex-col items-center gap-6 text-center shadow-sm hover:scale-[1.02] transition-transform duration-300">
-                <div className="relative flex items-center justify-center">
-                  <AnimatedSkillGauge
-                    value={skill.level}
-                    gaugePrimaryColor="#0038FF"
-                    gaugeSecondaryColor="#E8EEFF"
-                  />
-                </div>
-                
-                {/* Icon + Title + Descriptor below, eliminating overlap */}
-                <div className="flex flex-col items-center gap-1.5 mt-2">
-                  <div className="flex items-center gap-2">
-                    <skill.Icon style={{ color: skill.color }} className="w-5 h-5 flex-shrink-0" />
-                    <span className="font-black text-sm uppercase text-black">{skill.name}</span>
+            {['Tailwind CSS', 'JavaScript', 'React'].map((name) => {
+              const styleObj = {
+                'Tailwind CSS': { icon: SiTailwindcss, color: '#38BDF8', desc: 'Utility-First Styling', level: 100 },
+                'JavaScript': { icon: SiJavascript, color: '#F7DF1E', desc: 'Dynamic Interactivity', level: 80 },
+                'React': { icon: SiReact, color: '#61DAFB', desc: 'Component-Based UI', level: 70 }
+              }[name] || { icon: SiJavascript, color: '#F7DF1E', desc: 'Dynamic Interactivity', level: 80 };
+              const Icon = styleObj.icon;
+              return (
+                <div key={name} className="bg-white rounded-3xl p-8 border-2 border-black/5 flex flex-col items-center gap-6 text-center shadow-sm hover:scale-[1.02] transition-transform duration-300">
+                  <div className="relative flex items-center justify-center">
+                    <AnimatedSkillGauge
+                      value={styleObj.level}
+                      gaugePrimaryColor="#0038FF"
+                      gaugeSecondaryColor="#E8EEFF"
+                    />
                   </div>
-                  <span className="text-xs text-black/50 font-bold uppercase tracking-wider">{skill.desc}</span>
+                  <div className="flex flex-col items-center gap-1.5 mt-2 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <Icon style={{ color: styleObj.color }} className="w-5 h-5 flex-shrink-0" />
+                      <span className="font-black text-sm uppercase text-black">{name}</span>
+                    </div>
+                    <span className="text-xs text-black/50 font-bold uppercase tracking-wider">{styleObj.desc}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+
           </div>
         </div>
       </section>
@@ -472,18 +374,18 @@ export function HomePage() {
               WebkitBackdropFilter: 'blur(12px)',
             }}
           >
-            <div className="flex-1 flex flex-col gap-4">
+            <div className="flex-1 flex flex-col gap-4 text-left">
               <span className="text-[10px] font-black uppercase tracking-widest text-[#0038FF]">
-                AI ENGINEERING / INTEGRATION
+                {featuredProject.projectType}
               </span>
               <h4 className="text-2xl font-black uppercase leading-tight text-black">
-                Brainstormzz – AI Brainstorming Platform
+                {featuredProject.name} – {featuredProject.shortDescription}
               </h4>
               <p className="text-black/75 text-xs font-medium leading-relaxed max-w-lg">
-                An AI-powered brainstorming platform designed to help users organize ideas, generate creative directions, and visualize thought processes through an interactive interface. Built as a full-stack application to explore modern AI integration and intuitive user experiences.
+                {featuredProject.problem}
               </p>
               <div className="flex flex-wrap gap-1.5 mt-2">
-                {['React', 'Node.js', 'OpenAI API', 'Vercel', 'JavaScript'].map(t => (
+                {featuredProject.techStack.map(t => (
                   <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
                     {t}
                   </span>
@@ -532,18 +434,18 @@ export function HomePage() {
               WebkitBackdropFilter: 'blur(12px)',
             }}
           >
-            <div className="flex-1 flex flex-col gap-4">
+            <div className="flex-1 flex flex-col gap-4 text-left">
               <span className="text-[10px] font-black uppercase tracking-widest text-[#0038FF]">
-                INTERACTIVE CLIENT DEVELOPMENT
+                {latestClient.industry}
               </span>
               <h4 className="text-2xl font-black uppercase leading-tight text-black">
-                DevInterio – Architectural Visualization Website
+                {latestClient.client} – {latestClient.role}
               </h4>
               <p className="text-black/75 text-xs font-medium leading-relaxed max-w-lg">
-                Designed and developed a modern multi-page website for a 3D architectural visualization studio. The project focused on creating a premium digital presence, showcasing services and portfolios, and providing a seamless experience for potential clients through responsive design and interactive user interfaces.
+                {latestClient.outcome}
               </p>
               <div className="flex flex-wrap gap-1.5 mt-2">
-                {['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'Responsive Design'].map(t => (
+                {latestClient.stack.map(t => (
                   <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-[#F8F9FA] px-2.5 py-1 rounded-full text-black/70">
                     {t}
                   </span>
@@ -606,42 +508,27 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <button
-              onClick={() => {
-                setActiveCert(oracleCert);
-                setShowPdf(false);
-              }}
-              className="text-left p-6 rounded-[2rem] border-[3px] border-black flex items-start gap-4 shadow-[6px_6px_0_#000] hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer block w-full"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-              }}
-            >
-              <span className="text-3xl flex-shrink-0">☕</span>
-              <div>
-                <h4 className="font-black text-black text-sm uppercase leading-tight">Oracle Java Foundations Associate</h4>
-                <p className="text-black/50 text-[10px] font-bold uppercase tracking-wider mt-1">Oracle University • 2026</p>
-              </div>
-            </button>
-            <button
-              onClick={() => {
-                setActiveCert(mlCert);
-                setShowPdf(false);
-              }}
-              className="text-left p-6 rounded-[2rem] border-[3px] border-black flex items-start gap-4 shadow-[6px_6px_0_#000] hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer block w-full"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-              }}
-            >
-              <span className="text-3xl flex-shrink-0">🐍</span>
-              <div>
-                <h4 className="font-black text-black text-sm uppercase leading-tight">Applied Machine Learning in Python</h4>
-                <p className="text-black/50 text-[10px] font-bold uppercase tracking-wider mt-1">University of Michigan • Coursera • 2026</p>
-              </div>
-            </button>
+            {featuredCerts.map((cert) => (
+              <button
+                key={cert.id}
+                onClick={() => {
+                  setActiveCert(cert);
+                  setShowPdf(false);
+                }}
+                className="text-left p-6 rounded-[2rem] border-[3px] border-black flex items-start gap-4 shadow-[6px_6px_0_#000] hover:scale-[1.02] active:scale-[0.98] transition-transform cursor-pointer block w-full"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                }}
+              >
+                <span className="text-3xl flex-shrink-0">{cert.icon}</span>
+                <div className="text-left">
+                  <h4 className="font-black text-black text-sm uppercase leading-tight">{cert.title}</h4>
+                  <p className="text-black/50 text-[10px] font-bold uppercase tracking-wider mt-1">{cert.issuer} • {cert.issueDate}</p>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -668,18 +555,18 @@ export function HomePage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 16 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-lg bg-white border-[3px] border-black rounded-[2.5rem] shadow-2xl overflow-hidden z-10 flex flex-col"
+              className="relative w-full max-w-lg bg-white border-[3px] border-black rounded-[2.5rem] shadow-2xl overflow-hidden z-10"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-8 py-6 border-b-2 border-black bg-[#CCFF00]/10">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl leading-none">{activeCert.icon}</span>
-                  <div>
+                  <div className="text-left">
                     <h3 className="font-black text-sm text-black uppercase leading-tight max-w-[280px]">
-                      {activeCert.name}
+                      {activeCert.title}
                     </h3>
                     <span className="text-[10px] font-black uppercase text-black/50 tracking-wider">
-                      {activeCert.issuer} • {activeCert.year}
+                      {activeCert.issuer} • {activeCert.issueDate}
                     </span>
                   </div>
                 </div>
@@ -695,7 +582,7 @@ export function HomePage() {
               {showPdf ? (
                 <div className="p-4 bg-zinc-900 flex flex-col gap-4">
                   <iframe
-                    src={activeCert.verifyUrl}
+                    src={activeCert.credential}
                     className="w-full h-[55vh] rounded-2xl border-[3px] border-black bg-white"
                     title="Certificate PDF Viewer"
                   />
@@ -712,7 +599,7 @@ export function HomePage() {
               ) : (
                 <>
                   {/* Details */}
-                  <div className="p-8 flex flex-col gap-5">
+                  <div className="p-8 flex flex-col gap-5 text-left">
                     {/* Overview */}
                     <div>
                       <h4 className="text-[#0038FF] text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 mb-1.5">

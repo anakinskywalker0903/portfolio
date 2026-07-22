@@ -2,166 +2,76 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FaGithub, FaExternalLinkAlt, FaChartLine, FaPuzzlePiece, FaLightbulb } from 'react-icons/fa';
 
-const projectCaseStudies = [
-  {
-    title: 'NoteLift',
-    subtitle: 'Chrome Extension for Highlight Extraction & Revision Notes',
-    tags: ['JavaScript (ES6)', 'Chrome Extensions API', 'Local Storage', 'Manifest V3'],
-    role: 'Concept, Architecture & Logic Design (AI-assisted syntax & implementation)',
-    timeline: '2025',
-    problem: 'Students face friction extracting and organizing text highlights from PDFs and web articles into clean study sheets without subscription accounts or cloud dependencies.',
-    research: 'Studied context-menu text selection event models, DOM Range APIs, and local storage limits, designing a local-first offline database layout.',
-    architecture: 'Local-only Chrome Extension architecture utilizing Manifest V3 background scripts, content scripts injection, and client popup interface.',
-    features: [
-      'Extract highlighted page selections instantly via context menus.',
-      'Organize notes into custom modules and subjects lists.',
-      '100% offline, local-first data model with zero cloud databases dependencies.',
-      'Export gathered summaries instantly as clean Markdown or TXT files.',
-    ],
-    challenges: 'Capturing text selections reliably across cross-origin iframe documents without triggering browser security blocks.',
-    lessons: 'Programmed strict validation listeners on window bounds and fallback handlers on parent containers to safely retrieve text selections on complex sites.',
-    demoUrl: 'https://chromewebstore.google.com', // Replace with direct store URL if needed
-    githubUrl: 'https://github.com/anakinskywalker0903/notelift',
-    metrics: { count: 'SHIPPED', label: 'Live on Chrome Web Store' },
-  },
-  {
-    title: 'Brainstormzz',
-    subtitle: 'AI-Powered Collaborative Idea Whiteboard',
-    tags: ['React 18', 'Tailwind CSS', 'HTML5 Canvas', 'OpenAI API', 'Vite'],
-    role: 'Concept, UI Design & Canvas Logic (AI-assisted execution)',
-    timeline: '2025',
-    problem: 'Standard brainstorming tools lack visual layout grids, requiring manual translation from dry AI text prompt completions into structured flowchart blocks.',
-    research: 'Developed dynamic node-drawing logic on HTML5 Canvas. Switched from Chrome Gemini Nano local API to OpenAI API post-hackathon for processing quality.',
-    architecture: 'Client-side React 18 application integrating HTML5 Canvas event triggers and a secure Node.js routing server query framework.',
-    features: [
-      'Single prompt turns into 6 categorized visual suggestion blocks.',
-      'Interactive infinite whiteboard-style Canvas drawing space.',
-      'Instant summarize, translate, and expand buttons.',
-      'Paid cloud OpenAI API integration for stable data parsing.',
-    ],
-    challenges: 'OpenAI API completion responses occasionally drifted from the rigid JSON schema template, crashing the node-drawing scripts.',
-    lessons: 'Configured strict JSON schemas inside system prompts parameters to guarantee returned AI outputs map correctly to frontend canvas coordinates.',
-    demoUrl: 'https://brainstormzz.vercel.app', // Update if live
-    githubUrl: 'https://github.com/anakinskywalker0903/brainstormzz',
-    metrics: { count: 'GPT-4o', label: 'AI Generation Core' },
-  },
-  {
-    title: 'AI Career Engine',
-    subtitle: 'Resume Analyzer & Career Matching Hub',
-    tags: ['React 18', 'Node.js', 'Express', 'Anthropic Claude API', 'pdfjs-dist', 'Railway'],
-    role: 'Full-Stack Layouts, Backend Logic Scoping (AI-assisted implementation)',
-    timeline: '2025',
-    problem: 'Job seekers lack direct, quantitative evaluations of how their resumes match target job openings and lack custom roadmap learning objectives.',
-    research: 'Studied PDF binary extraction streams and programmed a custom resume evaluation formula (50% skill overlap + 50% personality indicators alignment).',
-    architecture: 'Vite/React client deployed on Vercel connecting to a Node.js/Express backend service hosted on Railway using Claude API pipelines.',
-    features: [
-      'Discovery Mode: Personality quiz + Resume → Top 3 career role matches.',
-      'Optimization Mode: Resume + Job Desc → Match percentage and gaps checklist.',
-      'Generates a personalized, step-by-step 12-week skills roadmap.',
-      'Local PDF parsing via client-side pdfjs-dist buffer loaders.',
-    ],
-    challenges: 'Parsing multi-column structured PDF resumes resulted in scrambled text coordinates, distorting key skill terms extraction.',
-    lessons: 'Implemented character token cleaning algorithms on raw text streams to preserve structural layouts context before AI analysis.',
-    demoUrl: 'https://careerengine.vercel.app', // Update if live
-    githubUrl: 'https://github.com/anakinskywalker0903/career-engine',
-    metrics: { count: 'CLAUDE', label: 'AI Processing Engine' },
-  },
-  {
-    title: 'SSB Practice Simulator',
-    subtitle: 'Services Selection Board timed exam simulator',
-    tags: ['React', 'Vercel', 'Custom Timer Loops', 'UX Design'],
-    role: 'Core Timer Logic, Test-Flow Algorithms (AI-assisted styling blocks)',
-    timeline: '2025',
-    problem: 'SSB aspirants struggle to train for timed psychological screenings (WAT, PPDT, SRT) due to a lack of realistic, time-restricted simulation environments.',
-    research: 'Analyzed Services Selection Board official timings rules and designed distraction-free keyboard shortcuts arrays.',
-    architecture: 'React-rendered browser flow utilizing synchronous timer states and asset preload arrays.',
-    features: [
-      'Realistic Word Association (WAT) & Situation Reaction (SRT) timed simulators.',
-      'Picture Perception & Description Test (PPDT) image simulation.',
-      'Fullscreen UI mode to match testing center constraints.',
-      'Randomized, no-repeat image and word banks logic.',
-    ],
-    challenges: 'Programmatic timing loops would occasionally drift on older browsers, desynchronizing the slide updates.',
-    lessons: 'Refactored timing calculations to reference absolute browser timestamps offsets rather than standard setInterval loops.',
-    demoUrl: 'https://ssbsimulator.vercel.app',
-    githubUrl: 'https://github.com/anakinskywalker0903/ssb-simulator',
-    metrics: { count: '100%', label: 'Exam Timer Accuracy' },
-  },
-  {
-    title: 'InstaSave Navigator',
-    subtitle: 'Chrome Extension for Archive Navigation (Development Paused)',
-    tags: ['JavaScript (ES6)', 'Chrome Extensions API', 'DOM Observers'],
-    role: 'Concept & Viewport DOM Logic (AI-assisted implementation)',
-    timeline: '2025',
-    problem: 'Instagram does not provide an option to sort saved bookmarks chronologically, forcing users to scroll endlessly to access early saves.',
-    research: 'Studied Instagram dynamic feed container IDs and analyzed infinite scrolling DOM nodes extensions.',
-    architecture: 'Manifest V3 Chrome Extension inject content script tracking scrolling heights and bookmark offsets.',
-    features: [
-      'One-click navigation path to the oldest saved bookmark page.',
-      'Automated scroll container tracking observer scripts.',
-    ],
-    challenges: 'Instagram anti-bot automation algorithms flag and block fast programmatic scroll adjustments.',
-    lessons: 'Development paused (~7 months ago) due to Instagram platform anti-automation blocks; framed as a platform-imposed barrier.',
-    demoUrl: '#',
-    githubUrl: 'https://github.com/anakinskywalker0903/instasave-navigator',
-    metrics: { count: 'PAUSED', label: 'Blocked by Anti-Bot Rules' },
-  },
-  {
-    title: 'RailDost',
-    subtitle: 'Indian Railways Route Visualizer (Development Paused)',
-    tags: ['HTML5', 'CSS3', 'JavaScript', 'Leaflet.js'],
-    role: 'Concept & Mapping Coordinates Integrations (AI-assisted)',
-    timeline: '2025',
-    problem: 'Travelers lack an interactive route visualizer showing transit overlay comparisons for multi-leg railway routes.',
-    research: 'Analyzed geoJSON track coordinates systems and Leaflet.js route polyline draws.',
-    architecture: 'Client-side mapping interface drawing polyline geoJSON coordinate arrays over Leaflet.js canvases.',
-    features: [
-      'Comparative travel times display overlay meters.',
-      'Hardcoded route samples fallback mapping (after API pull).',
-    ],
-    challenges: 'No stable public Indian Railways data source; the free third-party routing API was pulled by its creator.',
-    lessons: 'Configured hardcoded station arrays to maintain visual integrity; paused development until a stable routing feed becomes available.',
-    demoUrl: '#',
-    githubUrl: 'https://github.com/anakinskywalker0903/raildost',
-    metrics: { count: 'PAUSED', label: 'API Revoked by Provider' },
-  }
+import { useSEO } from '@/hooks/useSEO';
+import projectsData from '@/data/projects.json';
+import { trackProjectDemo, trackProjectRepo } from '@/lib/analytics';
+
+const MOBILE_TABS = [
+  { id: 'overview', label: '📋 Overview' },
+  { id: 'arch', label: '🧩 Architecture' },
+  { id: 'hurdles', label: '💡 Hurdles' },
 ];
 
 export function ProjectsPage() {
+  useSEO('Projects', 'Inspect my engineering projects and case studies, including NoteLift, Brainstormzz, and AI Career Engine.');
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
-  const project = projectCaseStudies[activeProjectIdx];
+  const [activeMobileTab, setActiveMobileTab] = useState<'overview' | 'arch' | 'hurdles'>('overview');
+
+  const project = projectsData[activeProjectIdx];
 
   return (
-    <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-32 pb-24 px-6 md:px-10">
+    <div className="w-full min-h-screen bg-white bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-24 sm:pt-32 pb-24 px-3 sm:px-6 md:px-20 lg:px-28 overflow-x-hidden">
       <div className="max-w-5xl mx-auto">
         
         {/* Header */}
-        <div className="mb-10 border-b border-black/5 pb-8">
-          <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-4 py-1.5 rounded-full mb-4 tracking-widest uppercase">
+        <div className="mb-6 sm:mb-10 border-b border-black/5 pb-6">
+          <span className="inline-block bg-[#CCFF00] text-black font-black text-xs px-3.5 py-1.5 rounded-full mb-3 tracking-widest uppercase border border-black shadow-sm">
             CASE STUDIES
           </span>
-          <h2
-            className="text-[clamp(3rem,8vw,80px)] font-black leading-none tracking-tighter text-black uppercase"
+          <h1
+            className="text-[clamp(2.2rem,7vw,80px)] font-black leading-none tracking-tighter text-black uppercase"
             style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}
           >
             ENGINEERING<br />
             <span className="text-[#0038FF]">PROJECTS</span>
-          </h2>
-          <p className="text-black/50 text-sm max-w-md font-medium leading-relaxed mt-4">
+          </h1>
+          <p className="text-black/50 text-xs sm:text-sm max-w-md font-medium leading-relaxed mt-3">
             Deep dive case studies detailing design decisions, architectural parameters, real-world hurdles, and lessons learned.
           </p>
         </div>
 
-        {/* Case Study Card with Dynamic Slide Transition */}
-        <div className="relative">
-          
-          {/* Circular Selector row just above the card */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 px-2">
+        {/* Project Selector Row */}
+        <div className="mb-6">
+          {/* Mobile Horizontal Touch Swiper */}
+          <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {projectsData.map((p, index) => {
+              const isActive = activeProjectIdx === index;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => {
+                    setActiveProjectIdx(index);
+                    setActiveMobileTab('overview');
+                  }}
+                  className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer border-2 flex-shrink-0 ${
+                    isActive
+                      ? 'bg-black text-[#CCFF00] border-black shadow-[2px_2px_0_#0038FF]'
+                      : 'bg-white text-black border-black/10 hover:border-black'
+                  }`}
+                >
+                  0{index + 1}. {p.name}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop Circular Selector Row */}
+          <div className="hidden lg:flex items-center justify-between gap-4 px-2">
             <span className="text-[10px] font-black uppercase text-black/40 tracking-wider">
-              Project Case Study (0{activeProjectIdx + 1} / 0{projectCaseStudies.length})
+              Project Case Study (0{activeProjectIdx + 1} / 0{projectsData.length})
             </span>
             <div className="flex flex-wrap gap-2">
-              {projectCaseStudies.map((_, index) => {
+              {projectsData.map((_, index) => {
                 const isActive = activeProjectIdx === index;
                 return (
                   <button
@@ -179,138 +89,259 @@ export function ProjectsPage() {
               })}
             </div>
           </div>
+        </div>
 
-          <AnimatePresence mode="wait">
-            <motion.article
-              key={project.title}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.25 }}
-              className="bg-white/60 backdrop-blur-md border-[3px] border-black rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Header Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-black p-8 bg-[#0038FF]/5 gap-4">
-                <div>
-                  <h3 className="text-2xl font-black text-black uppercase leading-tight">
-                    {project.title}
-                  </h3>
-                  <p className="text-black/60 text-xs font-black uppercase tracking-wider mt-1">
-                    {project.subtitle}
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
+        {/* Case Study Card with Dynamic Slide Transition */}
+        <AnimatePresence mode="wait">
+          <motion.article
+            key={project.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+            className="bg-white/70 backdrop-blur-md border-[3px] border-black rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_#000000] hover:shadow-[12px_12px_0px_0px_#0038FF] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300"
+          >
+            {/* Header Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-black p-5 sm:p-8 bg-[#0038FF]/5 gap-4">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-black uppercase leading-tight">
+                  {project.name}
+                </h3>
+                <p className="text-black/60 text-[11px] sm:text-xs font-black uppercase tracking-wider mt-1">
+                  {project.shortDescription}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                {project.github && (
                   <a
-                    href={project.githubUrl}
+                    href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-4 py-2 border-2 border-black rounded-full text-xs font-black uppercase tracking-wider bg-white hover:bg-black hover:text-white flex items-center gap-1.5 transition-colors"
+                    onClick={() => trackProjectRepo(project.name)}
+                    className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 border-2 border-black rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-white hover:bg-black hover:text-white flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <FaGithub /> Repo
                   </a>
-                  {project.demoUrl !== '#' && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-4 py-2 border-2 border-black rounded-full text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-sm"
-                    >
-                      <FaExternalLinkAlt /> Live Demo
-                    </a>
-                  )}
-                </div>
+                )}
+                {project.liveDemo && (
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => trackProjectDemo(project.name)}
+                    className="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2 border-2 border-black rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider bg-[#CCFF00] hover:bg-black text-black hover:text-white flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                  >
+                    <FaExternalLinkAlt /> Live Demo
+                  </a>
+                )}
               </div>
+            </div>
 
-              {/* Grid content */}
-              <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                {/* Left col: Tech stats, Role, Timeline */}
-                <div className="flex flex-col gap-6">
-                  <div>
-                    <span className="text-[10px] font-black text-black/40 uppercase tracking-widest block mb-1">
-                      Role &amp; Timeline
-                    </span>
-                    <p className="text-xs font-black uppercase text-black leading-snug">{project.role}</p>
-                    <span className="text-xs font-black text-[#0038FF] tracking-wider block mt-1">{project.timeline}</span>
+            {/* Mobile Tab Control Bar */}
+            <div className="lg:hidden flex items-center justify-around border-b-2 border-black bg-[#F8F9FA] p-2">
+              {MOBILE_TABS.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveMobileTab(tab.id as any)}
+                  className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase transition-all cursor-pointer ${
+                    activeMobileTab === tab.id
+                      ? 'bg-black text-[#CCFF00] border border-black shadow-sm'
+                      : 'text-black/60 hover:text-black'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Tabbed View Content */}
+            <div className="lg:hidden p-5">
+              {activeMobileTab === 'overview' && (
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="w-7 h-7 rounded-lg bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 mt-0.5 border border-red-200">
+                      <FaChartLine className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <h4 className="font-black text-black text-xs uppercase tracking-wider">Problem &amp; Why Built</h4>
+                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-1">{project.problem}</p>
+                      <div className="bg-[#0038FF]/5 p-2.5 rounded-xl border border-black/5 mt-2">
+                        <strong className="text-black uppercase text-[8.5px] block mb-0.5">Why Built:</strong>
+                        <p className="text-black/70 text-[11px] font-semibold italic">{project.whyBuilt}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 border-t border-black/10 pt-3 text-xs">
+                    <div>
+                      <span className="text-[8.5px] font-black text-black/40 block uppercase">Role &amp; Year</span>
+                      <p className="font-extrabold text-black text-[11px]">{project.role}</p>
+                      <span className="text-[10px] font-black text-[#0038FF]">{project.year}</span>
+                    </div>
+                    <div>
+                      <span className="text-[8.5px] font-black text-black/40 block uppercase">Project Status</span>
+                      <p className="font-extrabold text-[#0038FF] text-[11px] uppercase">{project.status}</p>
+                    </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] font-black text-black/40 uppercase tracking-widest block mb-2">
-                      Technologies
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map(t => (
-                        <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-white/60 px-2.5 py-1 rounded-full text-black/70">
+                    <span className="text-[8.5px] font-black text-black/40 block uppercase mb-1.5">Technologies</span>
+                    <div className="flex flex-wrap gap-1">
+                      {project.techStack.map(t => (
+                        <span key={t} className="text-[8.5px] font-black uppercase border border-black/10 bg-white px-2 py-0.5 rounded-full text-black/70">
                           {t}
                         </span>
                       ))}
                     </div>
                   </div>
+                </div>
+              )}
 
-                  {/* Highlights Card */}
-                  <div className="bg-[#1E2026] text-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden border-2 border-black">
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:1rem_1rem]" />
-                    <span className="text-[9px] font-black text-[#CCFF00] tracking-widest uppercase block mb-1">
-                      {project.metrics.label}
-                    </span>
-                    <span className="text-2xl font-black">{project.metrics.count}</span>
+              {activeMobileTab === 'arch' && (
+                <div className="flex flex-col gap-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#0038FF] flex items-center justify-center flex-shrink-0 mt-0.5 border border-blue-200">
+                      <FaPuzzlePiece className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <h4 className="font-black text-black text-xs uppercase tracking-wider">Architecture Details</h4>
+                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-1">
+                        System Type: <span className="font-black text-black">{project.projectType}</span>
+                      </p>
+                      <div className="bg-[#F8F9FA] rounded-xl p-3 border border-black/5 mt-2">
+                        <span className="text-[8.5px] font-black uppercase text-black/45 block mb-1">Future Planned Improvements</span>
+                        <p className="text-black/85 text-xs font-semibold leading-relaxed">{project.futureImprovements}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-[8.5px] font-black text-black/40 block uppercase mb-1">Core Contribution</span>
+                    <p className="text-xs font-semibold text-black/80 leading-relaxed bg-white p-3 rounded-xl border border-black/10">
+                      {project.contribution}
+                    </p>
                   </div>
                 </div>
+              )}
 
-                {/* Right col: Case details */}
-                <div className="md:col-span-2 flex flex-col gap-6">
-                  {/* Problem & Research */}
-                  <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 mt-1 border border-red-200">
-                      <FaChartLine className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-black text-black text-sm uppercase tracking-wider">The Problem &amp; Research</h4>
-                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">{project.problem}</p>
-                      <p className="text-black/60 text-[11px] font-medium leading-relaxed mt-2 italic">{project.research}</p>
-                    </div>
+              {activeMobileTab === 'hurdles' && (
+                <div className="flex gap-3 items-start">
+                  <div className="w-7 h-7 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 mt-0.5 border border-yellow-200">
+                    <FaLightbulb className="w-3.5 h-3.5" />
                   </div>
-
-                  {/* Architecture & Features */}
-                  <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#0038FF] flex items-center justify-center flex-shrink-0 mt-1 border border-blue-200">
-                      <FaPuzzlePiece className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-black text-black text-sm uppercase tracking-wider">Architecture &amp; Features</h4>
-                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">{project.architecture}</p>
-                      <ul className="flex flex-col gap-1.5 mt-3 text-xs text-black/80 font-bold">
-                        {project.features.map((feat, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0038FF] mt-1.5 flex-shrink-0" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Key Hurdles & Lessons */}
-                  <div className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 mt-1 border border-yellow-200">
-                      <FaLightbulb className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-black text-black text-sm uppercase tracking-wider">Key Hurdles &amp; Lessons</h4>
-                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">
-                        <strong className="text-black">The Hurdle:</strong> {project.challenges}
+                  <div>
+                    <h4 className="font-black text-black text-xs uppercase tracking-wider">Hurdles &amp; Lessons</h4>
+                    <div className="bg-[#F8F9FA] rounded-xl p-3 border border-black/5 mt-2 flex flex-col gap-2.5">
+                      <p className="text-black/75 text-xs font-medium leading-relaxed">
+                        <strong className="text-black block mb-0.5 uppercase text-[9px]">The Hurdle:</strong> {project.challenges}
                       </p>
-                      <p className="text-black/70 text-xs font-medium leading-relaxed mt-2">
-                        <strong className="text-[#0038FF]">The Solution:</strong> {project.lessons}
+                      <p className="text-black/75 text-xs font-medium leading-relaxed border-t border-black/5 pt-2">
+                        <strong className="text-[#0038FF] block mb-0.5 uppercase text-[9px]">The Solution:</strong> {project.lessonsLearned}
                       </p>
                     </div>
                   </div>
                 </div>
+              )}
+            </div>
 
+            {/* Desktop 2-Column Full View Content */}
+            <div className="hidden lg:grid p-8 grid-cols-3 gap-8">
+              
+              {/* Left col: Tech stats, Role, Timeline */}
+              <div className="flex flex-col gap-6">
+                <div>
+                  <span className="text-[10px] font-black text-black/40 uppercase tracking-widest block mb-1">
+                    Role &amp; Timeline
+                  </span>
+                  <p className="text-xs font-black uppercase text-black leading-snug">{project.role}</p>
+                  <span className="text-xs font-black text-[#0038FF] tracking-wider block mt-1">{project.year}</span>
+                </div>
+
+                <div>
+                  <span className="text-[10px] font-black text-black/40 uppercase tracking-widest block mb-1">
+                    Contribution
+                  </span>
+                  <p className="text-[11px] font-bold text-black/70 leading-relaxed pr-1">{project.contribution}</p>
+                </div>
+
+                <div>
+                  <span className="text-[10px] font-black text-black/40 uppercase tracking-widest block mb-2">
+                    Technologies
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.techStack.map(t => (
+                      <span key={t} className="text-[9px] font-black uppercase border border-black/10 bg-white/60 px-2.5 py-1 rounded-full text-black/70">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Highlights Card */}
+                <div className="bg-[#1E2026] text-white p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden border-2 border-black">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:1rem_1rem]" />
+                  <span className="text-[9px] font-black text-[#CCFF00] tracking-widest uppercase block mb-1">
+                    PROJECT STATUS
+                  </span>
+                  <span className="text-2xl font-black uppercase tracking-widest">{project.status}</span>
+                </div>
               </div>
-            </motion.article>
-          </AnimatePresence>
-        </div>
+
+              {/* Right col: Case details */}
+              <div className="col-span-2 flex flex-col gap-6">
+                {/* Problem & Research */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0 mt-1 border border-red-200">
+                    <FaChartLine className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-black text-sm uppercase tracking-wider">The Problem &amp; Why Built</h4>
+                    <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">{project.problem}</p>
+                    <p className="text-black/60 text-[11px] font-semibold leading-relaxed mt-2 italic bg-[#0038FF]/5 px-3 py-2 rounded-xl border border-black/5">
+                      <strong className="text-black uppercase text-[9px] block mb-0.5">Why Built:</strong> {project.whyBuilt}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Architecture & Features */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 text-[#0038FF] flex items-center justify-center flex-shrink-0 mt-1 border border-blue-200">
+                    <FaPuzzlePiece className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-black text-sm uppercase tracking-wider">Architecture &amp; Future Goals</h4>
+                    <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">
+                      Type: <span className="font-black text-black">{project.projectType}</span>
+                    </p>
+                    <div className="bg-[#F8F9FA] rounded-2xl p-4 border border-black/5 mt-3">
+                      <span className="text-[9px] font-black uppercase text-black/45 block mb-1">Future Planned Improvements</span>
+                      <p className="text-black/85 text-xs font-semibold leading-relaxed">{project.futureImprovements}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Key Hurdles & Lessons */}
+                <div className="flex gap-4 items-start">
+                  <div className="w-8 h-8 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 mt-1 border border-yellow-200">
+                    <FaLightbulb className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-black text-sm uppercase tracking-wider">Key Hurdles &amp; Lessons</h4>
+                    <p className="text-black/70 text-xs font-medium leading-relaxed mt-1.5">
+                      <strong className="text-black">The Hurdle:</strong> {project.challenges}
+                    </p>
+                    <p className="text-black/70 text-xs font-medium leading-relaxed mt-2">
+                      <strong className="text-[#0038FF]">The Solution:</strong> {project.lessonsLearned}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </motion.article>
+        </AnimatePresence>
 
       </div>
     </div>

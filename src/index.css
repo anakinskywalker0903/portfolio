@@ -32,6 +32,11 @@
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
   html, body, #root {
     margin: 0;
     padding: 0;
@@ -236,4 +241,28 @@ button.submit-anim-btn.ready:before {
 button.submit-anim-btn.ready:after {
   opacity: 1;
   animation: button-dot-outro .333s;
+}
+
+/* Accessibility visible focus outlines */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #0038FF !important;
+  outline-offset: 3px !important;
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: scroll !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }

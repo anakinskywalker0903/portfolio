@@ -1,0 +1,54 @@
+[
+  {
+    "id": "devinterio",
+    "client": "Devinterio",
+    "industry": "Interior Design",
+    "timeline": "3 Weeks (Completed)",
+    "role": "Frontend Developer (Freelance)",
+    "responsibilities": [
+      "Redesigned the entire landing experience.",
+      "Coded catalog sections.",
+      "Ongoing visual tweaks on request."
+    ],
+    "deliverables": [
+      "Responsive layout pages.",
+      "Configured Domain redirects.",
+      "Visual assets compression pipeline."
+    ],
+    "stack": ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
+    "challenges": "Resolving cross-browser responsive layout offsets.",
+    "outcome": "Paid work, live and actively serving clients at devinterio.com / devinterio.in.",
+    "lessons": "Learnt freelance client communication and delivery rules.",
+    "img": "/devinterio.png",
+    "logo": "/devinterio-logo.png",
+    "links": [
+      { "label": "devinterio.com", "url": "https://devinterio.com" },
+      { "label": "devinterio.in", "url": "https://devinterio.in" }
+    ]
+  },
+  {
+    "id": "jaas-visual",
+    "client": "Jaas Visual",
+    "industry": "Architectural CGI & Renders",
+    "timeline": "In Development",
+    "role": "Frontend Developer (Freelance)",
+    "responsibilities": [
+      "Coding custom showcase gallery page.",
+      "Designing responsive slider states.",
+      "Integrating domain handlers."
+    ],
+    "deliverables": [
+      "Custom CGI showcase grid.",
+      "Responsive gallery sliders."
+    ],
+    "stack": ["React", "Tailwind CSS", "Vite"],
+    "challenges": "Optimizing heavy image files loading performance.",
+    "outcome": "Upcoming portal showcase for CGI assets.",
+    "lessons": "Learnt image compression and lazy loading patterns.",
+    "img": "/jaas.jpg",
+    "logo": "/jaas-logo.png",
+    "links": [
+      { "label": "jaasvisual.com", "url": "#" }
+    ]
+  }
+]
