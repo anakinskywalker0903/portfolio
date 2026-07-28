@@ -16,13 +16,19 @@ const LearningArchivePage = lazy(() => import('@/pages/LearningArchivePage').the
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 import { initGA, trackPageView } from '@/lib/analytics';
+import { useLayoutEffect } from 'react';
 
-// Scroll to top & track page view on every route transition
+// Disable automatic scroll restoration globally for instant page top resets
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
+// Scroll to top instantly & track page view on every route transition
 function ScrollToTop() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     trackPageView(pathname);
   }, [pathname]);
 

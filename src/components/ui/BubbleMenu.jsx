@@ -54,6 +54,11 @@ export default function BubbleMenu({
 
   const handleLinkClick = (e, href) => {
     setIsMenuOpen(false);
+    
+    // Reset scroll to top immediately before page transition or navigation begins
+    if (!href.startsWith('#') || currentPath !== '/') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
 
     if (href.startsWith('#')) {
       e.preventDefault();

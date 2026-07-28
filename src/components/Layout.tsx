@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { FaArrowUp, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
@@ -8,6 +8,8 @@ import { ResumeModal } from '@/components/ui/ResumeModal';
 import BubbleMenu from '@/components/ui/BubbleMenu';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import ProfileCard from '@/components/ui/ProfileCard';
+import { fetchVisitorCount } from '@/lib/visitorCounter';
+
 const Logo = () => (
   <div className="p-0.5 rounded-full bg-white shadow-sm flex items-center justify-center border border-black/5">
     <Link
@@ -40,6 +42,11 @@ const menuItems = [
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetchVisitorCount().then(setVisitorCount);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -218,8 +225,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <p className="font-bold uppercase tracking-wider">
               © {new Date().getFullYear()} ROHIT DUBEY. ALL RIGHTS RESERVED.
             </p>
+            {visitorCount !== null && (
+              <p className="font-black uppercase tracking-wider text-white/70 flex items-center gap-1.5 bg-white/5 px-3.5 py-1.5 rounded-full border border-white/10 text-[10px] sm:text-xs">
+                <span className="text-[#CCFF00]">👁</span> {visitorCount} VISITORS SINCE LAUNCH
+              </p>
+            )}
             <p className="font-black uppercase tracking-widest text-[#CCFF00]/60">
-              v2.0 • BUILT WITH REACT, THREE.JS, &amp; GSAP
+              v3.1 • BUILT WITH REACT, THREE.JS, &amp; GSAP
             </p>
           </div>
         </div>

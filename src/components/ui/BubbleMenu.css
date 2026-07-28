@@ -1,12 +1,12 @@
 .bubble-menu {
   left: 0;
   right: 0;
-  top: 1.5em;
+  top: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 0 2em;
+  padding: 0 1.25rem;
   pointer-events: none;
   z-index: 99;
 }
@@ -21,12 +21,12 @@
 
 /* === Bubbles === */
 .bubble-menu .bubble {
-  --bubble-size: 52px;
+  --bubble-size: 42px;
   width: var(--bubble-size);
   height: var(--bubble-size);
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -42,9 +42,11 @@
   width: auto;
   min-height: var(--bubble-size);
   height: var(--bubble-size);
-  padding: 0 18px;
+  padding: 0 4px;
   border-radius: calc(var(--bubble-size) / 2);
-  gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bubble-menu .toggle-bubble {
@@ -60,8 +62,6 @@
 }
 
 .bubble-menu .logo-content {
-  --logo-max-height: 60%;
-  --logo-max-width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -72,8 +72,8 @@
 .bubble-menu .logo-content > .bubble-logo,
 .bubble-menu .logo-content > img,
 .bubble-menu .logo-content > svg {
-  max-height: var(--logo-max-height);
-  max-width: var(--logo-max-width);
+  max-height: 60%;
+  max-width: 100%;
 }
 
 /* === Toggle Button === */
@@ -93,8 +93,8 @@
 }
 
 .bubble-menu .menu-line {
-  width: 22px;
-  height: 2.5px;
+  width: 18px;
+  height: 2.2px;
   background: #0038FF;
   border-radius: 2px;
   display: block;
@@ -106,24 +106,24 @@
 }
 
 .bubble-menu .menu-line + .menu-line {
-  margin-top: 6px;
+  margin-top: 5px;
 }
 
 .bubble-menu .menu-btn.open .menu-line:first-child {
-  transform: translateY(4.25px) rotate(45deg);
+  transform: translateY(3.6px) rotate(45deg);
 }
 
 .bubble-menu .menu-btn.open .menu-line:last-child {
-  transform: translateY(-4.25px) rotate(-45deg);
+  transform: translateY(-3.6px) rotate(-45deg);
 }
 
 @media (min-width: 768px) {
-  .bubble-menu .bubble {
-    --bubble-size: 58px;
+  .bubble-menu {
+    padding: 0 2rem;
   }
 
-  .bubble-menu .logo-bubble {
-    padding: 0 20px;
+  .bubble-menu .bubble {
+    --bubble-size: 46px;
   }
 }
 
@@ -137,7 +137,7 @@
   justify-content: space-between;
   pointer-events: auto;
   z-index: 98;
-  background: rgba(0, 56, 255, 0.96);
+  background: #0038FF;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   padding: 80px 20px 24px 20px;

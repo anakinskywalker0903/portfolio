@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { HeroSection } from '@/components/ui/hero';
 import { ContactSection } from '@/components/ui/contact';
 import { AnimatedCircularProgressBar } from '@/components/ui/animated-circular-progress-bar';
@@ -59,36 +59,40 @@ export function HomePage() {
   const latestClient = clientWorkData[0];
   const featuredCerts = certificationsData.featured.slice(0, 2);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  // Duplicated cards for seamless infinite horizontal loop
+  const duplicatedAboutDeck = [...siteData.aboutDeck, ...siteData.aboutDeck];
 
-  // Card 1: Origin
-  const y1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [0, 0, -700]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [1, 1, 0]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.14, 0.18], [1, 1, 0.9]);
+  const originScrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Card 2: Why I Build
-  const y2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [700, 700, 0, 0, -700]);
-  const opacity2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [0, 0, 1, 1, 0]);
-  const scale2 = useTransform(scrollYProgress, [0.10, 0.14, 0.18, 0.34, 0.38], [0.9, 0.9, 1, 1, 0.9]);
+  // Gentle auto-scroll effect (temporarily pauses on hover/touch and automatically resumes on mouse leave)
+  useEffect(() => {
+    if (!isAutoScrolling || isHovered) return;
+    const container = originScrollRef.current;
+    if (!container) return;
 
-  // Card 3: Learning Philosophy
-  const y3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [700, 700, 0, 0, -700]);
-  const opacity3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [0, 0, 1, 1, 0]);
-  const scale3 = useTransform(scrollYProgress, [0.30, 0.34, 0.38, 0.54, 0.58], [0.9, 0.9, 1, 1, 0.9]);
+    const interval = setInterval(() => {
+      if (container.scrollLeft >= container.scrollWidth - container.clientWidth - 10) {
+        container.scrollTo({ left: 0, behavior: 'auto' });
+      } else {
+        container.scrollBy({ left: 1.5, behavior: 'auto' });
+      }
+    }, 25);
 
-  // Card 4: Current Mission
-  const y4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [700, 700, 0, 0, -700]);
-  const opacity4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [0, 0, 1, 1, 0]);
-  const scale4 = useTransform(scrollYProgress, [0.50, 0.54, 0.58, 0.74, 0.78], [0.9, 0.9, 1, 1, 0.9]);
+    return () => clearInterval(interval);
+  }, [isAutoScrolling, isHovered]);
 
-  // Card 5: Looking Ahead
-  const y5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [700, 700, 0, 0]);
-  const opacity5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [0, 0, 1, 1]);
-  const scale5 = useTransform(scrollYProgress, [0.70, 0.74, 0.78, 1.0], [0.9, 0.9, 1, 1]);
+  const handleManualScroll = (direction: 'left' | 'right') => {
+    const container = originScrollRef.current;
+    if (container) {
+      const scrollAmount = window.innerWidth < 640 ? 320 : 420;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <div className="w-full relative bg-white">
@@ -99,95 +103,133 @@ export function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0038FF] pointer-events-none z-20" />
       </div>
 
-      {/* 2. Origin — viewport-locked sticky deck, cards cycle as you scroll */}
+      {/* 2. Origin — Infinite & Manual Horizontal Scrolling Deck */}
       <section
         id="about"
-        ref={containerRef}
-        className="relative h-[600vh] w-full z-30"
+        className="relative py-20 md:py-28 w-full z-30 overflow-hidden bg-[#0038FF]"
       >
-        {/* STICKY VIEWPORT — everything inside stays fixed while you scroll */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* WebGL Grainient Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Grainient
+            color1="#3b82f6"
+            color2="#fcfcfc"
+            color3="#54f63b"
+            timeSpeed={1.2}
+            colorBalance={0.06}
+            warpStrength={1.2}
+            warpFrequency={3.0}
+            warpSpeed={0.8}
+            warpAmplitude={40.0}
+            blendAngle={0.0}
+            blendSoftness={0.05}
+            rotationAmount={300.0}
+            noiseScale={1.5}
+            grainAmount={0.07}
+            grainScale={2.0}
+            grainAnimated={false}
+            contrast={1.3}
+            gamma={1.0}
+            saturation={1.0}
+            centerX={0.0}
+            centerY={0.0}
+            zoom={1.05}
+          />
+        </div>
 
-          {/* WebGL Grainient — toned down settings to reduce GPU lag */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <Grainient
-              color1="#3b82f6"
-              color2="#fcfcfc"
-              color3="#54f63b"
-              timeSpeed={1.2}
-              colorBalance={0.06}
-              warpStrength={1.2}
-              warpFrequency={3.0}
-              warpSpeed={0.8}
-              warpAmplitude={40.0}
-              blendAngle={0.0}
-              blendSoftness={0.05}
-              rotationAmount={300.0}
-              noiseScale={1.5}
-              grainAmount={0.07}
-              grainScale={2.0}
-              grainAnimated={false}
-              contrast={1.3}
-              gamma={1.0}
-              saturation={1.0}
-              centerX={0.0}
-              centerY={0.0}
-              zoom={1.05}
-            />
+        {/* Top/Bottom seamless gradients */}
+        <div
+          className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
+          style={{
+            height: '120px',
+            background: 'linear-gradient(to bottom, #0038FF 0%, rgba(0, 56, 255, 0.6) 50%, transparent 100%)'
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
+          style={{
+            height: '100px',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%)'
+          }}
+        />
+
+        {/* Section Header */}
+        <div className="max-w-6xl mx-auto px-6 md:px-10 relative z-20 mb-8 text-center flex flex-col items-center">
+          <span className="inline-block bg-[#CCFF00] text-black font-black text-[10px] px-4 py-1.5 rounded-full mb-3 tracking-widest uppercase border border-black shadow-[3px_3px_0_#000]">
+            ⚡ ORIGIN DECK • AUTO &amp; MANUAL SCROLL
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-none mb-3" style={{ fontFamily: '"Arial Black", Impact, sans-serif', textShadow: '2px 2px 0 #000' }}>
+            ORIGIN &amp; ENGINEERING PHILOSOPHY
+          </h2>
+          <p className="text-white/80 text-xs sm:text-sm font-bold uppercase tracking-wider max-w-xl mb-4">
+            Swipe, drag, or use arrows to scroll manually. Touch or hover to pause auto-scroll.
+          </p>
+
+          {/* Interactive Manual Scroll Controls */}
+          <div className="flex items-center gap-2.5 z-30">
+            <button
+              onClick={() => handleManualScroll('left')}
+              className="w-9 h-9 rounded-full border-2 border-black bg-white hover:bg-[#CCFF00] text-black flex items-center justify-center font-black text-sm shadow-[3px_3px_0_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all cursor-pointer"
+              aria-label="Scroll Left"
+              title="Scroll Left"
+            >
+              ←
+            </button>
+            <button
+              onClick={() => setIsAutoScrolling(prev => !prev)}
+              className="px-4 py-1.5 rounded-full border-2 border-black bg-white hover:bg-[#CCFF00] text-black font-black text-[10px] uppercase tracking-wider shadow-[3px_3px_0_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all cursor-pointer"
+            >
+              {isAutoScrolling ? '⏸ Pause Auto-Scroll' : '▶ Auto-Scroll'}
+            </button>
+            <button
+              onClick={() => handleManualScroll('right')}
+              className="w-9 h-9 rounded-full border-2 border-black bg-white hover:bg-[#CCFF00] text-black flex items-center justify-center font-black text-sm shadow-[3px_3px_0_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all cursor-pointer"
+              aria-label="Scroll Right"
+              title="Scroll Right"
+            >
+              →
+            </button>
           </div>
+        </div>
 
-          {/* Seamless blend: fade FROM hero blue into Grainient at the very top */}
-          <div
-            className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
-            style={{
-              height: '180px',
-              background: 'linear-gradient(to bottom, #0038FF 0%, rgba(0, 56, 255, 0.6) 40%, transparent 100%)'
-            }}
-          />
-          {/* Subtle dark vignette at bottom to lead into next section */}
-          <div
-            className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
-            style={{
-              height: '100px',
-              background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%)'
-            }}
-          />
+        {/* Horizontal Scroll Deck Container */}
+        <div className="relative w-full py-4 z-20">
+          {/* Left & Right gradient edge masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-r from-[#0038FF] to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#0038FF] to-transparent z-20 pointer-events-none" />
 
-          {/* Cards — all absolutely positioned, animated by scroll */}
-          <div className="absolute inset-0 flex items-center justify-center px-6 md:px-10 pointer-events-none">
-            {siteData.aboutDeck.map((card, idx) => {
-              const transformObj = [
-                { y: y1, opacity: opacity1, scale: scale1 },
-                { y: y2, opacity: opacity2, scale: scale2 },
-                { y: y3, opacity: opacity3, scale: scale3 },
-                { y: y4, opacity: opacity4, scale: scale4 },
-                { y: y5, opacity: opacity5, scale: scale5 }
-              ][idx];
+          <div
+            ref={originScrollRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
+            className="flex gap-6 overflow-x-auto no-scrollbar py-4 px-6 md:px-12 scroll-smooth select-none cursor-grab active:cursor-grabbing pointer-events-auto"
+          >
+            {duplicatedAboutDeck.map((card, idx) => {
+              const realIdx = idx % siteData.aboutDeck.length;
               const isCurrentMission = card.id === 'current-mission';
-
               return (
-                <motion.div
-                  key={card.id}
-                  style={transformObj}
-                  className="absolute max-w-3xl w-full bg-white border-[3px] border-black rounded-[2.5rem] p-8 md:p-10 shadow-[8px_8px_0_#000] flex flex-col justify-between h-[65vh] max-h-[500px] overflow-y-auto no-scrollbar pointer-events-auto"
+                <div
+                  key={`${card.id}-${idx}`}
+                  className="w-[300px] sm:w-[380px] md:w-[460px] flex-shrink-0 bg-white border-[3px] border-black rounded-[2.5rem] p-7 md:p-9 shadow-[8px_8px_0_#000] flex flex-col justify-between text-left h-[420px] overflow-y-auto no-scrollbar hover:border-[#CCFF00] transition-colors"
                 >
                   <div>
                     <span className="inline-block bg-[#CCFF00] text-black font-black text-[9px] px-3 py-1 rounded-full mb-3 tracking-widest uppercase border border-black">
-                      SECTION 0{idx + 1}
+                      SECTION 0{realIdx + 1}
                     </span>
-                    <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-none mb-1 text-left" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
+                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-black leading-none mb-1 text-left" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
                       {card.title}
                     </h3>
                     {card.subtitle && (
-                      <p className="text-black/50 text-xs font-bold uppercase tracking-wider mb-6 italic text-left">
+                      <p className="text-black/50 text-xs font-bold uppercase tracking-wider mb-4 italic text-left">
                         {card.subtitle}
                       </p>
                     )}
-                    <div className="flex flex-col gap-4 text-black/75 text-sm font-medium leading-relaxed text-left">
+                    <div className="flex flex-col gap-3 text-black/75 text-xs sm:text-sm font-medium leading-relaxed text-left">
                       {card.paragraphs.map((p, i) => (
-                        <p key={i} className={idx === 0 && i === 0 ? "font-bold text-black text-base" : ""}>
+                        <p key={i} className={realIdx === 0 && i === 0 ? "font-bold text-black text-xs sm:text-sm" : ""}>
                           {isCurrentMission ? (
-                            <span className="font-black text-black text-sm uppercase leading-snug tracking-tight">
+                            <span className="font-black text-black text-xs sm:text-sm uppercase leading-snug tracking-tight">
                               Building a strong foundation in <span className="text-[#0038FF]">Full-Stack Development</span> and <span className="text-[#0038FF]">Artificial Intelligence</span> through consistent learning, real-world projects, and continuous improvement.
                             </span>
                           ) : p}
@@ -198,12 +240,12 @@ export function HomePage() {
 
                   {isCurrentMission ? (
                     <div className="flex flex-col gap-2 mt-4 text-left">
-                      <h5 className="font-black text-xs uppercase tracking-wider text-black">
+                      <h5 className="font-black text-[10px] sm:text-xs uppercase tracking-wider text-black">
                         Current Focus:
                       </h5>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-black/80 font-bold">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] sm:text-xs text-black/80 font-bold">
                         {siteData.homeStatus.currentObjectives.map((focus, i) => (
-                          <li key={i} className="flex items-center gap-2 bg-[#F8F9FA] border border-black/5 p-2 rounded-xl">
+                          <li key={i} className="flex items-center gap-1.5 bg-[#F8F9FA] border border-black/5 p-1.5 rounded-xl">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] border border-black/40 flex-shrink-0" />
                             <span className="truncate">{focus}</span>
                           </li>
@@ -212,41 +254,15 @@ export function HomePage() {
                     </div>
                   ) : (
                     card.footer && (
-                      <p className="font-bold text-[#0038FF] text-sm mt-4 text-left">
+                      <p className="font-bold text-[#0038FF] text-xs sm:text-sm mt-4 text-left">
                         {card.footer}
                       </p>
                     )
                   )}
-                </motion.div>
+                </div>
               );
             })}
           </div>
-
-          {/* Progress dots — bottom center */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10 pointer-events-none">
-            {[
-              useTransform(scrollYProgress, [0, 0.18], [1, 0]),
-              useTransform(scrollYProgress, [0.10, 0.18, 0.38], [0, 1, 0]),
-              useTransform(scrollYProgress, [0.30, 0.38, 0.58], [0, 1, 0]),
-              useTransform(scrollYProgress, [0.50, 0.58, 0.78], [0, 1, 0]),
-              useTransform(scrollYProgress, [0.70, 0.78, 1.0], [0, 1, 1]),
-            ].map((op, i) => (
-              <motion.span
-                key={i}
-                style={{ opacity: op }}
-                className="block w-2 h-2 rounded-full bg-white border border-white/30"
-              />
-            ))}
-          </div>
-
-          {/* Scroll hint — top right */}
-          <div className="absolute top-6 right-8 z-10 pointer-events-none flex items-center gap-2">
-            <span className="text-white/40 text-[10px] font-black uppercase tracking-widest">Scroll</span>
-            <svg className="w-3 h-3 text-white/40 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-
         </div>
       </section>
 
