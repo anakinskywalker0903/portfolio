@@ -1,11 +1,12 @@
 /**
  * Lightweight Live Visitor Counter Service for rohitdubey.dev
- * Uses counterapi.dev with session-level deduplication to count unique browser sessions.
+ * Uses counterapi.dev with session-level deduplication combined with GA baseline count.
  */
 
 const COUNTER_API_BASE = 'https://api.counterapi.dev/v1/rohitdubey-portfolio/visits';
 const SESSION_KEY = 'rohitdubey_session_counted';
-const BASELINE_COUNT = 136; // Matching live Google Analytics baseline user count
+const BASELINE_OFFSET = 130; // GA historical baseline offset
+const FALLBACK_TOTAL = 137; // Total visitors fallback
 
 export async function fetchVisitorCount(): Promise<number> {
   try {
@@ -27,18 +28,18 @@ export async function fetchVisitorCount(): Promise<number> {
     }
 
     const data = await response.json();
-    const count = data?.count ?? data?.value;
+    const liveHits = data?.count ?? data?.value;
 
-    if (typeof count === 'number' && !isNaN(count)) {
+    if (typeof liveHits === 'number' && !isNaN(liveHits)) {
       if (typeof sessionStorage !== 'undefined') {
         sessionStorage.setItem(SESSION_KEY, 'true');
       }
-      return count;
+      return BASELINE_OFFSET + liveHits;
     }
 
-    return BASELINE_COUNT;
+    return FALLBACK_TOTAL;
   } catch (err) {
     console.debug('Visitor Counter Notice (Using Fallback Baseline):', err);
-    return BASELINE_COUNT;
+    return FALLBACK_TOTAL;
   }
 }
