@@ -1,0 +1,33 @@
+# Rohit Dubey — AI & Full-Stack Developer
+
+> Rohit Dubey is an AI and Full-Stack Developer based in India specializing in React, TypeScript, Node.js, Python, and AI integrations (OpenAI and Claude APIs).
+
+## Summary
+Full-stack software engineer with a track record of building web applications, AI tools, Chrome extensions, and custom client sites. Shipped NoteLift on the Chrome Web Store, built AI tools like Brainstormzz and AI Career Engine, and delivered commercial website solutions for client Devinterio.
+
+## Key Projects
+- [NoteLift](https://rohitdubey.dev/projects): Chrome extension published on the Chrome Web Store for extracting PDF and web highlights into modular revision notes (built with Manifest V3 and local storage).
+- [Brainstormzz](https://rohitdubey.dev/projects): AI-powered whiteboard application for structured concept generation using OpenAI API, HTML5 Canvas, and React 18.
+- [AI Career Engine](https://rohitdubey.dev/projects): Career discovery and 12-week roadmap optimization platform powered by Anthropic Claude API, Node.js, Express, and React.
+- [SSB Practice Simulator](https://rohitdubey.dev/projects): Interactive simulator for Service Selection Board (WAT/PPDT/SRT) test preparation.
+- [Devinterio](https://rohitdubey.dev/client-work): Complete client website redesign and post-launch maintenance for an interior design business.
+- [RailDost](https://rohitdubey.dev/projects): Indian Railways route comparison tool using Leaflet.js mapping.
+
+## Core Technical Skills
+- Languages: JavaScript (ES6+), TypeScript, Python, HTML5, CSS3, SQL.
+- Frontend: React, Tailwind CSS, Responsive Web Design, DOM Manipulation, Single Page Applications.
+- Backend: Node.js, Express, REST APIs, Google OAuth authentication.
+- AI / ML Integration: OpenAI API (Structured JSON prompting), Anthropic Claude API, Prompt Engineering.
+- Cloud & Tools: Vercel, Hostinger, Railway, Git, GitHub, Chrome Extensions API.
+
+## Subpages
+- [Skills](https://rohitdubey.dev/skills): Complete technical skills matrix and engineering breakdown.
+- [Projects](https://rohitdubey.dev/projects): Detailed case studies for all built projects.
+- [Client Work](https://rohitdubey.dev/client-work): Commercial client outcomes and redesign work.
+- [Experience](https://rohitdubey.dev/experience): Internship experience and educational background.
+- [Certifications](https://rohitdubey.dev/certifications): Learning archive and technical milestones.
+
+## Contact Information
+- Website: https://rohitdubey.dev
+- GitHub: https://github.com/anakinskywalker0903
+- Portfolio Contact: https://rohitdubey.dev/#contact

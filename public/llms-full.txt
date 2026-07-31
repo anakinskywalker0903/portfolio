@@ -1,0 +1,71 @@
+# Rohit Dubey — AI & Full-Stack Developer (Full Documentation)
+
+## Overview
+Rohit Dubey is an AI and Full-Stack Developer specializing in building modern web applications, AI tools, Chrome extensions, and full-stack software.
+
+## Technical Architecture & Engineering Skills
+
+### Languages
+- Python: Experienced with automation scripts, GUI tools (Tkinter), and AI/LLM integration.
+- JavaScript (ES6+): Deep DOM manipulation, asynchronous programming, event handling, and single page applications.
+- TypeScript: Typed development for scalable React applications.
+- Java: Data Structures and Algorithms practice.
+- SQL: Database querying syntax (PostgreSQL/NeonDB).
+
+### Frontend Development
+- Frameworks & Libraries: React 19, Tailwind CSS v4, Motion (Framer Motion), Three.js, GSAP.
+- UI Engineering: Responsive layouts, dark mode UI, micro-animations, interactive canvas components.
+
+### Backend & Cloud Engineering
+- Server Tech: Node.js, Express.js REST APIs.
+- Authentication: OAuth 2.0 / Google Cloud Console integration.
+- Storage: PostgreSQL (NeonDB), Browser Local Storage, Chrome Storage API.
+- Cloud & Hosting: Vercel (Frontend deployment), Railway (Node.js backend deployment), Hostinger.
+
+### AI & Generative AI Engineering
+- OpenAI API: Structured JSON output generation, prompt engineering, canvas tool integration.
+- Anthropic Claude API: Resume parsing analysis, scoring heuristics, personalized roadmap generation.
+- LLM Standards: llms.txt, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization), JSON-LD Schemas.
+
+## Project Case Studies
+
+### 1. NoteLift (Published Chrome Extension)
+- Status: Live on Chrome Web Store (v0.2).
+- Problem: Students need a seamless way to capture and organize key highlights from online PDFs and web pages without context-switching.
+- Solution: Lightweight Chrome extension using Manifest V3 that captures selected text, organizes notes module-wise, stores them locally, and exports to TXT or Markdown.
+- Tech Stack: JavaScript, Chrome Extension APIs, Chrome Local Storage.
+
+### 2. Brainstormzz (AI Whiteboard Application)
+- Status: Live.
+- Problem: Brainstorming sessions lack structured AI-driven visual expansion.
+- Solution: Interactive whiteboard UI where single prompts generate multi-category structured idea cards with refinement tools.
+- Tech Stack: React 18, HTML5 Canvas, Tailwind CSS, OpenAI API.
+
+### 3. AI Career Engine
+- Status: Live.
+- Problem: Job seekers need actionable insights bridging their resume to target job descriptions.
+- Solution: Dual-mode application offering career role discovery and job description overlap scoring with a 12-week custom roadmap.
+- Tech Stack: React, Vite, Node.js, Express, pdfjs-dist, Multer, Anthropic Claude API, deployed on Vercel & Railway.
+
+### 4. Devinterio (Commercial Client Work)
+- Status: Live at devinterio.com / devinterio.in.
+- Scope: Complete redesign and rebuild of an interior design business website with ongoing post-launch maintenance.
+- Outcome: Commercial client deployment with responsive design and fast load speeds.
+
+### 5. SSB Practice Simulator
+- Status: Live.
+- Solution: Test simulator for Services Selection Board aspirants with strict timed modules for WAT, PPDT, and SRT tests.
+
+### 6. RailDost
+- Status: Prototype / Showcase.
+- Solution: Visualized route and travel-time comparison tool for Indian Railways using Leaflet.js maps.
+
+## Frequently Asked Questions (FAQ)
+
+### What makes Rohit Dubey's engineering approach unique?
+Rohit combines clean frontend design with direct AI API integrations, ensuring AI features return reliable, structured JSON data that renders into interactive visual components.
+
+### How can recruiters or clients contact Rohit Dubey?
+- Portfolio URL: https://rohitdubey.dev
+- Contact Page: https://rohitdubey.dev/#contact
+- GitHub: https://github.com/anakinskywalker0903
