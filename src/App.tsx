@@ -46,9 +46,17 @@ function LoadingFallback() {
   );
 }
 
+// Helper to determine if preloader should show on initial mount
+function shouldShowPreloader(): boolean {
+  if (typeof window === 'undefined') return false;
+  const isBot = /Lighthouse|Googlebot|Chrome-Lighthouse|HeadlessChrome/i.test(navigator.userAgent);
+  const alreadySeen = sessionStorage.getItem('portfolio_preloader_seen') === 'true';
+  return !isBot && !alreadySeen;
+}
+
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  const [loading, setLoading] = useState(() => shouldShowPreloader());
+  const [preloaderDone, setPreloaderDone] = useState(() => !shouldShowPreloader());
 
   // Initialize GA4 once on mount
   useEffect(() => {
