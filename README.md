@@ -8,12 +8,12 @@ A premium, high-performance web portfolio built to showcase personal engineering
 *   **Build Tool**: Vite (optimized asset pipelining)
 *   **Styling**: Tailwind CSS (custom utility skins)
 *   **Animations**: Motion (Framer Motion) & Custom CSS Keyframes
-*   **3D Elements**: React Three Fiber, Three.js, & Rapier Physics (3D Dangle Lanyard)
+*   **3D Elements**: React Three Fiber & Three.js
 *   **Hosting & Deployment**: Vercel
 
 ## 📂 Core Pages & Architecture
 
-1.  **Home Page (`/`)**: Cinematic opening preloader, dynamic availability indicators, and interactive 3D physics-based dangle Lanyard displaying developer ID badge.
+1.  **Home Page (`/`)**: Cinematic opening preloader, dynamic availability indicators, interactive skill gauges, and featured engineering showcases.
 2.  **Projects (`/projects`)**: Scoped grid displaying production builds (NoteLift, NoteLift-AI, Brainstormzz, SSB Simulator, InstaSave, RailDost) with verified contribution notes.
 3.  **Client Work (`/client-work`)**: Clean client case studies page featuring DevInterio website redesign and upcoming CGI architecture portals (Jaas Visual).
 4.  **Experience (`/experience`)**: Chronological timeline displaying verified AKS Ecosystem Web Development Internship.

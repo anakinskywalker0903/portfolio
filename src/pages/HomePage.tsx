@@ -96,7 +96,7 @@ export function HomePage() {
 
   return (
     <div className="w-full relative bg-white">
-      {/* 1. Hero with dangle physics Lanyard */}
+      {/* 1. Hero Section */}
       <div className="relative">
         <HeroSection />
         {/* Gradient fade OUT of hero → into Origin, no hard cut */}
