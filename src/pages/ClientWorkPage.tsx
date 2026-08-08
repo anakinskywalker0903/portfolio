@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FaBriefcase, FaHandshake, FaQuoteLeft, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaBriefcase, FaHandshake, FaQuoteLeft, FaExternalLinkAlt, FaAward } from 'react-icons/fa';
 
 import { useSEO } from '@/hooks/useSEO';
 import clientWorkData from '@/data/client-work.json';
@@ -216,6 +216,17 @@ export function ClientWorkPage() {
                       >
                         👁️ Preview Layout
                       </button>
+                      {(item as any).cert && (
+                         <button
+                           onClick={() => {
+                             setActiveScreenshot((item as any).cert);
+                             setPreviewTitle(`${item.client} — Completion Certificate`);
+                           }}
+                           className="flex-1 text-[9.5px] font-black uppercase bg-[#CCFF00] border border-black py-2 rounded-xl text-black flex items-center justify-center gap-1"
+                         >
+                           <FaAward className="w-3 h-3" /> Certificate
+                         </button>
+                       )}
                       {item.links.map(l => (
                         l.url !== '#' ? (
                           <a
@@ -223,7 +234,7 @@ export function ClientWorkPage() {
                             href={l.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="flex-1 text-[9.5px] font-black uppercase bg-[#CCFF00] border border-black py-2 rounded-xl text-black text-center"
+                            className="flex-1 text-[9.5px] font-black uppercase bg-white border border-black py-2 rounded-xl text-black text-center"
                           >
                             Live Site ↗
                           </a>
@@ -344,37 +355,48 @@ export function ClientWorkPage() {
                   </div>
                   
                   <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        setActiveScreenshot(item.img);
-                        setPreviewTitle(`${item.client} Layout Preview`);
-                      }}
-                      className="text-[9.5px] font-black uppercase tracking-wider bg-white border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-white transition-colors flex items-center gap-1 shadow-sm cursor-pointer"
-                    >
-                      👁️ Preview Layout
-                    </button>
-                    {item.links.map(l => (
-                      l.url !== '#' ? (
-                        <a
-                          key={l.label}
-                          href={l.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00] border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-[#CCFF00] transition-colors flex items-center gap-1 shadow-sm"
-                        >
-                          <FaExternalLinkAlt className="w-2.5 h-2.5" /> {l.label}
-                        </a>
-                      ) : (
-                        <span
-                          key={l.label}
-                          className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00]/30 border-2 border-black/20 px-3.5 py-1.5 rounded-full text-black/40 flex items-center gap-1 select-none cursor-not-allowed"
-                          title="Site launching soon"
-                        >
-                          ⏳ {l.label} (Soon)
-                        </span>
-                      )
-                    ))}
-                  </div>
+                     <button
+                       onClick={() => {
+                         setActiveScreenshot(item.img);
+                         setPreviewTitle(`${item.client} Layout Preview`);
+                       }}
+                       className="text-[9.5px] font-black uppercase tracking-wider bg-white border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-white transition-colors flex items-center gap-1 shadow-sm cursor-pointer"
+                     >
+                       👁️ Preview Layout
+                     </button>
+                     {(item as any).cert && (
+                       <button
+                         onClick={() => {
+                           setActiveScreenshot((item as any).cert);
+                           setPreviewTitle(`${item.client} — Completion Certificate`);
+                         }}
+                         className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00] border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-[#CCFF00] transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
+                       >
+                         <FaAward className="w-2.5 h-2.5" /> Certificate
+                       </button>
+                     )}
+                     {item.links.map(l => (
+                       l.url !== '#' ? (
+                         <a
+                           key={l.label}
+                           href={l.url}
+                           target="_blank"
+                           rel="noreferrer"
+                           className="text-[9.5px] font-black uppercase tracking-wider bg-white border-2 border-black px-3.5 py-1.5 rounded-full text-black hover:bg-black hover:text-white transition-colors flex items-center gap-1 shadow-sm"
+                         >
+                           <FaExternalLinkAlt className="w-2.5 h-2.5" /> {l.label}
+                         </a>
+                       ) : (
+                         <span
+                           key={l.label}
+                           className="text-[9.5px] font-black uppercase tracking-wider bg-[#CCFF00]/30 border-2 border-black/20 px-3.5 py-1.5 rounded-full text-black/40 flex items-center gap-1 select-none cursor-not-allowed"
+                           title="Site launching soon"
+                         >
+                           ⏳ {l.label} (Soon)
+                         </span>
+                       )
+                     ))}
+                   </div>
                 </div>
               </div>
             </div>

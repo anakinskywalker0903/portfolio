@@ -24,7 +24,8 @@
     "links": [
       { "label": "devinterio.com", "url": "https://devinterio.com" },
       { "label": "devinterio.in", "url": "https://devinterio.in" }
-    ]
+    ],
+    "cert": "/certficates/dev-interio-completion-cert.jpeg"
   },
   {
     "id": "jaas-visual",
