@@ -18,26 +18,26 @@ const resumeVersions = [
   {
     id: 'ai-engineer',
     role: 'AI Engineer',
-    description: 'LLMs, RAG pipelines, fine-tuning, vector DBs, and AI architectures.',
+    description: 'LLM orchestration, FastAPI product layers, Groq LLaMA, and AI architectures.',
     fileUrl: aiResume,
-    summary: 'Full-Stack & AI Engineer specializing in LLM integrations, RAG workflows, PyTorch, OpenAI/Claude APIs, and scalable Web Apps.',
-    skills: ['Python', 'TypeScript', 'LangChain / LlamaIndex', 'OpenAI & Claude API', 'PyTorch', 'Vector DBs (Pinecone/Chroma)', 'React / Next.js', 'FastAPI / Node.js']
+    summary: 'Full-Stack & AI Engineer specializing in LLM application development, FastAPI product layers, Groq SDK (LLaMA 3.3/3.1, Gemma 2), Supabase PostgreSQL, and scalable web platforms.',
+    skills: ['Python', 'FastAPI', 'Groq SDK & LLaMA', 'Prompt Engineering', 'Structured JSON Output', 'PostgreSQL / Supabase', 'React 19 & Vite', 'Node.js / Express']
   },
   {
     id: 'full-stack-sde',
     role: 'Full Stack / SDE',
-    description: 'End-to-end web applications, system design, REST & GraphQL APIs, and databases.',
+    description: 'End-to-end web applications, system design, REST APIs, and databases.',
     fileUrl: sdeResume,
-    summary: 'Full-Stack Software Development Engineer proficient in React, Next.js, Node.js, Express, PostgreSQL, MongoDB, Docker, and Cloud Deployments.',
-    skills: ['React & Next.js', 'Node.js & Express', 'TypeScript', 'PostgreSQL / Prisma', 'MongoDB', 'Docker & AWS', 'REST & GraphQL APIs', 'Tailwind CSS']
+    summary: 'Full-Stack Software Engineer & GenAI Application Engineer shipping production systems to real users across React 19, Node.js/Express, PostgreSQL, and Groq/LLaMA.',
+    skills: ['React 19 & Vite', 'Node.js & Express', 'JavaScript (ES6+)', 'PostgreSQL / Supabase', 'REST APIs & Zod', 'Groq / LLaMA', 'Tailwind CSS', 'Vercel & Render']
   },
   {
     id: 'frontend',
     role: 'Frontend Developer',
-    description: 'Creative animations, pixel-perfect design systems, responsive UI/UX.',
+    description: 'Responsive web systems, React 19 component architecture, and UI state management.',
     fileUrl: frontendResume,
-    summary: 'Frontend Engineer focused on building high-performance, pixel-perfect, accessible user interfaces with Framer Motion, GSAP, and Tailwind CSS.',
-    skills: ['React.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion & GSAP', 'Vite & Webpack', 'UI/UX Architecture', 'Web Performance & Accessibility']
+    summary: 'Frontend-focused Software Engineer with hands-on experience in React 19, modern JavaScript, Tailwind CSS, Vite, and responsive web systems.',
+    skills: ['React 19 & Vite', 'JavaScript (ES6+)', 'Tailwind CSS', 'React Router', 'Responsive Web Design', 'Component Architecture', 'UI State Management', 'Web Vitals & Performance']
   },
 ];
 
