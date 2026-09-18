@@ -182,7 +182,7 @@ export function ExperiencePageStarWars() {
                       <span className="text-xs font-black uppercase tracking-wider block mb-1" style={{ color: accent, fontFamily: 'monospace' }}>
                         // VERIFIED DELIVERABLES
                       </span>
-                      {(currentItem.keyAchievements || currentItem.deliverables || []).map((a: string, i: number) => (
+                      {(currentItem.keyAchievements || currentItem.achievements || currentItem.deliverables || []).map((a: string, i: number) => (
                         <div key={i} className="flex items-start gap-2">
                           <span className="text-xs mt-0.5" style={{ color: accent }}>✦</span>
                           <p className="text-xs md:text-sm font-medium leading-relaxed" style={{ color: 'var(--sw-white)', opacity: 0.85, fontFamily: 'monospace' }}>

@@ -212,7 +212,7 @@ export default function BubbleMenu({
             <span className="tagline-title">ROHIT DUBEY</span>
             <span className="tagline-sub">AI &amp; FULL-STACK DEVELOPER</span>
             <div className="tagline-badge">
-              <span className="status-dot" /> AVAILABLE FOR HIRE
+              <span className="status-dot" /> AI ENGINEER INTERN AT ASHTAYAH LABS
             </div>
           </div>
 

@@ -297,8 +297,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     name="Rohit Dubey"
                     title="AI & Full-Stack Developer"
                     handle="rohitdubey"
-                    status="Building something"
-                    contactText="Hire Me"
+                    status="AI Engineer Intern at Ashtayah Labs"
+                    contactText="Get in Touch"
                     avatarUrl="/rohit.jpg"
                     showUserInfo={true}
                     enableTilt={true}
@@ -410,8 +410,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     name="Rohit Dubey"
                     title="AI & Full-Stack Developer"
                     handle="rohitdubey"
-                    status="Building something"
-                    contactText="Hire Me"
+                    status="AI Engineer Intern at Ashtayah Labs"
+                    contactText="Get in Touch"
                     avatarUrl="/rohit.jpg"
                     showUserInfo={true}
                     enableTilt={true}

@@ -1,10 +1,49 @@
 [
   {
+    "role": "AI Engineer Intern",
+    "company": "Ashtayah Labs (ashtayahlabs.com)",
+    "companyUrl": "https://ashtayahlabs.com",
+    "duration": "Sept. 2026 — Present",
+    "type": "Internship (AI Engineering & Backend)",
+    "description": "Architecting a modular, versioned FastAPI product layer around speech AI and conversational processing pipelines (NimbleBiz), adding stateless authentication, multi-tenant isolation, rate limiting, and telemetry monitoring.",
+    "responsibilities": [
+      "Architected and deployed a versioned FastAPI product layer around speech AI and conversational inference pipelines without modifying core processing engines.",
+      "Implemented stateless JWT authentication (register/login/me) with bcrypt password hashing and strict multi-tenant account-scoped data isolation.",
+      "Engineered in-memory sliding-window rate limiters and per-account upload quotas to ensure API reliability and protect compute resources.",
+      "Built account-scoped usage telemetry endpoints tracking audio duration, processing latencies, and service metrics exposed via authenticated APIs.",
+      "Configured automated OpenAPI/Swagger documentation, Pydantic validation schemas, and structured error handling for frontend client consumption."
+    ],
+    "technologies": [
+      "FastAPI",
+      "Python",
+      "JWT & Auth",
+      "REST APIs",
+      "SQLAlchemy",
+      "SQLite",
+      "Speech AI Pipelines",
+      "Rate Limiting",
+      "Pydantic"
+    ],
+    "achievements": [
+      "Engineered modular v1 REST API layer with automated OpenAPI and Swagger interactive documentation.",
+      "Enforced multi-tenant data isolation, rejecting unauthorized cross-account requests and verifying permission boundaries.",
+      "Implemented sliding-window rate limiters and quota enforcement to protect downstream AI inference pipelines.",
+      "Integrated account-scoped telemetry monitoring processing latency, audio duration, and system resource utilization."
+    ],
+    "keyAchievements": [
+      "Engineered modular v1 REST API layer with automated OpenAPI and Swagger interactive documentation.",
+      "Enforced multi-tenant data isolation, rejecting unauthorized cross-account requests and verifying permission boundaries.",
+      "Implemented sliding-window rate limiters and quota enforcement to protect downstream AI inference pipelines.",
+      "Integrated account-scoped telemetry monitoring processing latency, audio duration, and system resource utilization."
+    ]
+  },
+  {
     "role": "Web Development Intern",
     "company": "AKS Ecosystem (aksecosystem.in)",
     "companyUrl": "https://aksecosystem.in/",
     "duration": "May 31, 2026 — Present",
     "type": "Internship (Ecosystem Frontend)",
+    "description": "Engineering responsive landing portals and core dashboard interfaces for the AKS product ecosystem, handling multiple simultaneous web projects.",
     "responsibilities": [
       "Engineering the responsive landing portal and core dashboard interfaces for the AKS product ecosystem, handling multiple simultaneous web projects.",
       "Developed core frontend versions for Upsilon and Upsilon Landing sites using React and Tailwind CSS, designing custom configuration themes and spacing rules.",
@@ -14,6 +53,11 @@
     ],
     "technologies": ["React", "Tailwind CSS", "PostgreSQL", "Vite", "Google Console", "Git"],
     "achievements": [
+      "Successfully launched Upsilon Landing version and integrated dark mode features.",
+      "Handled Google OAuth credentials setups.",
+      "Constructed NeonDB database table columns."
+    ],
+    "keyAchievements": [
       "Successfully launched Upsilon Landing version and integrated dark mode features.",
       "Handled Google OAuth credentials setups.",
       "Constructed NeonDB database table columns."

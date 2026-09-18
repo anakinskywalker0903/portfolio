@@ -131,7 +131,7 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
       ctx.fillText(value, half + half - 50, y);
     };
 
-    drawBackLine('STATUS', 'AVAILABLE FOR WORK', 280);
+    drawBackLine('STATUS', 'AI INTERN @ ASHTAYAH LABS', 280);
     drawBackLine('ROLE', 'FULL-STACK / AI', 340);
     drawBackLine('EXPERIENCE', '3+ YEARS', 400);
     drawBackLine('LOCATION', 'INDIA (REMOTE)', 460);
