@@ -502,20 +502,20 @@ export function ExperiencePage() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.94, y: 15 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                className="relative w-full max-w-4xl bg-[var(--c-bg-surface)] border-[3px] border-black rounded-[2rem] sm:rounded-[2.5rem] shadow-[10px_10px_0px_0px_var(--c-accent-2)] overflow-hidden z-[110] flex flex-col max-h-[85vh] my-auto"
+                className="relative w-full max-w-4xl bg-white border-[3px] border-black rounded-[2rem] sm:rounded-[2.5rem] shadow-[8px_8px_0px_0px_#000000] overflow-hidden z-[110] flex flex-col max-h-[85vh] my-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Modal Header */}
-                <div className="flex items-center justify-between px-5 sm:px-7 py-4 border-b-2 border-black bg-[var(--c-accent)]/10">
+                <div className="flex items-center justify-between px-5 sm:px-7 py-3.5 border-b-2 border-black bg-white">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[var(--c-accent)] text-black border-2 border-black flex items-center justify-center flex-shrink-0 shadow-xs">
-                      {activeDoc.type === 'pdf' ? <FaFileAlt className="w-4 h-4" /> : <FaAward className="w-4 h-4" />}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-black text-white border-2 border-black flex items-center justify-center flex-shrink-0 shadow-xs">
+                      {activeDoc.type === 'pdf' ? <FaFileAlt className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <FaAward className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                     </div>
                     <div className="text-left">
                       <h3 className="font-black text-xs sm:text-sm text-black uppercase leading-tight">
                         {activeDoc.title}
                       </h3>
-                      <span className="text-[9px] font-black uppercase text-black/50 tracking-wider block mt-0.5">
+                      <span className="text-[9px] font-bold uppercase text-black/50 tracking-wider block mt-0.5">
                         {activeDoc.subtitle}
                       </span>
                     </div>
@@ -525,7 +525,7 @@ export function ExperiencePage() {
                     <a
                       href={activeDoc.url}
                       download
-                      className="px-3.5 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-accent)] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-xs"
+                      className="px-3.5 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-accent)] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-[2px_2px_0_#000]"
                     >
                       <FaDownload className="w-2.5 h-2.5" /> Download
                     </a>
@@ -540,28 +540,28 @@ export function ExperiencePage() {
                 </div>
 
                 {/* Modal Content Body */}
-                <div className="p-4 sm:p-6 bg-zinc-950 flex flex-col items-center justify-center overflow-y-auto flex-1">
+                <div className="p-3 sm:p-4 bg-zinc-100 flex flex-col items-center justify-center overflow-hidden flex-1">
                   {activeDoc.type === 'image' ? (
                     <img
                       src={activeDoc.url}
                       alt={activeDoc.title}
-                      className="max-w-full max-h-[62vh] object-contain rounded-xl border-2 border-white/20 shadow-2xl bg-zinc-900"
+                      className="max-w-full max-h-[64vh] object-contain rounded-xl border-2 border-black shadow-md bg-white"
                     />
                   ) : (
                     <iframe
                       src={activeDoc.url}
-                      className="w-full h-[62vh] rounded-xl border-2 border-black bg-white"
+                      className="w-full h-[64vh] rounded-xl border-2 border-black bg-white shadow-sm"
                       title={activeDoc.title}
                     />
                   )}
                 </div>
 
                 {/* Modal Footer Strip */}
-                <div className="flex items-center justify-between px-6 py-2.5 bg-[var(--c-bg-surface)] border-t-2 border-black text-[10px] font-black uppercase text-black/60 tracking-wider">
+                <div className="flex items-center justify-between px-6 py-2.5 bg-white border-t-2 border-black text-[10px] font-black uppercase text-black/60 tracking-wider">
                   <span>VERIFIED RECORD • IN-PORTFOLIO DOCUMENT VIEWER</span>
                   <button
                     onClick={() => setActiveDoc(null)}
-                    className="text-[var(--c-accent-2)] hover:underline cursor-pointer"
+                    className="text-black hover:underline cursor-pointer font-bold"
                   >
                     Close Preview ✕
                   </button>
