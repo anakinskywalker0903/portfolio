@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -9,8 +9,10 @@ import {
   FaArrowRight, 
   FaChartLine, 
   FaPuzzlePiece, 
-  FaAward 
+  FaAward,
+  FaDownload 
 } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 import { useSEO } from '@/hooks/useSEO';
 import internshipData from '@/data/experience.json';
@@ -22,14 +24,57 @@ const MOBILE_EXP_TABS = [
   { id: 'achievements', label: '🏆 Victories' },
 ];
 
+interface ActiveDocument {
+  title: string;
+  subtitle: string;
+  url: string;
+  type: 'image' | 'pdf';
+}
+
 export function ExperiencePage() {
   useSEO('Experience', 'Review my professional timeline and work experience, including internships and freelance history.');
   const [activeCategory, setActiveCategory] = useState<'internship' | 'freelance'>('internship');
   const [activeExpIdx, setActiveExpIdx] = useState(0);
   const [activeMobileTab, setActiveMobileTab] = useState<'overview' | 'responsibilities' | 'achievements'>('overview');
+  const [activeDoc, setActiveDoc] = useState<ActiveDocument | null>(null);
 
   const currentDataset = activeCategory === 'internship' ? internshipData : clientWorkData;
   const activeExp: any = currentDataset[activeExpIdx] || currentDataset[0];
+
+  // Lock background Lenis smooth scrolling and handle Escape key while document modal is open
+  useEffect(() => {
+    if (activeDoc) {
+      (window as any).lenis?.stop();
+      document.body.style.overflow = 'hidden';
+    } else {
+      (window as any).lenis?.start();
+      document.body.style.overflow = '';
+    }
+    return () => {
+      (window as any).lenis?.start();
+      document.body.style.overflow = '';
+    };
+  }, [activeDoc]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && activeDoc) {
+        setActiveDoc(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeDoc]);
+
+  const openDocument = (url: string, title: string, subtitle: string) => {
+    const isPdf = url.toLowerCase().endsWith('.pdf');
+    setActiveDoc({
+      url,
+      title,
+      subtitle,
+      type: isPdf ? 'pdf' : 'image',
+    });
+  };
 
   const getExperienceStatus = (exp: any, category: 'internship' | 'freelance') => {
     if (category === 'internship') {
@@ -185,24 +230,30 @@ export function ExperiencePage() {
                     </a>
                   )}
                   {activeExp.offerLetter && (
-                    <a
-                      href={activeExp.offerLetter}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-3 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-bg-surface)] hover:bg-black hover:text-white flex items-center justify-center gap-1.5 transition-colors"
+                    <button
+                      type="button"
+                      onClick={() => openDocument(
+                        activeExp.offerLetter,
+                        `${activeExp.company?.replace(/\s*\(.*\)/, '') || activeExp.role} — Offer Letter`,
+                        'Official Internship Engagement Document'
+                      )}
+                      className="px-3 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-bg-surface)] hover:bg-black hover:text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <FaFileAlt className="w-2.5 h-2.5" /> Offer Letter
-                    </a>
+                    </button>
                   )}
                   {activeExp.cert && (
-                    <a
-                      href={activeExp.cert}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-3 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-bg-surface)] hover:bg-black hover:text-white flex items-center justify-center gap-1.5 transition-colors"
+                    <button
+                      type="button"
+                      onClick={() => openDocument(
+                        activeExp.cert,
+                        `${activeExp.client || activeExp.role} — Certificate of Completion`,
+                        'Verified Client Project Delivery Credential'
+                      )}
+                      className="px-3 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-bg-surface)] hover:bg-black hover:text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
                       <FaAward className="w-2.5 h-2.5" /> Certificate
-                    </a>
+                    </button>
                   )}
                   {activeCategory === 'freelance' && (
                     <Link
@@ -429,6 +480,94 @@ export function ExperiencePage() {
 
               </div>
             </motion.article>
+          )}
+        </AnimatePresence>
+
+        {/* Document In-Page Modal (Zero Redirects) */}
+        <AnimatePresence>
+          {activeDoc && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-4 px-3 sm:px-6">
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setActiveDoc(null)}
+                className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
+              />
+
+              {/* Modal Container */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: 15 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                className="relative w-full max-w-4xl bg-[var(--c-bg-surface)] border-[3px] border-black rounded-[2rem] sm:rounded-[2.5rem] shadow-[10px_10px_0px_0px_var(--c-accent-2)] overflow-hidden z-[110] flex flex-col max-h-[85vh] my-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between px-5 sm:px-7 py-4 border-b-2 border-black bg-[var(--c-accent)]/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-[var(--c-accent)] text-black border-2 border-black flex items-center justify-center flex-shrink-0 shadow-xs">
+                      {activeDoc.type === 'pdf' ? <FaFileAlt className="w-4 h-4" /> : <FaAward className="w-4 h-4" />}
+                    </div>
+                    <div className="text-left">
+                      <h3 className="font-black text-xs sm:text-sm text-black uppercase leading-tight">
+                        {activeDoc.title}
+                      </h3>
+                      <span className="text-[9px] font-black uppercase text-black/50 tracking-wider block mt-0.5">
+                        {activeDoc.subtitle}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={activeDoc.url}
+                      download
+                      className="px-3.5 py-1.5 border-2 border-black rounded-full text-[10px] font-black uppercase tracking-wider bg-[var(--c-accent)] hover:bg-black text-black hover:text-white flex items-center gap-1.5 transition-colors shadow-xs"
+                    >
+                      <FaDownload className="w-2.5 h-2.5" /> Download
+                    </a>
+                    <button
+                      onClick={() => setActiveDoc(null)}
+                      className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all flex-shrink-0 cursor-pointer"
+                      aria-label="Close document modal"
+                    >
+                      <IoClose className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Modal Content Body */}
+                <div className="p-4 sm:p-6 bg-zinc-950 flex flex-col items-center justify-center overflow-y-auto flex-1">
+                  {activeDoc.type === 'image' ? (
+                    <img
+                      src={activeDoc.url}
+                      alt={activeDoc.title}
+                      className="max-w-full max-h-[62vh] object-contain rounded-xl border-2 border-white/20 shadow-2xl bg-zinc-900"
+                    />
+                  ) : (
+                    <iframe
+                      src={activeDoc.url}
+                      className="w-full h-[62vh] rounded-xl border-2 border-black bg-white"
+                      title={activeDoc.title}
+                    />
+                  )}
+                </div>
+
+                {/* Modal Footer Strip */}
+                <div className="flex items-center justify-between px-6 py-2.5 bg-[var(--c-bg-surface)] border-t-2 border-black text-[10px] font-black uppercase text-black/60 tracking-wider">
+                  <span>VERIFIED RECORD • IN-PORTFOLIO DOCUMENT VIEWER</span>
+                  <button
+                    onClick={() => setActiveDoc(null)}
+                    className="text-[var(--c-accent-2)] hover:underline cursor-pointer"
+                  >
+                    Close Preview ✕
+                  </button>
+                </div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
 
