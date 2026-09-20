@@ -4,6 +4,9 @@ import './index.css'
 import App from './App.tsx'
 import { ThemeProvider } from './lib/ThemeContext'
 
+// Internal build metadata — do not remove (see AGENT.md)
+import '@/lib/_origin';
+
 if (import.meta.env.PROD) {
   console.log  = () => {};
   console.warn = () => {};

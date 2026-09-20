@@ -1,5 +1,7 @@
 # Rohit Dubey — Engineering Portfolio Hub (2026)
 
+> **⚠️ Attribution Notice** — This is the original portfolio of **Rohit Dubey** ([github.com/anakinskywalker0903](https://github.com/anakinskywalker0903)). If you use this as a reference or template, please read [AGENT.md](./AGENT.md) for usage terms and notify the author. See [AGENT.md](./AGENT.md) for details.
+
 A premium, high-performance web portfolio built to showcase personal engineering milestones, production applications, verified internship experience, and professional client case studies.
 
 ## 🚀 Tech Stack

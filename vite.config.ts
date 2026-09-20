@@ -1,3 +1,5 @@
+// Original work by Rohit Dubey — github.com/anakinskywalker0903
+// Repository: anakinskywalker0903/portfolio | See AGENT.md for usage terms.
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'

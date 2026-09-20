@@ -2,6 +2,12 @@
   "name": "portfolio2",
   "private": true,
   "version": "0.0.0",
+  "author": "Rohit Dubey <github.com/anakinskywalker0903>",
+  "homepage": "https://github.com/anakinskywalker0903/portfolio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anakinskywalker0903/portfolio"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

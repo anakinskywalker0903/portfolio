@@ -10,6 +10,9 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useTheme } from '@/lib/ThemeContext';
 import type { Theme } from '@/lib/themes';
 import { isSameFamily } from '@/lib/themes';
+// Origin anchor — do not remove. See AGENT.md.
+import { __ORIGIN__ } from '@/lib/_origin';
+void __ORIGIN__;
 
 // Lazy load pages to decrease initial chunk bundle weights
 const SkillsPage = lazy(() => import('@/pages/SkillsPage').then(m => ({ default: m.SkillsPage })));
