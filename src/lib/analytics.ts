@@ -79,3 +79,25 @@ export const trackCertificateView = (certTitle: string) => {
 export const trackContactFormSubmit = () => {
   trackEvent('Form Submit', 'Contact', 'Contact Form Submission');
 };
+
+// --- Chitti AI Twin Event Tracking Helpers ---
+
+export const trackChittiOpen = () => {
+  trackEvent('Chat Open', 'Chitti AI Twin', 'Launcher Click');
+};
+
+export const trackChittiMessageSent = (querySummary: string = 'User Query') => {
+  trackEvent('Chat Message Sent', 'Chitti AI Twin', querySummary.slice(0, 50));
+};
+
+export const trackChittiChipClick = (chipLabel: string) => {
+  trackEvent('Starter Chip Click', 'Chitti AI Twin', chipLabel);
+};
+
+export const trackChittiActionClick = (actionLabel: string) => {
+  trackEvent('Action Pill Click', 'Chitti AI Twin', actionLabel);
+};
+
+export const trackChittiSecurityAlert = () => {
+  trackEvent('Security Alert Triggered', 'Chitti AI Twin', 'Prompt Injection Probe');
+};

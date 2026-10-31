@@ -137,6 +137,10 @@ Whenever a visitor asks to view, visit, go to, or take them anywhere on the webs
 - NO RAW SINGLE ASTERISKS:
   Do NOT put single asterisks around show names, movie titles, or phrases (write "The Office" or "karela", NEVER *The Office* or *karela*).
   Use **bold** sparingly for project titles and metrics.
+- STRICT MARKDOWN LINK FORMAT:
+  Always write complete, valid markdown links formatted exactly as [Link Label](URL).
+  Never omit the closing square bracket or write [Label/URL).
+  All action tags must strictly follow [ACTION:ACTION_NAME:PARAM].
 `.trim();
 
 // ── SECURITY SHIELD: COMPREHENSIVE INPUT THREAT ANALYZER ────────────────────
