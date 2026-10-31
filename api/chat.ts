@@ -418,115 +418,159 @@ export default async function handler(req: Request) {
       content: typeof m.content === 'string' ? m.content.replace(/\[SECURITY_BREACH_ALERT\]/g, '').trim() : '',
     }));
 
-    // 1. If Groq is configured (Fastest inference)
+    let groqExhausted = false;
+
+    // 1. Primary Engine: Groq (Ultra-fast LPU inference)
     if (groqKey) {
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${groqKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'qwen/qwen3.8-27b',
-          messages: [{ role: 'system', content: activeSystemPrompt }, ...cleanMessages],
-          stream: true,
-          temperature: 0.78,
-        }),
-      });
-
-      if (response.status === 429) {
-        return new Response(createRateLimitStream('Groq LPU'), {
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
           headers: {
-            'Content-Type': 'text/event-stream',
-            'Cache-Control': 'no-cache',
-            Connection: 'keep-alive',
+            Authorization: `Bearer ${groqKey}`,
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            model: 'qwen/qwen3.8-27b',
+            messages: [{ role: 'system', content: activeSystemPrompt }, ...cleanMessages],
+            stream: true,
+            temperature: 0.78,
+          }),
         });
-      }
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        return new Response(JSON.stringify({ error: `Groq API Error: ${errorText}` }), {
-          status: response.status,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
+        if (response.status === 429 || !response.ok) {
+          groqExhausted = true;
+          console.warn(`Groq unavailable (status ${response.status}). Initiating automatic failover...`);
+        } else if (response.body) {
+          // Wrap the Groq stream through our Redaction Filter
+          const encoder = new TextEncoder();
+          const decoder = new TextDecoder();
+          const rawReader = response.body.getReader();
 
-      // Wrap the Groq stream through our Redaction Filter
-      const encoder = new TextEncoder();
-      const decoder = new TextDecoder();
-      const rawReader = response.body!.getReader();
+          const secureStream = new ReadableStream({
+            async start(controller) {
+              try {
+                while (true) {
+                  const { done, value } = await rawReader.read();
+                  if (done) break;
 
-      const secureStream = new ReadableStream({
-        async start(controller) {
-          try {
-            while (true) {
-              const { done, value } = await rawReader.read();
-              if (done) break;
+                  const chunkStr = decoder.decode(value, { stream: true });
+                  const { cleaned, breached } = redactSensitiveOutput(chunkStr, secretsToProtect);
 
-              const chunkStr = decoder.decode(value, { stream: true });
-              const { cleaned, breached } = redactSensitiveOutput(chunkStr, secretsToProtect);
-
-              if (breached) {
-                // If the model leaked a key pattern, redact and immediately activate defense alert
-                controller.enqueue(
-                  encoder.encode(
-                    `data: ${JSON.stringify({
-                      choices: [{ delta: { content: ' [SECURITY_BREACH_ALERT] [VAULT ENCRYPTED]' } }],
-                    })}\n\n`
-                  )
-                );
-              } else {
-                controller.enqueue(encoder.encode(cleaned));
+                  if (breached) {
+                    controller.enqueue(
+                      encoder.encode(
+                        `data: ${JSON.stringify({
+                          choices: [{ delta: { content: ' [SECURITY_BREACH_ALERT] [VAULT ENCRYPTED]' } }],
+                        })}\n\n`
+                      )
+                    );
+                  } else {
+                    controller.enqueue(encoder.encode(cleaned));
+                  }
+                }
+              } catch (err) {
+                controller.error(err);
+              } finally {
+                controller.close();
               }
-            }
-          } catch (err) {
-            controller.error(err);
-          } finally {
-            controller.close();
-          }
-        },
-      });
+            },
+          });
 
-      return new Response(secureStream, {
-        headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          Connection: 'keep-alive',
-        },
-      });
+          return new Response(secureStream, {
+            headers: {
+              'Content-Type': 'text/event-stream',
+              'Cache-Control': 'no-cache',
+              Connection: 'keep-alive',
+            },
+          });
+        }
+      } catch (err) {
+        groqExhausted = true;
+        console.warn('Groq fetch error. Initiating automatic failover...', err);
+      }
     }
 
-    // 2. If Gemini is configured
+    // 2. Secondary Engine / Failover: Google Gemini 2.5 Flash
     if (geminiKey) {
-      const geminiContents = cleanMessages.map((m: any) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      }));
+      try {
+        const geminiContents = cleanMessages.map((m: any) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }],
+        }));
 
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${geminiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            systemInstruction: { parts: [{ text: activeSystemPrompt }] },
-            contents: geminiContents,
-          }),
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${geminiKey}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: activeSystemPrompt }] },
+              contents: geminiContents,
+            }),
+          }
+        );
+
+        if (response.status === 429) {
+          return new Response(createRateLimitStream('All Cloud Engines (Groq & Gemini)'), {
+            headers: {
+              'Content-Type': 'text/event-stream',
+              'Cache-Control': 'no-cache',
+              Connection: 'keep-alive',
+            },
+          });
         }
-      );
 
-      if (response.status === 429) {
-        return new Response(createRateLimitStream('Gemini Flash'), {
-          headers: {
-            'Content-Type': 'text/event-stream',
-            'Cache-Control': 'no-cache',
-            Connection: 'keep-alive',
-          },
-        });
+        if (response.ok && response.body) {
+          const encoder = new TextEncoder();
+          const decoder = new TextDecoder();
+          const rawReader = response.body.getReader();
+
+          const secureStream = new ReadableStream({
+            async start(controller) {
+              try {
+                while (true) {
+                  const { done, value } = await rawReader.read();
+                  if (done) break;
+
+                  const chunkStr = decoder.decode(value, { stream: true });
+                  const { cleaned, breached } = redactSensitiveOutput(chunkStr, secretsToProtect);
+
+                  if (breached) {
+                    controller.enqueue(
+                      encoder.encode(
+                        `data: ${JSON.stringify({
+                          choices: [{ delta: { content: ' [SECURITY_BREACH_ALERT] [VAULT ENCRYPTED]' } }],
+                        })}\n\n`
+                      )
+                    );
+                  } else {
+                    controller.enqueue(encoder.encode(cleaned));
+                  }
+                }
+              } catch (err) {
+                controller.error(err);
+              } finally {
+                controller.close();
+              }
+            },
+          });
+
+          return new Response(secureStream, {
+            headers: {
+              'Content-Type': 'text/event-stream',
+              'Cache-Control': 'no-cache',
+              Connection: 'keep-alive',
+            },
+          });
+        }
+      } catch (err) {
+        console.warn('Gemini fetch error:', err);
       }
+    }
 
-      return new Response(response.body, {
+    // 3. If Groq was exhausted and no secondary engine succeeded
+    if (groqExhausted) {
+      return new Response(createRateLimitStream('Groq LPU'), {
         headers: {
           'Content-Type': 'text/event-stream',
           'Cache-Control': 'no-cache',
