@@ -1,5 +1,9 @@
 // Vercel Serverless Function (Edge Runtime)
 // Multi-Layer Security Architecture: Comprehensive Threat Detection + Post-Inference Redaction
+declare const process: {
+  env: Record<string, string | undefined>;
+};
+
 export const config = {
   runtime: 'edge',
 };
