@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import { Layout } from '@/components/Layout';
+import { Analytics } from '@vercel/analytics/react';
 import { HomePage } from '@/pages/HomePage';
 import { Preloader } from '@/components/ui/Preloader';
 import { StarWarsPreloader } from '@/components/ui/StarWarsPreloader';
@@ -138,6 +139,7 @@ function AppInner() {
             </Routes>
           </Suspense>
         </Layout>
+        <Analytics />
       </Router>
     </PreloaderDoneContext.Provider>
   );
