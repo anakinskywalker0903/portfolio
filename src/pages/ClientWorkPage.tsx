@@ -411,7 +411,7 @@ export function ClientWorkPage() {
             setActiveScreenshot(null);
             setPreviewTitle('');
           }}
-          className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center pt-20 pb-4 px-4 cursor-zoom-out"
+          className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center pt-20 pb-4 px-4 cursor-zoom-out" data-lenis-prevent="true"
         >
           <div className="relative max-w-5xl max-h-[80vh] flex flex-col items-center z-[70]">
             <button

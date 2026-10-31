@@ -391,7 +391,7 @@ export function LearningArchivePage() {
         {/* Overlay Modal for Certificate details (Centered on screen) */}
         <AnimatePresence>
           {activeItem && (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center pt-20 pb-4 px-3 sm:px-4">
+            <div className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-4 px-3 sm:px-4" data-lenis-prevent="true">
               {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}

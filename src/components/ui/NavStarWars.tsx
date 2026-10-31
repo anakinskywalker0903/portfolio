@@ -118,7 +118,8 @@ export function NavStarWars({ onResumeOpen }: { onResumeOpen: () => void }) {
                 boxShadow: `0 0 6px ${isSith ? '#FF2020' : '#4FC3F7'}`,
               }}
             />
-            <span>{isSith ? 'JEDI THEME' : 'SITH THEME'}</span>
+            <span className="hidden min-[380px]:inline">{isSith ? 'JEDI THEME' : 'SITH THEME'}</span>
+            <span className="min-[380px]:hidden">{isSith ? 'JEDI' : 'SITH'}</span>
           </motion.button>
 
           {/* Open menu button */}

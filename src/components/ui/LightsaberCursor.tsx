@@ -45,7 +45,7 @@ export function LightsaberCursor({ colour = '#4FC3F7' }: { colour?: string }) {
         top:           0,
         left:          0,
         pointerEvents: 'none',
-        zIndex:        99999,
+        zIndex:        100000,
         // Translate origin = bottom of hilt = the "grip" hotspot
         marginLeft:    -(totalW / 2),
         marginTop:     -totalH,

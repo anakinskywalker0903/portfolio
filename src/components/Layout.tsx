@@ -5,6 +5,8 @@ import { FaArrowUp, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RightActionDock } from '@/components/ui/SocialSidebar';
 import { ResumeModal } from '@/components/ui/ResumeModal';
+import { RohitAiCompanion } from '@/components/ui/RohitAiCompanion';
+import { FullWebsiteLockdown } from '@/components/ui/FullWebsiteLockdown';
 import BubbleMenu from '@/components/ui/BubbleMenu';
 import { ScrollVelocity } from '@/components/ui/ScrollVelocity';
 import ProfileCard from '@/components/ui/ProfileCard';
@@ -40,7 +42,30 @@ const Logo = () => {
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [resumeInitialRole, setResumeInitialRole] = useState<string | null>(null);
   const { toggleSwitcher, activeTheme } = useTheme();
+
+  useEffect(() => {
+    const handleOpenResume = (e: Event) => {
+      const custom = e as CustomEvent<{ role?: string; roleId?: string; url?: string }>;
+      const detail = custom.detail || {};
+      const roleHint = detail.role || detail.roleId || detail.url || '';
+      setResumeInitialRole(roleHint);
+      setResumeOpen(true);
+    };
+
+    window.addEventListener('rohit-open-resume', handleOpenResume);
+    return () => window.removeEventListener('rohit-open-resume', handleOpenResume);
+  }, []);
+
+  // Disable right-click context menu (asset & source inspection protection)
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('contextmenu', handleContextMenu);
+    return () => window.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
 
   const menuItems = [
     { label: 'home',           href: '/',               ariaLabel: 'Home',           rotation: -6, translateY: -14, hoverStyles: { bgColor: activeTheme.vars['--c-accent'], textColor: activeTheme.vars['--c-accent-text'] } },
@@ -67,7 +92,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const accent  = 'var(--c-accent)';
-  const accent2 = 'var(--c-accent-2)';
   const shadow  = 'var(--c-shadow)';
 
   return (
@@ -279,7 +303,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   {['AI Engineer Resume', 'Full Stack / SDE Resume', 'Frontend Developer Resume'].map(label => (
                     <button
                       key={label}
-                      onClick={() => setResumeOpen(true)}
+                      onClick={() => {
+                        setResumeInitialRole(label);
+                        setResumeOpen(true);
+                      }}
                       className="text-left text-xs font-bold w-fit transition-all hover:translate-x-1.5 flex items-center gap-1.5 cursor-pointer"
                       style={{ color: 'var(--c-text-muted)', fontFamily: 'monospace' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = accent; }}
@@ -385,19 +412,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     DOCUMENTS
                   </h4>
                   <button
-                    onClick={() => setResumeOpen(true)}
+                    onClick={() => {
+                      setResumeInitialRole('AI Engineer');
+                      setResumeOpen(true);
+                    }}
                     className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
                   >
                     AI Engineer Resume
                   </button>
                   <button
-                    onClick={() => setResumeOpen(true)}
+                    onClick={() => {
+                      setResumeInitialRole('Full Stack / SDE');
+                      setResumeOpen(true);
+                    }}
                     className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
                   >
                     Full Stack / SDE Resume
                   </button>
                   <button
-                    onClick={() => setResumeOpen(true)}
+                    onClick={() => {
+                      setResumeInitialRole('Frontend Developer');
+                      setResumeOpen(true);
+                    }}
                     className="text-left text-white/60 hover:text-white text-sm font-bold w-fit transition-colors cursor-pointer animate-none"
                   >
                     Frontend Developer Resume
@@ -447,7 +483,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </footer>
         )}
 
-        <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
+        <ResumeModal
+          isOpen={resumeOpen}
+          initialRole={resumeInitialRole}
+          onClose={() => {
+            setResumeOpen(false);
+            setResumeInitialRole(null);
+          }}
+        />
+        <RohitAiCompanion />
+        <FullWebsiteLockdown />
       </div>
     </SmoothScroll>
   );

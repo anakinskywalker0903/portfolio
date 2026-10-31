@@ -11,6 +11,7 @@ import { PdfCanvasViewer } from './PdfCanvasViewer';
 
 interface ResumeModalProps {
   isOpen: boolean;
+  initialRole?: string | null;
   onClose: () => void;
 }
 
@@ -41,10 +42,24 @@ const resumeVersions = [
   },
 ];
 
-export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
+export function ResumeModal({ isOpen, initialRole, onClose }: ResumeModalProps) {
   const [activePreview, setActivePreview] = useState<typeof resumeVersions[0] | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [totalPages, setTotalPages] = useState<number>(1);
+
+  // If initialRole is passed, automatically open directly into that specific resume preview
+  useEffect(() => {
+    if (isOpen && initialRole) {
+      const lower = initialRole.toLowerCase();
+      if (lower.includes('ai')) {
+        setActivePreview(resumeVersions[0]);
+      } else if (lower.includes('sde') || lower.includes('full')) {
+        setActivePreview(resumeVersions[1]);
+      } else if (lower.includes('front')) {
+        setActivePreview(resumeVersions[2]);
+      }
+    }
+  }, [isOpen, initialRole]);
 
   // Lock background Lenis smooth scrolling while modal is open
   useEffect(() => {
@@ -96,7 +111,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center pt-20 pb-4 px-3 sm:px-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-4 px-3 sm:px-4" data-lenis-prevent="true">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -114,7 +129,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
             className={`relative w-full ${
               activePreview ? 'max-w-5xl w-[95vw] h-[90vh] max-h-[90vh]' : 'max-w-xl max-h-[85vh]'
-            } bg-[var(--c-bg-surface)] border-[3px] border-black rounded-[1.8rem] sm:rounded-[2.2rem] shadow-2xl overflow-hidden z-[70] flex flex-col my-auto transition-all duration-300`}
+            } bg-[var(--c-bg-surface)] border-[3px] border-black rounded-[1.8rem] sm:rounded-[2.2rem] shadow-2xl overflow-hidden z-[101] flex flex-col my-auto transition-all duration-300`}
           >
             {activePreview ? (
               <div className="flex-1 flex flex-col h-full overflow-hidden" style={{ background: 'var(--c-bg)' }}>

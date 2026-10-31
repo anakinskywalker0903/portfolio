@@ -80,8 +80,9 @@ export function SkinSwitcher() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm"
             onClick={closeSwitcher}
+            data-lenis-prevent="true"
           />
 
           {/* Panel */}
@@ -91,7 +92,7 @@ export function SkinSwitcher() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -8 }}
             transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 z-[90] w-[92vw] max-w-[520px] rounded-2xl overflow-hidden shadow-2xl border border-black/20"
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-[101] w-[92vw] max-w-[520px] rounded-2xl overflow-hidden shadow-2xl border border-black/20"
             style={{ background: '#FAFAF8', color: '#1a1a1a', fontFamily: 'monospace' }}
             role="dialog"
             aria-label="Switch skin"

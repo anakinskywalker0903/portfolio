@@ -329,7 +329,7 @@ export function SkillsPage() {
       {/* Mobile Skill Details Modal Drawer */}
       <AnimatePresence>
         {mobileDetailOpen && finalSelected && (
-          <div className="fixed inset-0 z-[60] lg:hidden flex items-center justify-center pt-20 pb-4 px-4 bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-[100] lg:hidden flex items-center justify-center pt-20 pb-4 px-4 bg-black/80 backdrop-blur-sm" data-lenis-prevent="true">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

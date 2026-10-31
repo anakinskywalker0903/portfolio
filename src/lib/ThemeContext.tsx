@@ -9,6 +9,7 @@ const STORAGE_KEY = 'rohit-portfolio-skin';
 interface ThemeContextValue {
   activeTheme:      Theme;
   setTheme:         (id: string) => void;
+  updateThemeVars:  (overrides: Record<string, string>) => void;
   themes:           Theme[];
   isSwitcherOpen:   boolean;
   openSwitcher:     () => void;
@@ -58,6 +59,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(STORAGE_KEY, id);
   }, []);
 
+  const updateThemeVars = useCallback((overrides: Record<string, string>) => {
+    setActiveTheme(prev => {
+      const nextTheme: Theme = {
+        ...prev,
+        vars: { ...prev.vars, ...overrides },
+      };
+      applyTheme(nextTheme);
+      return nextTheme;
+    });
+  }, []);
+
   const onThemeChange = useCallback((cb: (next: Theme, prev: Theme) => void) => {
     listenersRef.current.add(cb);
     return () => listenersRef.current.delete(cb);
@@ -69,7 +81,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{
-      activeTheme, setTheme, themes,
+      activeTheme, setTheme, updateThemeVars, themes,
       isSwitcherOpen, openSwitcher, closeSwitcher, toggleSwitcher,
       onThemeChange,
     }}>

@@ -230,7 +230,6 @@ export const themes: Theme[] = [
       '--sw-white':          '#F0D0D0',    // red-tinted white
     },
   },
-
 ];
 
 export const DEFAULT_THEME_ID = 'default';

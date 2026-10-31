@@ -139,7 +139,9 @@
 
 /* Custom Brutalist Theme Mouse Pointer for Desktop / Fine-Pointer Devices (Cyber Green) */
 @media (pointer: fine) {
-  html:not([data-theme="starwars"]):not([data-theme="sith"]) body {
+  html:not([data-theme="starwars"]):not([data-theme="sith"]),
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) body,
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) * {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%2300F5A0' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%230D9488'/%3E%3C/svg%3E") 3 3, auto;
   }
 
@@ -148,8 +150,16 @@
   html:not([data-theme="starwars"]):not([data-theme="sith"]) [role="button"],
   html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="submit"],
   html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="button"],
-  html:not([data-theme="starwars"]):not([data-theme="sith"]) .cursor-pointer {
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) .cursor-pointer,
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) summary {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='11' fill='%23042420' stroke='%23000000' stroke-width='2.5'/%3E%3Ccircle cx='14' cy='14' r='4' fill='%2300F5A0' stroke='%23000000' stroke-width='1.5'/%3E%3C/svg%3E") 14 14, pointer !important;
+  }
+
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="text"],
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="search"],
+  html:not([data-theme="starwars"]):not([data-theme="sith"]) textarea {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%2300F5A0' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%230D9488'/%3E%3C/svg%3E") 3 3, text;
+    caret-color: #00F5A0;
   }
 
   html[data-theme="starwars"],
