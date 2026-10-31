@@ -14,7 +14,8 @@ export function ProjectsPageStarWars() {
 
   const [activeIdx, setActiveIdx] = useState(0);
   const [activeTab, setActiveTab] = useState<'overview' | 'arch' | 'hurdles'>('overview');
-  const project = projectsData[activeIdx];
+  const project = projectsData[activeIdx] || projectsData[0];
+  if (!project) return null;
 
   const headShadow = Array.from({ length: 4 }, (_, i) => `${i + 1}px ${i + 1}px 0 #000`).join(',');
 

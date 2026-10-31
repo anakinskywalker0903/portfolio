@@ -23,6 +23,21 @@ export class ErrorBoundary extends Component<Props, State> {
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Console log will be stripped in production build, but helpful in dev
     console.error('ErrorBoundary caught an error', error, errorInfo);
+
+    // Auto-heal chunk mismatches caused by fresh deployments:
+    const msg = (error?.message || '').toLowerCase();
+    if (
+      msg.includes('failed to fetch dynamically imported module') ||
+      msg.includes('loading chunk') ||
+      msg.includes('error loading dynamically imported module')
+    ) {
+      const lastReload = sessionStorage.getItem('chunk_reload_timestamp');
+      const now = Date.now();
+      if (!lastReload || now - parseInt(lastReload, 10) > 10000) {
+        sessionStorage.setItem('chunk_reload_timestamp', now.toString());
+        window.location.reload();
+      }
+    }
   }
 
   public render() {

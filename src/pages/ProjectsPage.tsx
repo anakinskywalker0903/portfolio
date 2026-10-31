@@ -17,7 +17,8 @@ export function ProjectsPage() {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [activeMobileTab, setActiveMobileTab] = useState<'overview' | 'arch' | 'hurdles'>('overview');
 
-  const project = projectsData[activeProjectIdx];
+  const project = projectsData[activeProjectIdx] || projectsData[0];
+  if (!project) return null;
 
   return (
     <div className="w-full min-h-screen bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] pt-24 sm:pt-32 pb-24 px-3 sm:px-6 md:px-20 lg:px-28 overflow-x-hidden">

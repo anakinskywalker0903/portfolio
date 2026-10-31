@@ -13,6 +13,12 @@ if (import.meta.env.PROD) {
   // Keep console.error live so real runtime errors surface in prod monitoring
 }
 
+// Auto-heal chunk invalidations when a new Vercel deployment replaces asset hashes
+window.addEventListener('vite:preloadError', (event) => {
+  event.preventDefault();
+  window.location.reload();
+});
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
