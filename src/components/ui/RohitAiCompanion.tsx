@@ -319,8 +319,10 @@ export const RohitAiCompanion: React.FC = () => {
 
           if (displayed.length < target.length) {
             const diff = target.length - displayed.length;
-            // Adaptive reading speed: smooth and natural, never instantaneous
-            const step = diff > 160 ? 8 : diff > 70 ? 4 : diff > 25 ? 3 : 2;
+            // Snappy, responsive pacing: fast and natural, never sluggish
+            const step = !isStreamingRef.current
+              ? (diff > 50 ? 16 : diff > 20 ? 8 : 4)
+              : (diff > 120 ? 12 : diff > 50 ? 6 : diff > 15 ? 4 : 3);
             const nextLen = Math.min(displayed.length + step, target.length);
             const nextText = target.slice(0, nextLen);
             typeQueueRef.current.displayed = nextText;
@@ -342,52 +344,57 @@ export const RohitAiCompanion: React.FC = () => {
         }, 18);
       };
 
+      let streamBuffer = '';
+
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
+        streamBuffer += decoder.decode(value, { stream: true });
+        const lines = streamBuffer.split('\n');
+        // Keep the last segment (which may be an incomplete line) in the buffer
+        streamBuffer = lines.pop() || '';
 
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const dataStr = line.slice(6).trim();
-            if (dataStr === '[DONE]') continue;
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (!line.startsWith('data: ')) continue;
+          const dataStr = line.slice(6).trim();
+          if (dataStr === '[DONE]') continue;
 
-            try {
-              const parsed = JSON.parse(dataStr);
-              const delta =
-                parsed.choices?.[0]?.delta?.content ||
-                parsed.candidates?.[0]?.content?.parts?.[0]?.text ||
-                '';
-              assistantReply += delta;
+          try {
+            const parsed = JSON.parse(dataStr);
+            const delta =
+              parsed.choices?.[0]?.delta?.content ||
+              parsed.candidates?.[0]?.content?.parts?.[0]?.text ||
+              '';
+            assistantReply += delta;
 
-              if (assistantReply.includes('[SECURITY_BREACH_ALERT]') && !breachTriggeredForStream) {
-                breachTriggeredForStream = true;
-                setIsLockdown(true);
-                playSirenBlast();
-                window.dispatchEvent(new CustomEvent('rohit-lockdown-trigger'));
-              }
-
-              // Dynamic real-time execution of assistant action commands
-              const actionMatches = assistantReply.matchAll(/\[ACTION:([A-Z_]+):?([^\]]*)\]/g);
-              for (const match of actionMatches) {
-                const actKey = `${match[1]}:${match[2]}`;
-                if (!executedActionsRef.current.has(actKey)) {
-                  executedActionsRef.current.add(actKey);
-                  executeAction(match[1], match[2]);
-                }
-              }
-
-              const cleanDisplay = assistantReply
-                .replace(/\[SECURITY_BREACH_ALERT\]/g, '')
-                .replace(/\[ACTION:[^\]]+\]/g, '')
-                .trim();
-              typeQueueRef.current.target = cleanDisplay;
-              startPacingTicker();
-            } catch {
-              // Non-JSON stream chunk
+            if (assistantReply.includes('[SECURITY_BREACH_ALERT]') && !breachTriggeredForStream) {
+              breachTriggeredForStream = true;
+              setIsLockdown(true);
+              playSirenBlast();
+              window.dispatchEvent(new CustomEvent('rohit-lockdown-trigger'));
             }
+
+            // Dynamic real-time execution of assistant action commands (supports both [ACTION:...] and [A:...])
+            const actionMatches = assistantReply.matchAll(/\[(?:ACTION|A):([A-Z_]+):?([^\]]*)\]/gi);
+            for (const match of actionMatches) {
+              const actKey = `${match[1].toUpperCase()}:${match[2]}`;
+              if (!executedActionsRef.current.has(actKey)) {
+                executedActionsRef.current.add(actKey);
+                executeAction(match[1], match[2]);
+              }
+            }
+
+            const cleanDisplay = assistantReply
+              .replace(/\[SECURITY_BREACH_ALERT\]/g, '')
+              .replace(/\[(?:ACTION|A):[^\]]+\]/gi, '')
+              .replace(/\[(NAVIGATE|SCROLL|OPEN_RESUME|SET_THEME):[^\]]+\]/gi, '')
+              .trim();
+            typeQueueRef.current.target = cleanDisplay;
+            startPacingTicker();
+          } catch {
+            // Non-JSON stream chunk
           }
         }
       }
@@ -580,8 +587,9 @@ export const RohitAiCompanion: React.FC = () => {
   const renderFormattedText = (content: string) => {
     let normalized = content.replace(/\r\n/g, '\n');
 
-    // Strip raw action tags from paragraph text
-    normalized = normalized.replace(/\[ACTION:[^\]]+\]/g, '');
+    // Strip ALL action and navigation machine tags from paragraph text
+    normalized = normalized.replace(/\[(?:ACTION|A):[^\]]+\]/gi, '');
+    normalized = normalized.replace(/\[(NAVIGATE|SCROLL|OPEN_RESUME|SET_THEME):[^\]]+\]/gi, '');
 
     // Auto-heal malformed markdown links generated by LLMs like [Title/url) or [Title(/url)
     normalized = normalized.replace(/\[([^\]\n]+?)[/(](\/assets\/resumes\/[^\s)]+\.pdf|\/[a-z-]+|https?:\/\/[^\s)]+)\)?/g, '[$1]($2)');
@@ -665,8 +673,8 @@ export const RohitAiCompanion: React.FC = () => {
       }
     };
 
-    // 1. Explicit action tags: [ACTION:NAVIGATE:/certifications], [ACTION:OPEN_RESUME], etc.
-    const matches = rawContent.matchAll(/\[ACTION:([A-Z_]+):?([^\]]*)\]/g);
+    // 1. Explicit action tags: [ACTION:NAVIGATE:/certifications], [A:SCROLL:#contact], etc.
+    const matches = rawContent.matchAll(/\[(?:ACTION|A):([A-Z_]+):?([^\]]*)\]/gi);
     for (const m of matches) {
       const type = m[1];
       const param = (m[2] || '').trim();
