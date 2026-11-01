@@ -1,6 +1,20 @@
 {
   "featured": [
     {
+      "id": "ORACLE-AI-DB-2026",
+      "title": "Oracle AI Database SQL Certified Associate",
+      "issuer": "Oracle University",
+      "issueDate": "Oct 2026",
+      "credential": "/certficates/Oracle_AI_Database_SQL_Certified_Associate.pdf",
+      "skills": ["Oracle SQL", "AI Database", "Database Architecture", "Query Optimization"],
+      "category": "featured",
+      "badge": "ORACLE SQL",
+      "icon": "⚡",
+      "hours": "50 hours",
+      "desc": "Validates deep expertise in Oracle AI Database SQL, relational database design, query optimization, correlated subqueries, and advanced schema management.",
+      "learnt": "Complex SQL SELECT statements, single & correlated subqueries, conversion functions (TO_CHAR, TO_DATE), row limiting, object & system privileges, synonyms, and transactions."
+    },
+    {
       "id": "ORACLE-JAVA-2026",
       "title": "Oracle Certified Foundations Associate, Java",
       "issuer": "Oracle University",

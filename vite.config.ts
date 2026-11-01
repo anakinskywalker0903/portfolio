@@ -11,6 +11,10 @@ function devApiPlugin(): Plugin {
     name: 'dev-api-chat',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
+        if (req.url?.startsWith('/assets/resumes/')) {
+          req.url = req.url.replace('/assets/resumes/', '/resumes/');
+          return next();
+        }
         const url = req.url?.split('?')[0];
         if (url !== '/api/chat' && url !== '/api/chat/') {
           return next();

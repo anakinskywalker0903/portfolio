@@ -155,7 +155,7 @@ Never respond with a robotic "I am an AI assistant and cannot fulfill this reque
 
 === ACTION TRIGGERS ===
 - If someone asks to see or download my resume:
-  Offer my resumes directly: "I have 3 targeted versions ready: [Frontend Resume](/assets/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/assets/resumes/Rohit_s_Resume_SDE.pdf), and [AI Resume](/assets/resumes/Rohit_s_Resume_AI.pdf)."
+  Offer my resumes directly: "I have 3 targeted versions ready: [Frontend Resume](/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/resumes/Rohit_s_Resume_SDE.pdf), and [AI Resume](/resumes/Rohit_s_Resume_AI.pdf)."
 - If someone wants to contact or hire me:
   Provide direct links: Email: rohitdubey39005@gmail.com | WhatsApp: https://wa.me/918777453162 | LinkedIn: https://www.linkedin.com/in/rohit--dubey03/
 

@@ -3,9 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { IoClose } from 'react-icons/io5';
 import { FaFilePdf, FaDownload, FaEye } from 'react-icons/fa';
 
-import aiResume from '@/assets/resumes/Rohit_s_Resume_AI.pdf';
-import frontendResume from '@/assets/resumes/Rohit_s_Resume_Frontend.pdf';
-import sdeResume from '@/assets/resumes/Rohit_s_Resume_SDE.pdf';
 import { trackResumeDownload, trackResumePreview } from '@/lib/analytics';
 import { PdfCanvasViewer } from './PdfCanvasViewer';
 
@@ -20,7 +17,7 @@ const resumeVersions = [
     id: 'ai-engineer',
     role: 'AI Engineer',
     description: 'LLM orchestration, FastAPI product layers, Groq LLaMA, and AI architectures.',
-    fileUrl: aiResume,
+    fileUrl: '/resumes/Rohit_s_Resume_AI.pdf',
     summary: 'Full-Stack & AI Engineer specializing in LLM application development, FastAPI product layers, Groq SDK (LLaMA 3.3/3.1, Gemma 2), Supabase PostgreSQL, and scalable web platforms.',
     skills: ['Python', 'FastAPI', 'Groq SDK & LLaMA', 'Prompt Engineering', 'Structured JSON Output', 'PostgreSQL / Supabase', 'React 19 & Vite', 'Node.js / Express']
   },
@@ -28,7 +25,7 @@ const resumeVersions = [
     id: 'full-stack-sde',
     role: 'Full Stack / SDE',
     description: 'End-to-end web applications, system design, REST APIs, and databases.',
-    fileUrl: sdeResume,
+    fileUrl: '/resumes/Rohit_s_Resume_SDE.pdf',
     summary: 'Full-Stack Software Engineer & GenAI Application Engineer shipping production systems to real users across React 19, Node.js/Express, PostgreSQL, and Groq/LLaMA.',
     skills: ['React 19 & Vite', 'Node.js & Express', 'JavaScript (ES6+)', 'PostgreSQL / Supabase', 'REST APIs & Zod', 'Groq / LLaMA', 'Tailwind CSS', 'Vercel & Render']
   },
@@ -36,7 +33,7 @@ const resumeVersions = [
     id: 'frontend',
     role: 'Frontend Developer',
     description: 'Responsive web systems, React 19 component architecture, and UI state management.',
-    fileUrl: frontendResume,
+    fileUrl: '/resumes/Rohit_s_Resume_Frontend.pdf',
     summary: 'Frontend-focused Software Engineer with hands-on experience in React 19, modern JavaScript, Tailwind CSS, Vite, and responsive web systems.',
     skills: ['React 19 & Vite', 'JavaScript (ES6+)', 'Tailwind CSS', 'React Router', 'Responsive Web Design', 'Component Architecture', 'UI State Management', 'Web Vitals & Performance']
   },

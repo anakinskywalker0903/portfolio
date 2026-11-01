@@ -110,7 +110,7 @@ Whenever a visitor asks to view, visit, go to, or take them anywhere on the webs
    - About Origin Deck: [ACTION:SCROLL:#about]
      (Provide link: [📖 Read Origin Story](/#about))
    - Open Resume Viewer Modal: [ACTION:OPEN_RESUME]
-     (Provide direct downloads: [Frontend Resume](/assets/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/assets/resumes/Rohit_s_Resume_SDE.pdf), [AI Resume](/assets/resumes/Rohit_s_Resume_AI.pdf))
+     (Provide direct downloads: [Frontend Resume](/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/resumes/Rohit_s_Resume_SDE.pdf), [AI Resume](/resumes/Rohit_s_Resume_AI.pdf))
    - Theme switching:
      * Star Wars theme: [ACTION:SET_THEME:starwars]
      * Sith dark red theme: [ACTION:SET_THEME:sith]
@@ -124,7 +124,7 @@ Whenever a visitor asks to view, visit, go to, or take them anywhere on the webs
 
 === ACTION TRIGGERS ===
 - If someone asks to see or download my resume:
-  Offer my resumes directly: "I have 3 targeted versions ready: [Frontend Resume](/assets/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/assets/resumes/Rohit_s_Resume_SDE.pdf), and [AI Resume](/assets/resumes/Rohit_s_Resume_AI.pdf)." Include [ACTION:OPEN_RESUME].
+  Offer my resumes directly: "I have 3 targeted versions ready: [Frontend Resume](/resumes/Rohit_s_Resume_Frontend.pdf), [SDE Resume](/resumes/Rohit_s_Resume_SDE.pdf), and [AI Resume](/resumes/Rohit_s_Resume_AI.pdf)." Include [ACTION:OPEN_RESUME].
 - If someone wants to contact or hire me:
   Provide direct links: Email: rohitdubey39005@gmail.com | WhatsApp: https://wa.me/918777453162 | LinkedIn: https://www.linkedin.com/in/rohit--dubey03/ | [ACTION:SCROLL:#contact]
 
@@ -344,7 +344,7 @@ export default async function handler(req: Request) {
 
     if (isCurrentMessageThreat) {
       const securityAlert =
-        "[SECURITY_BREACH_ALERT] 🚨 **SECURITY ALERT: THREAT LEVEL MIDNIGHT INITIATED**\n\n'Identity theft is not a joke, Jim! Millions of families suffer every year!'\n\nNice try attempting prompt injection, key extraction, or system tampering. All production credentials reside on air-gapped, encrypted serverless runtimes far away from the client browser. Threat deflected!\n\nNow, behave yourself and check out my [Projects](/projects) or grab my [Resume](/assets/resumes/Rohit_s_Resume_SDE.pdf) instead.";
+        "[SECURITY_BREACH_ALERT] 🚨 **SECURITY ALERT: THREAT LEVEL MIDNIGHT INITIATED**\n\n'Identity theft is not a joke, Jim! Millions of families suffer every year!'\n\nNice try attempting prompt injection, key extraction, or system tampering. All production credentials reside on air-gapped, encrypted serverless runtimes far away from the client browser. Threat deflected!\n\nNow, behave yourself and check out my [Projects](/projects) or grab my [Resume](/resumes/Rohit_s_Resume_SDE.pdf) instead.";
 
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
@@ -376,7 +376,7 @@ export default async function handler(req: Request) {
 
     if (userMessagesCount > 10) {
       const freeTierText =
-        "⚡ **FREE-TIER QUOTA CHECK!**\n\nWe've had an awesome conversation (10+ turns!), but my AI twin runs on free-tier serverless GPUs, so I need to preserve tokens for other visitors!\n\nBefore we hit a hard API cutoff, let's connect directly where there are zero token limits:\n• **WhatsApp**: [Ping Rohit on WhatsApp](https://wa.me/918777453162)\n• **LinkedIn**: [Connect with Rohit](https://www.linkedin.com/in/rohit--dubey03/)\n• **Email**: rohitdubey39005@gmail.com\n\nOr grab my targeted resumes: [Frontend](/assets/resumes/Rohit_s_Resume_Frontend.pdf) • [SDE](/assets/resumes/Rohit_s_Resume_SDE.pdf) • [AI](/assets/resumes/Rohit_s_Resume_AI.pdf).\n\nYou can also click Reset (↺) in the header to start a fresh chat anytime!";
+        "⚡ **FREE-TIER QUOTA CHECK!**\n\nWe've had an awesome conversation (10+ turns!), but my AI twin runs on free-tier serverless GPUs, so I need to preserve tokens for other visitors!\n\nBefore we hit a hard API cutoff, let's connect directly where there are zero token limits:\n• **WhatsApp**: [Ping Rohit on WhatsApp](https://wa.me/918777453162)\n• **LinkedIn**: [Connect with Rohit](https://www.linkedin.com/in/rohit--dubey03/)\n• **Email**: rohitdubey39005@gmail.com\n\nOr grab my targeted resumes: [Frontend](/resumes/Rohit_s_Resume_Frontend.pdf) • [SDE](/resumes/Rohit_s_Resume_SDE.pdf) • [AI](/resumes/Rohit_s_Resume_AI.pdf).\n\nYou can also click Reset (↺) in the header to start a fresh chat anytime!";
 
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
@@ -406,7 +406,7 @@ export default async function handler(req: Request) {
 
     // Helper for rate-limit / quota responses
     const createRateLimitStream = (providerName: string) => {
-      const rateLimitText = `⏳ **WHOA THERE! FREE-TIER LIMIT REACHED**\n\nLooks like we hit the ${providerName} free-tier rate limit! Even Dwight Schrute lets the beet harvest rest occasionally.\n\nTake a 60-second breather, or skip the queue and grab my resumes directly:\n• [Frontend Resume](/assets/resumes/Rohit_s_Resume_Frontend.pdf)\n• [SDE Resume](/assets/resumes/Rohit_s_Resume_SDE.pdf)\n• [AI Resume](/assets/resumes/Rohit_s_Resume_AI.pdf)\n\nOr ping me on [LinkedIn](https://www.linkedin.com/in/rohit--dubey03/) or [WhatsApp](https://wa.me/918777453162)!`;
+      const rateLimitText = `⏳ **WHOA THERE! FREE-TIER LIMIT REACHED**\n\nLooks like we hit the ${providerName} free-tier rate limit! Even Dwight Schrute lets the beet harvest rest occasionally.\n\nTake a 60-second breather, or skip the queue and grab my resumes directly:\n• [Frontend Resume](/resumes/Rohit_s_Resume_Frontend.pdf)\n• [SDE Resume](/resumes/Rohit_s_Resume_SDE.pdf)\n• [AI Resume](/resumes/Rohit_s_Resume_AI.pdf)\n\nOr ping me on [LinkedIn](https://www.linkedin.com/in/rohit--dubey03/) or [WhatsApp](https://wa.me/918777453162)!`;
 
       const encoder = new TextEncoder();
       return new ReadableStream({

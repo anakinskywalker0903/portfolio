@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/assets/resumes/:match*", "destination": "/resumes/:match*" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
