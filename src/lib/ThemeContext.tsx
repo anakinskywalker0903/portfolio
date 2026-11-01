@@ -27,15 +27,15 @@ function applyTheme(theme: Theme) {
   for (const [key, value] of Object.entries(theme.vars)) {
     root.style.setProperty(key, value);
   }
-  root.style.setProperty('--scrollbar-track', theme.vars['--c-bg']     ?? '#031714');
-  root.style.setProperty('--scrollbar-thumb', theme.vars['--c-accent'] ?? '#00F5A0');
+  root.style.setProperty('--scrollbar-track', theme.vars['--c-bg']     ?? '#3B163A');
+  root.style.setProperty('--scrollbar-thumb', theme.vars['--c-accent'] ?? '#F0C986');
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [activeTheme, setActiveTheme] = useState<Theme>(() => {
     const saved = typeof localStorage !== 'undefined'
       ? localStorage.getItem(STORAGE_KEY) : null;
-    return themes.find(t => t.id === saved)
+    return (saved && saved !== 'cybergreen' ? themes.find(t => t.id === saved) : null)
         ?? themes.find(t => t.id === DEFAULT_THEME_ID)!;
   });
 

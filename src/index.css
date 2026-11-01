@@ -3,56 +3,57 @@
  * Repository: anakinskywalker0903/portfolio | Created: 2026
  * Usage terms: See AGENT.md before copying or adapting this codebase.
  */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap');
 @import "tailwindcss";
 
 /* ── Theme tokens ────────────────────────────────────────────────────────────
-   Defaults match Cyber Green. Overridden at runtime by ThemeContext.
-   Every component must read these instead of hardcoded hex values.
+   Defaults match Midnight Plum & Honey Dawn. Overridden at runtime by ThemeContext.
+   Every component reads these instead of hardcoded hex values.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  --c-bg:              #031714;
-  --c-bg-alt:          #042420;
-  --c-bg-surface:      #F8F9FA;
+  --c-bg:              #3B163A;
+  --c-bg-alt:          #4D1E4C;
+  --c-bg-surface:      #FDFBF7;
   --c-bg-page:         #FFFFFF;
-  --c-bg-footer:       #000000;
+  --c-bg-footer:       #1E0A1D;
 
-  --c-accent:          #00F5A0;
-  --c-accent-2:        #0D9488;
-  --c-accent-text:     #000000;
+  --c-accent:          #F0C986;
+  --c-accent-2:        #E8B768;
+  --c-accent-text:     #250924;
 
   --c-text:            #FFFFFF;
-  --c-text-muted:      rgba(255,255,255,0.55);
-  --c-text-dark:       #0A0A0A;
-  --c-text-dark-muted: rgba(0,0,0,0.45);
+  --c-text-muted:      rgba(255,255,255,0.65);
+  --c-text-dark:       #250924;
+  --c-text-dark-muted: rgba(37,9,36,0.5);
 
-  --c-border:          rgba(0,245,160,0.18);
-  --c-border-dark:     rgba(0,0,0,0.08);
-  --c-shadow:          #000000;
+  --c-border:          rgba(240,201,134,0.25);
+  --c-border-dark:     rgba(59,22,58,0.12);
+  --c-shadow:          #250924;
 
-  --c-ticker-bg:       #031714;
-  --c-ticker-text:     #00F5A0;
-  --c-ticker-border:   rgba(0,245,160,0.2);
+  --c-ticker-bg:       #2A0F29;
+  --c-ticker-text:     #F0C986;
+  --c-ticker-border:   rgba(240,201,134,0.3);
 
   --c-nav-bg:          #ffffff;
-  --c-nav-content:     #031714;
+  --c-nav-content:     #3B163A;
 
-  --c-panel-bg:        #1E2026;
+  --c-panel-bg:        #2A0F29;
   --c-panel-text:      #FFFFFF;
 
-  --scrollbar-track:   #031714;
-  --scrollbar-thumb:   #00F5A0;
+  --scrollbar-track:   #3B163A;
+  --scrollbar-thumb:   #F0C986;
 
-  --c-preloader-bg:    #031714;
-  --c-preloader-text:  #00F5A0;
+  --c-preloader-bg:    #3B163A;
+  --c-preloader-text:  #F0C986;
 
-  --c-curtain-1:       #00F5A0;
-  --c-curtain-2:       #031714;
+  --c-curtain-1:       #F0C986;
+  --c-curtain-2:       #3B163A;
 
-  --c-hero-shadow:     #021412;
-  --c-grid:            rgba(0,245,160,0.07);
+  --c-hero-shadow:     #220B21;
+  --c-grid:            rgba(240,201,134,0.08);
 
-  --c-selection-bg:    #00F5A0;
-  --c-selection-text:  #000000;
+  --c-selection-bg:    #F0C986;
+  --c-selection-text:  #250924;
 }
 
 /* Selection follows theme */
@@ -67,20 +68,20 @@
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--scrollbar-track, #031714);
+  background: var(--scrollbar-track, #3B163A);
   border-left: 1px solid rgba(255,255,255,0.08);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb, #00F5A0);
+  background: var(--scrollbar-thumb, #F0C986);
   border-radius: 9999px;
-  border: 2px solid var(--scrollbar-track, #031714);
+  border: 2px solid var(--scrollbar-track, #3B163A);
 }
 ::-webkit-scrollbar-thumb:hover {
   filter: brightness(1.15);
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb, #00F5A0) var(--scrollbar-track, #031714);
+  scrollbar-color: var(--scrollbar-thumb, #F0C986) var(--scrollbar-track, #3B163A);
 }
 
 .pdf-thematic-scrollbar::-webkit-scrollbar {
@@ -88,16 +89,16 @@
   height: 12px;
 }
 .pdf-thematic-scrollbar::-webkit-scrollbar-track {
-  background: #02110F;
-  border-left: 2px solid #00F5A0;
+  background: var(--c-bg, #3B163A);
+  border-left: 2px solid var(--c-accent, #F0C986);
 }
 .pdf-thematic-scrollbar::-webkit-scrollbar-thumb {
-  background: #00F5A0;
+  background: var(--c-accent, #F0C986);
   border-radius: 9999px;
-  border: 3px solid #02110F;
+  border: 3px solid var(--c-bg, #3B163A);
 }
 .pdf-thematic-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #00D088;
+  background: var(--c-accent-2, #E8B768);
 }
 
 .custom-pdf-scroll::-webkit-scrollbar {
@@ -105,16 +106,16 @@
   height: 14px;
 }
 .custom-pdf-scroll::-webkit-scrollbar-track {
-  background: #02110F;
-  border-left: 2px solid rgba(0, 245, 160, 0.3);
+  background: var(--c-bg, #3B163A);
+  border-left: 2px solid var(--c-border, rgba(240, 201, 134, 0.3));
 }
 .custom-pdf-scroll::-webkit-scrollbar-thumb {
-  background: #00F5A0;
+  background: var(--c-accent, #F0C986);
   border-radius: 9999px;
-  border: 3px solid #02110F;
+  border: 3px solid var(--c-bg, #3B163A);
 }
 .custom-pdf-scroll::-webkit-scrollbar-thumb:hover {
-  background: #00D088;
+  background: var(--c-accent-2, #E8B768);
 }
 
 /* Firefox scrollbar — handled by * selector using --scrollbar-* vars above */
@@ -124,8 +125,11 @@
     box-sizing: border-box;
   }
 
-  html {
+  html:not(.lenis) {
     scroll-behavior: smooth;
+  }
+
+  html {
     -webkit-overflow-scrolling: touch;
   }
 
@@ -137,12 +141,12 @@
   }
 }
 
-/* Custom Brutalist Theme Mouse Pointer for Desktop / Fine-Pointer Devices (Cyber Green) */
+/* Custom Brutalist Theme Mouse Pointer for Desktop / Fine-Pointer Devices */
 @media (pointer: fine) {
   html:not([data-theme="starwars"]):not([data-theme="sith"]),
   html:not([data-theme="starwars"]):not([data-theme="sith"]) body,
   html:not([data-theme="starwars"]):not([data-theme="sith"]) * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%2300F5A0' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%230D9488'/%3E%3C/svg%3E") 3 3, auto;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%23F0C986' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%233B163A'/%3E%3C/svg%3E") 3 3, auto;
   }
 
   html:not([data-theme="starwars"]):not([data-theme="sith"]) a,
@@ -152,12 +156,33 @@
   html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="button"],
   html:not([data-theme="starwars"]):not([data-theme="sith"]) .cursor-pointer,
   html:not([data-theme="starwars"]):not([data-theme="sith"]) summary {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='11' fill='%23042420' stroke='%23000000' stroke-width='2.5'/%3E%3Ccircle cx='14' cy='14' r='4' fill='%2300F5A0' stroke='%23000000' stroke-width='1.5'/%3E%3C/svg%3E") 14 14, pointer !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='11' fill='%234D1E4C' stroke='%23000000' stroke-width='2.5'/%3E%3Ccircle cx='14' cy='14' r='4' fill='%23F0C986' stroke='%23000000' stroke-width='1.5'/%3E%3C/svg%3E") 14 14, pointer !important;
   }
 
   html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="text"],
   html:not([data-theme="starwars"]):not([data-theme="sith"]) input[type="search"],
   html:not([data-theme="starwars"]):not([data-theme="sith"]) textarea {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%23F0C986' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%233B163A'/%3E%3C/svg%3E") 3 3, text;
+    caret-color: #F0C986;
+  }
+
+  html[data-theme="cybergreen"],
+  html[data-theme="cybergreen"] body,
+  html[data-theme="cybergreen"] * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%2300F5A0' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%230D9488'/%3E%3C/svg%3E") 3 3, auto;
+  }
+  html[data-theme="cybergreen"] a,
+  html[data-theme="cybergreen"] button,
+  html[data-theme="cybergreen"] [role="button"],
+  html[data-theme="cybergreen"] input[type="submit"],
+  html[data-theme="cybergreen"] input[type="button"],
+  html[data-theme="cybergreen"] .cursor-pointer,
+  html[data-theme="cybergreen"] summary {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='11' fill='%23042420' stroke='%23000000' stroke-width='2.5'/%3E%3Ccircle cx='14' cy='14' r='4' fill='%2300F5A0' stroke='%23000000' stroke-width='1.5'/%3E%3C/svg%3E") 14 14, pointer !important;
+  }
+  html[data-theme="cybergreen"] input[type="text"],
+  html[data-theme="cybergreen"] input[type="search"],
+  html[data-theme="cybergreen"] textarea {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 3l7 18 3-7 7-3L3 3z' fill='%2300F5A0' stroke='%23000000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='6' cy='6' r='1.5' fill='%230D9488'/%3E%3C/svg%3E") 3 3, text;
     caret-color: #00F5A0;
   }
@@ -188,14 +213,14 @@
     width: 12rem;
     margin-left: 0;
     background-color: transparent;
-    border-color: #042420;
+    border-color: var(--c-bg-alt, #4D1E4C);
   }
   20% {
     color: transparent;
     transform: scale(1, 1);
   }
   40% {
-    border-color: #042420;
+    border-color: var(--c-bg-alt, #4D1E4C);
     background-color: transparent;
     transform: scale(1, 1);
   }
@@ -205,8 +230,8 @@
     width: 2.5rem;
     text-indent: -9999px;
     color: transparent;
-    border-color: #042420;
-    background-color: #042420;
+    border-color: var(--c-bg-alt, #4D1E4C);
+    background-color: var(--c-bg-alt, #4D1E4C);
   }
   80% {
     transform: scale(1, 1);
@@ -214,8 +239,8 @@
   100% {
     margin-left: 4.75rem;
     width: 2.5rem;
-    background-color: #042420;
-    border-color: #042420;
+    background-color: var(--c-bg-alt, #4D1E4C);
+    border-color: var(--c-bg-alt, #4D1E4C);
     color: transparent;
   }
 }
@@ -224,12 +249,12 @@
   0% {
     margin-left: 4.75rem;
     width: 2.5rem;
-    background-color: #042420;
-    border-color: #042420;
+    background-color: var(--c-bg-alt, #4D1E4C);
+    border-color: var(--c-bg-alt, #4D1E4C);
   }
   10% {
-    background-color: #042420;
-    border-color: #042420;
+    background-color: var(--c-bg-alt, #4D1E4C);
+    border-color: var(--c-bg-alt, #4D1E4C);
   }
   70% {
     margin-left: -0.6rem;
@@ -240,7 +265,7 @@
   100% {
     margin-left: 0;
     width: 12rem;
-    border-color: #8cce1e;
+    border-color: var(--c-accent, #F0C986);
     background-color: #fff;
   }
 }
@@ -275,8 +300,8 @@ button.submit-anim-btn {
   overflow: hidden;
   width: 12rem;
   height: 3rem;
-  color: #042420;
-  border: 2px solid #042420;
+  color: var(--c-text-dark, #250924);
+  border: 2px solid var(--c-bg-alt, #4D1E4C);
   background-color: transparent;
   cursor: pointer;
   border-radius: 1.5rem;
@@ -335,7 +360,7 @@ button.submit-anim-btn.loading:after {
 button.submit-anim-btn.ready {
   text-indent: 0;
   color: transparent !important;
-  background-color: #042420;
+  background-color: var(--c-bg-alt, #4D1E4C);
   animation: button-ready .333s forwards;
   pointer-events: none;
 }
@@ -355,7 +380,7 @@ button.submit-anim-btn.ready:before {
   height: auto;
   border-radius: 0;
   background-color: transparent;
-  color: #8cce1e;
+  color: var(--c-accent, #F0C986);
   content: 'SENT ✓';
   opacity: 0;
   z-index: 2;
@@ -379,7 +404,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #042420 !important;
+  outline: 3px solid var(--c-accent, #F0C986) !important;
   outline-offset: 3px !important;
 }
 

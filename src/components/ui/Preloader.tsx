@@ -72,7 +72,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         }
       }}
       className="fixed inset-0 z-[999] flex flex-col items-center justify-center select-none"
-      style={{ background: 'var(--c-preloader-bg, #031714)' }}
+      style={{ background: 'var(--c-preloader-bg, #3B163A)' }}
     >
       {/* Grid pattern */}
       <div className="absolute inset-0 bg-[size:3rem_3rem] pointer-events-none"
@@ -98,7 +98,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
               fontSize: isDot ? 'clamp(3rem, 8vw, 7rem)' : 'clamp(5rem, 12vw, 10rem)',
               lineHeight: 1,
               textShadow: !isDot ? shadow3D : undefined,
-              color: isDot ? 'var(--c-preloader-text, #00F5A0)' : 'white',
+              color: isDot ? 'var(--c-preloader-text, #F0C986)' : 'white',
               marginLeft: isDot ? '-0.05em' : index > 0 ? '-0.05em' : 0,
             }}
           >
@@ -122,7 +122,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         {/* Monospace progress percent */}
         <span 
           className="text-xs font-black tracking-widest text-[var(--c-accent)] font-mono"
-          style={{ textShadow: '0 0 10px rgba(0, 245, 160, 0.4)' }}
+          style={{ textShadow: '0 0 10px rgba(240, 201, 134, 0.4)' }}
         >
           {String(progress).padStart(3, '0')}%
         </span>

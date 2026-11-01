@@ -100,7 +100,7 @@ export const FullWebsiteLockdown: React.FC = () => {
             className={`relative z-10 w-full max-w-lg p-6 sm:p-8 font-mono transition-all ${
               isNeobrutalist
                 ? 'border-4 border-red-600 bg-black text-white shadow-[10px_10px_0_#EF4444]'
-                : 'rounded-2xl border border-red-500/50 bg-[#031714]/95 text-white shadow-[0_0_60px_rgba(239,68,68,0.35)] backdrop-blur-2xl'
+                : 'rounded-2xl border border-red-500/50 bg-[var(--c-bg,#3B163A)]/95 text-white shadow-[0_0_60px_rgba(239,68,68,0.35)] backdrop-blur-2xl'
             }`}
           >
             {/* Top Hazard Warning Strip */}
@@ -146,7 +146,7 @@ export const FullWebsiteLockdown: React.FC = () => {
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>AIR-GAP STATUS:</span>
-                  <span className="text-emerald-400 flex items-center gap-1">
+                  <span className="text-[var(--c-accent,#F0C986)] flex items-center gap-1">
                     <FiShield className="w-3.5 h-3.5" /> 100% ENCRYPTED &amp; VAULTED
                   </span>
                 </div>
@@ -163,7 +163,7 @@ export const FullWebsiteLockdown: React.FC = () => {
                 className={`p-3 text-xs italic ${
                   isNeobrutalist
                     ? 'border-l-4 border-yellow-400 bg-white/5 text-gray-200'
-                    : 'rounded-lg border-l-4 border-emerald-400/80 bg-white/5 text-white/90'
+                    : 'rounded-lg border-l-4 border-[var(--c-accent,#F0C986)]/80 bg-white/5 text-white/90'
                 }`}
               >
                 &quot;Identity theft is not a joke, Jim! Millions of families suffer every year!&quot;

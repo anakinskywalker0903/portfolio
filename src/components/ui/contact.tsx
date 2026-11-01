@@ -229,8 +229,8 @@ export const ContactSection = () => {
                     <p className="font-extrabold text-xs text-black font-mono">{currentTime || 'IST (UTC+5:30)'}</p>
                   </div>
                 </div>
-                <span className="inline-flex items-center gap-1 text-[8px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase border border-emerald-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" /> IST
+                <span className="inline-flex items-center gap-1 text-[8px] font-black text-[var(--c-accent-text,#250924)] bg-[var(--c-accent)]/20 px-2.5 py-1 rounded-full uppercase border border-[var(--c-accent)]/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-accent)] animate-ping" /> IST
                 </span>
               </div>
 

@@ -224,7 +224,7 @@ export function RightActionDock({ onResumeOpen }: { onResumeOpen: () => void }) 
       <div className="fixed right-2.5 sm:right-5 bottom-1/2 translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
         <div
           className="flex flex-col items-center gap-2 sm:gap-3 px-1.5 py-3 sm:px-3 sm:py-5 rounded-full border border-white/25 bg-black/25 hover:bg-black/50 backdrop-blur-lg shadow-xl transition-all duration-300"
-          style={{ boxShadow: '0 8px 32px 0 rgba(0,245,160,0.15)' }}
+          style={{ boxShadow: '0 8px 32px 0 rgba(240,201,134,0.15)' }}
         >
           {/* Pulse dot */}
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-accent)] mx-auto animate-pulse mb-0.5" />
@@ -330,7 +330,7 @@ export function RightActionDock({ onResumeOpen }: { onResumeOpen: () => void }) 
           aria-expanded={isFabOpen}
           aria-label={isFabOpen ? 'Close Quick Actions' : 'Open Quick Actions'}
           className="w-10 h-10 rounded-full border-2 border-black bg-[var(--c-bg-surface)] flex items-center justify-center text-black shadow-lg hover:bg-[var(--c-accent)] transition-colors cursor-pointer z-50 relative"
-          style={{ boxShadow: '0 6px 20px rgba(0,245,160,0.3)' }}
+          style={{ boxShadow: '0 6px 20px rgba(240,201,134,0.3)' }}
         >
           <AnimatePresence mode="wait">
             {isFabOpen ? (

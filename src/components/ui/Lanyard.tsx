@@ -12,6 +12,7 @@ import {
 } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
+import { useTheme } from '@/lib/ThemeContext';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -20,24 +21,28 @@ const EMPTY_TEXTURE_URL =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORUSCYII=';
 
 // ── Generate Lanyard Ribbon Texture (Repeating Text) ─────────────────────────
-function createRibbonTexture(text = 'ROHIT DUBEY • FULL-STACK • AI ENGINEER • '): THREE.CanvasTexture {
+function createRibbonTexture(
+  text = 'ROHIT DUBEY • FULL-STACK • AI ENGINEER • ',
+  bg = '#3B163A',
+  accent = '#F0C986'
+): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 1024;
   canvas.height = 128;
   const ctx = canvas.getContext('2d');
   if (ctx) {
     // Ribbon background
-    ctx.fillStyle = '#031714';
+    ctx.fillStyle = bg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Subtle border lines
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     ctx.fillRect(0, 0, canvas.width, 6);
     ctx.fillRect(0, canvas.height - 6, canvas.width, 6);
 
     // Text pattern
     ctx.font = 'bold 36px "Arial Black", sans-serif';
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
 
@@ -56,7 +61,13 @@ function createRibbonTexture(text = 'ROHIT DUBEY • FULL-STACK • AI ENGINEER 
 }
 
 // ── Generate ID Card Front & Back Canvas Texture ─────────────────────────────
-function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
+function generateCardCanvasTexture(
+  avatarSrc = '/rohit.jpg',
+  bg = '#3B163A',
+  bgBack = '#2A0F29',
+  accent = '#F0C986',
+  accentText = '#250924'
+): Promise<string> {
   return new Promise((resolve) => {
     const resolution = 1024;
     const canvas = document.createElement('canvas');
@@ -73,23 +84,23 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
 
     // Backgrounds
     // Left Half = Front of Card
-    ctx.fillStyle = '#031714';
+    ctx.fillStyle = bg;
     ctx.fillRect(0, 0, half, resolution);
     // Right Half = Back of Card
-    ctx.fillStyle = '#021412';
+    ctx.fillStyle = bgBack;
     ctx.fillRect(half, 0, half, resolution);
 
     // Border highlights
-    ctx.strokeStyle = 'rgba(0, 245, 160, 0.4)';
+    ctx.strokeStyle = `${accent}66`;
     ctx.lineWidth = 12;
     ctx.strokeRect(10, 10, half - 20, resolution - 20);
     ctx.strokeRect(half + 10, 10, half - 20, resolution - 20);
 
     // Accent header pill (Front)
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     ctx.fillRect(40, 50, half - 80, 50);
     ctx.font = '900 24px "Arial Black", sans-serif';
-    ctx.fillStyle = '#031714';
+    ctx.fillStyle = accentText;
     ctx.textAlign = 'center';
     ctx.fillText('VERIFIED DEVELOPER', half / 2, 84);
 
@@ -99,7 +110,7 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
     ctx.fillText('ROHIT DUBEY', half / 2, 590);
 
     ctx.font = 'bold 24px sans-serif';
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     ctx.fillText('Full-Stack & AI Engineer', half / 2, 635);
 
     ctx.font = 'bold 18px monospace';
@@ -108,12 +119,12 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
 
     // Tech Tags (Front)
     ctx.font = 'bold 18px sans-serif';
-    ctx.fillStyle = 'rgba(0, 245, 160, 0.8)';
+    ctx.fillStyle = `${accent}D9`;
     ctx.fillText('REACT • THREE.JS • NODE • PYTHON', half / 2, 725);
 
     // --- Back Side Content ---
     ctx.font = '900 36px "Arial Black", sans-serif';
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     ctx.fillText('PORTFOLIO 2026', half + half / 2, 120);
 
     ctx.font = 'bold 22px sans-serif';
@@ -126,7 +137,7 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.textAlign = 'left';
       ctx.fillText(label, half + 50, y);
-      ctx.fillStyle = '#00F5A0';
+      ctx.fillStyle = accent;
       ctx.textAlign = 'right';
       ctx.fillText(value, half + half - 50, y);
     };
@@ -137,7 +148,7 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
     drawBackLine('LOCATION', 'INDIA (REMOTE)', 460);
 
     // Decorative Barcode on Back
-    ctx.fillStyle = '#00F5A0';
+    ctx.fillStyle = accent;
     const barcodeY = 600;
     const barcodeXStart = half + 60;
     const barcodeWidth = half - 120;
@@ -180,7 +191,7 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
       // Outer glow ring around avatar
       ctx.beginPath();
       ctx.arc(avatarX, avatarY, avatarSize / 2 + 4, 0, Math.PI * 2);
-      ctx.strokeStyle = '#00F5A0';
+      ctx.strokeStyle = accent;
       ctx.lineWidth = 8;
       ctx.stroke();
 
@@ -212,7 +223,15 @@ function generateCardCanvasTexture(avatarSrc = '/rohit.jpg'): Promise<string> {
 }
 
 // ── Band & Card Physics Scene ────────────────────────────────────────────────
-function Band({ cardImageSrc }: { cardImageSrc: string }) {
+function Band({
+  cardImageSrc,
+  accent = '#F0C986',
+  ribbonTexture,
+}: {
+  cardImageSrc: string;
+  accent?: string;
+  ribbonTexture: THREE.CanvasTexture;
+}) {
   const band = useRef<THREE.Mesh>(null!);
   const fixed = useRef<RapierRigidBody>(null!);
   const j1 = useRef<RapierRigidBody>(null!);
@@ -235,8 +254,6 @@ function Band({ cardImageSrc }: { cardImageSrc: string }) {
 
   const { nodes } = useGLTF(CARD_GLB_URL) as any;
   const cardTexture = useTexture(cardImageSrc || EMPTY_TEXTURE_URL);
-
-  const ribbonTexture = useMemo(() => createRibbonTexture(), []);
 
   const [curve] = useState(
     () =>
@@ -379,14 +396,14 @@ function Band({ cardImageSrc }: { cardImageSrc: string }) {
             {/* Clip & Clamp Metal Meshes */}
             <mesh geometry={nodes.clip.geometry}>
               <meshPhysicalMaterial
-                color="#00F5A0"
+                color={accent}
                 roughness={0.2}
                 metalness={0.9}
               />
             </mesh>
             <mesh geometry={nodes.clamp.geometry}>
               <meshPhysicalMaterial
-                color="#00F5A0"
+                color={accent}
                 roughness={0.2}
                 metalness={0.9}
               />
@@ -399,7 +416,7 @@ function Band({ cardImageSrc }: { cardImageSrc: string }) {
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial
-          color="#00F5A0"
+          color={accent}
           depthTest={false}
           resolution={[1000, 1000]}
           useMap={true}
@@ -416,8 +433,19 @@ useGLTF.preload(CARD_GLB_URL);
 
 // ── Main Exported Lanyard Component ─────────────────────────────────────────
 export const Lanyard: React.FC<{ className?: string }> = ({ className = '' }) => {
+  const { activeTheme } = useTheme();
+  const themeBg = activeTheme.vars['--c-bg'] || '#3B163A';
+  const themeBgAlt = activeTheme.vars['--c-ticker-bg'] || '#2A0F29';
+  const themeAccent = activeTheme.vars['--c-accent'] || '#F0C986';
+  const themeAccentText = activeTheme.vars['--c-accent-text'] || '#250924';
+
   const [isDesktop, setIsDesktop] = useState<boolean>(() => typeof window !== 'undefined' && window.innerWidth >= 1024);
   const [cardImageUrl, setCardImageUrl] = useState<string>('');
+
+  const ribbonTexture = useMemo(
+    () => createRibbonTexture(undefined, themeBg, themeAccent),
+    [themeBg, themeAccent]
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -429,10 +457,10 @@ export const Lanyard: React.FC<{ className?: string }> = ({ className = '' }) =>
 
   useEffect(() => {
     if (!isDesktop) return;
-    generateCardCanvasTexture('/rohit.jpg').then((dataUrl) => {
+    generateCardCanvasTexture('/rohit.jpg', themeBg, themeBgAlt, themeAccent, themeAccentText).then((dataUrl) => {
       setCardImageUrl(dataUrl);
     });
-  }, [isDesktop]);
+  }, [isDesktop, themeBg, themeBgAlt, themeAccent, themeAccentText]);
 
   if (!isDesktop) return null;
 
@@ -460,12 +488,12 @@ export const Lanyard: React.FC<{ className?: string }> = ({ className = '' }) =>
         <React.Suspense fallback={null}>
           <ambientLight intensity={Math.PI * 1.2} />
           <Physics gravity={[0, -35, 0]} timeStep={1 / 60}>
-            <Band cardImageSrc={cardImageUrl} />
+            <Band cardImageSrc={cardImageUrl} accent={themeAccent} ribbonTexture={ribbonTexture} />
           </Physics>
           <Environment blur={0.75}>
             <Lightformer
               intensity={2}
-              color="#00F5A0"
+              color={themeAccent}
               position={[0, -1, 5]}
               rotation={[0, 0, Math.PI / 3]}
               scale={[100, 0.1, 1]}
@@ -479,7 +507,7 @@ export const Lanyard: React.FC<{ className?: string }> = ({ className = '' }) =>
             />
             <Lightformer
               intensity={3}
-              color="#00F5A0"
+              color={themeAccent}
               position={[1, 1, 1]}
               rotation={[0, 0, Math.PI / 3]}
               scale={[100, 0.1, 1]}

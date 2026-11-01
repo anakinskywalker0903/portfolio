@@ -7,7 +7,7 @@ import gsap from 'gsap';
 export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
   const overlayRef = useRef<HTMLDivElement>(null);
-  const greenBarRef = useRef<HTMLDivElement>(null);
+  const curtainBarRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const prevPathRef = useRef<string>(location.pathname);
 
@@ -21,7 +21,7 @@ export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ childr
           sync: false,
           leave() {
             const tl = gsap.timeline();
-            tl.to(greenBarRef.current, {
+            tl.to(curtainBarRef.current, {
               scaleY: 1,
               transformOrigin: 'bottom',
               duration: 0.35,
@@ -55,7 +55,7 @@ export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ childr
               duration: 0.45,
               ease: 'power3.inOut',
             })
-            .to(greenBarRef.current, {
+            .to(curtainBarRef.current, {
               scaleY: 0,
               transformOrigin: 'top',
               duration: 0.35,
@@ -78,12 +78,12 @@ export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ childr
       prevPathRef.current = location.pathname;
 
       const tl = gsap.timeline();
-      tl.set(greenBarRef.current, { scaleY: 0, transformOrigin: 'bottom' })
+      tl.set(curtainBarRef.current, { scaleY: 0, transformOrigin: 'bottom' })
         .set(overlayRef.current, { scaleY: 0, transformOrigin: 'bottom' })
         .set(textRef.current, { opacity: 0, y: 20 })
 
         // Leave transition: Curtain wipes UP to cover screen
-        .to(greenBarRef.current, {
+        .to(curtainBarRef.current, {
           scaleY: 1,
           duration: 0.3,
           ease: 'power3.inOut',
@@ -114,7 +114,7 @@ export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ childr
           duration: 0.4,
           ease: 'power3.inOut',
         })
-        .to(greenBarRef.current, {
+        .to(curtainBarRef.current, {
           scaleY: 0,
           transformOrigin: 'top',
           duration: 0.3,
@@ -127,7 +127,7 @@ export const PageTransition: React.FC<{ children: React.ReactNode }> = ({ childr
     <div data-barba="wrapper" className="w-full relative min-h-screen">
       {/* Barba.js Curtain Transition Overlay Elements */}
       <div
-        ref={greenBarRef}
+        ref={curtainBarRef}
         className="fixed inset-0 z-[9998] pointer-events-none scale-y-0 origin-bottom"
         style={{ background: 'var(--c-curtain-1)' }}
       />

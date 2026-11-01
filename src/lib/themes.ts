@@ -19,12 +19,82 @@ export interface Theme {
 
 export const themes: Theme[] = [
   // ─────────────────────────────────────────────────────────────────────────
-  // 1. CYBER GREEN  (default — current build)
+  // 1. MIDNIGHT PLUM & HONEY DAWN (Default — Active Portfolio Skin)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 'default',
+    name: 'Midnight Plum',
+    subtitle: 'DEFAULT · HONEY DAWN & MIDNIGHT PLUM',
+    group: 'ACTIVE',
+    swatches: ['#3B163A', '#F0C986', '#E8B768'],
+    vars: {
+      // ── core backgrounds ──────────────────────────────────────────────────
+      '--c-bg':              '#3B163A',   // midnight plum
+      '--c-bg-alt':          '#4D1E4C',   // slightly lighter plum panel
+      '--c-bg-surface':      '#FDFBF7',   // warm honey cream surface
+      '--c-bg-page':         '#FFFFFF',   // page root background
+      '--c-bg-footer':       '#1E0A1D',   // dark plum footer
+
+      // ── accent / brand ────────────────────────────────────────────────────
+      '--c-accent':          '#F0C986',   // honey dawn primary accent
+      '--c-accent-2':        '#E8B768',   // warm amber glow
+      '--c-accent-text':     '#250924',   // dark plum text on accent
+
+      // ── text ──────────────────────────────────────────────────────────────
+      '--c-text':            '#FFFFFF',   // text on dark bg
+      '--c-text-muted':      'rgba(255,255,255,0.65)',
+      '--c-text-dark':       '#250924',   // text on light surface
+      '--c-text-dark-muted': 'rgba(37,9,36,0.5)',
+
+      // ── borders / shadows ─────────────────────────────────────────────────
+      '--c-border':          'rgba(240,201,134,0.25)',
+      '--c-border-dark':     'rgba(59,22,58,0.12)',
+      '--c-shadow':          '#250924',   // brutalist offset shadow
+
+      // ── ticker ────────────────────────────────────────────────────────────
+      '--c-ticker-bg':       '#2A0F29',
+      '--c-ticker-text':     '#F0C986',
+      '--c-ticker-border':   'rgba(240,201,134,0.3)',
+
+      // ── nav / bubble menu ─────────────────────────────────────────────────
+      '--c-nav-bg':          '#FFFFFF',
+      '--c-nav-content':     '#3B163A',
+
+      // ── skill/detail panel ────────────────────────────────────────────────
+      '--c-panel-bg':        '#2A0F29',
+      '--c-panel-text':      '#FFFFFF',
+
+      // ── scrollbar ─────────────────────────────────────────────────────────
+      '--scrollbar-track':   '#3B163A',
+      '--scrollbar-thumb':   '#F0C986',
+
+      // ── preloader ─────────────────────────────────────────────────────────
+      '--c-preloader-bg':    '#3B163A',
+      '--c-preloader-text':  '#F0C986',
+
+      // ── page transition curtain ───────────────────────────────────────────
+      '--c-curtain-1':       '#F0C986',
+      '--c-curtain-2':       '#3B163A',
+
+      // ── hero text shadow ──────────────────────────────────────────────────
+      '--c-hero-shadow':     '#220B21',
+
+      // ── grid overlay ──────────────────────────────────────────────────────
+      '--c-grid':            'rgba(240,201,134,0.08)',
+
+      // ── selection ─────────────────────────────────────────────────────────
+      '--c-selection-bg':    '#F0C986',
+      '--c-selection-text':  '#250924',
+    },
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 2. CYBER GREEN (Preserved Classic — #00F5A0 & #031714)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'cybergreen',
     name: 'Cyber Green',
-    subtitle: 'DEFAULT · CURRENT BUILD',
+    subtitle: 'ORIGINAL · #00F5A0 & #031714',
     group: 'ACTIVE',
     swatches: ['#031714', '#00F5A0', '#0D9488'],
     vars: {

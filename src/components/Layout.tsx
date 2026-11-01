@@ -89,7 +89,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('keydown', handle);
   }, [toggleSwitcher]);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = () => {
+    if ((window as any).lenis) {
+      (window as any).lenis.scrollTo(0, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const accent  = 'var(--c-accent)';
   const shadow  = 'var(--c-shadow)';
@@ -359,13 +365,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </footer>
         ) : (
-          /* Original Cyber Green Sleek Footer */
+          /* Original Sleek Footer */
           <footer className="bg-black text-white py-16 px-6 md:px-10 border-t-4 border-black relative z-10 w-full mt-auto">
             <div className="max-w-6xl mx-auto flex flex-col gap-12">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-8 items-start">
                 {/* Branding Column */}
                 <div className="md:col-span-2 xl:col-span-2 flex flex-col gap-4">
-                  <span className="inline-block bg-[#00F5A0] text-black font-black text-xs px-4 py-1.5 rounded-full w-fit tracking-wider uppercase">
+                  <span className="inline-block bg-[var(--c-accent)] text-[var(--c-accent-text)] font-black text-xs px-4 py-1.5 rounded-full w-fit tracking-wider uppercase">
                     ROHIT DUBEY
                   </span>
                   <p className="text-white/50 text-sm max-w-sm font-medium leading-relaxed">
@@ -386,7 +392,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={social.label}
-                          className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[#00F5A0] hover:text-black transition-all duration-300"
+                          className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-[var(--c-accent)] hover:text-[var(--c-accent-text)] transition-all duration-300"
                         >
                           <Icon className="w-4 h-4" />
                         </a>
@@ -397,7 +403,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
                 {/* Quick Links Column */}
                 <div className="flex flex-col gap-3">
-                  <h4 className="text-[#00F5A0] font-black text-xs tracking-widest uppercase mb-1">
+                  <h4 className="text-[var(--c-accent)] font-black text-xs tracking-widest uppercase mb-1">
                     NAVIGATE
                   </h4>
                   <Link to="/" className="text-white/60 hover:text-white text-sm font-bold w-fit transition-colors">Home / About</Link>
@@ -408,7 +414,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <h4 className="text-[#00F5A0] font-black text-xs tracking-widest uppercase mb-1">
+                  <h4 className="text-[var(--c-accent)] font-black text-xs tracking-widest uppercase mb-1">
                     DOCUMENTS
                   </h4>
                   <button
@@ -453,7 +459,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     enableTilt={true}
                     enableMobileTilt={false}
                     behindGlowEnabled={true}
-                    behindGlowColor="rgba(0, 245, 160, 0.15)"
+                    behindGlowColor="rgba(240, 201, 134, 0.18)"
                     innerGradient="transparent"
                     onContactClick={() => {
                       if (window.location.pathname !== '/') {
@@ -475,7 +481,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <p className="font-bold uppercase tracking-wider">
                   © {new Date().getFullYear()} ROHIT DUBEY. ALL RIGHTS RESERVED.
                 </p>
-                <p className="font-black uppercase tracking-widest text-[#00F5A0]/60">
+                <p className="font-black uppercase tracking-widest text-[var(--c-accent)]/60">
                   v3.1 • BUILT WITH REACT, THREE.JS, &amp; GSAP
                 </p>
               </div>

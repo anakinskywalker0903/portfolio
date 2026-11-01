@@ -5,8 +5,8 @@ import { useTheme } from '@/lib/ThemeContext';
 export function SkinSwitcher() {
   const { themes, activeTheme, setTheme, isSwitcherOpen, closeSwitcher } = useTheme();
   
-  // Filter out Sith — it's a theme mode within the Force skin
-  const visibleThemes = themes.filter(t => t.id !== 'sith');
+  // Filter out Sith (theme mode within Force) and Cyber Green (archived theme preserved in code)
+  const visibleThemes = themes.filter(t => t.id !== 'sith' && t.id !== 'cybergreen');
   
   const getActiveIndex = () => {
     const activeId = activeTheme.id === 'sith' ? 'starwars' : activeTheme.id;

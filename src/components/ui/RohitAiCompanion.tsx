@@ -41,7 +41,7 @@ const STARTER_PROMPTS = [
 
 /**
  * Custom High-Tech Cyber Avatar for Chitti (Rohit's AI Twin).
- * Theme-adaptive: Sleek glowing cyan/emerald in default Cyber Green;
+ * Theme-adaptive: Sleek glowing Honey Dawn in default Midnight Plum;
  * Bold high-contrast Neobrutalist with Sith red or Star Wars accents.
  */
 const ChittiAvatar: React.FC<{ isNeobrutalist?: boolean; isSith?: boolean; size?: number }> = ({
@@ -49,8 +49,8 @@ const ChittiAvatar: React.FC<{ isNeobrutalist?: boolean; isSith?: boolean; size?
   isSith = false,
   size = 36,
 }) => {
-  const accentColor = isSith ? '#FF2020' : isNeobrutalist ? '#FFE81F' : 'var(--c-accent, #00F5A0)';
-  const visorGlow = isSith ? 'rgba(255, 32, 32, 0.7)' : isNeobrutalist ? 'rgba(255, 232, 31, 0.7)' : 'rgba(0, 245, 160, 0.7)';
+  const accentColor = isSith ? '#FF2020' : isNeobrutalist ? '#FFE81F' : 'var(--c-accent, #F0C986)';
+  const visorGlow = isSith ? 'rgba(255, 32, 32, 0.7)' : isNeobrutalist ? 'rgba(255, 232, 31, 0.7)' : 'rgba(240, 201, 134, 0.7)';
 
   return (
     <div
@@ -64,7 +64,7 @@ const ChittiAvatar: React.FC<{ isNeobrutalist?: boolean; isSith?: boolean; size?
         height: `${size}px`,
         background: isNeobrutalist
           ? isSith ? '#1A0808' : '#FFFFFF'
-          : 'linear-gradient(135deg, rgba(3, 23, 20, 0.95) 0%, rgba(4, 48, 40, 0.95) 100%)',
+          : 'linear-gradient(135deg, rgba(59, 22, 58, 0.95) 0%, rgba(77, 30, 76, 0.95) 100%)',
       }}
     >
       <svg
@@ -108,7 +108,7 @@ const ChittiAvatar: React.FC<{ isNeobrutalist?: boolean; isSith?: boolean; size?
           width="22"
           height="19"
           rx="4.5"
-          fill={isNeobrutalist ? (isSith ? '#2A0B0B' : '#FFFFFF') : '#042420'}
+          fill={isNeobrutalist ? (isSith ? '#2A0B0B' : '#FFFFFF') : 'var(--c-bg-alt, #4D1E4C)'}
           stroke={isNeobrutalist ? '#000000' : accentColor}
           strokeWidth={isNeobrutalist ? '2' : '1.5'}
         />
@@ -120,7 +120,7 @@ const ChittiAvatar: React.FC<{ isNeobrutalist?: boolean; isSith?: boolean; size?
           width="17"
           height="8.5"
           rx="2.5"
-          fill={isNeobrutalist && !isSith ? '#121212' : '#01120F'}
+          fill={isNeobrutalist && !isSith ? '#121212' : 'var(--c-bg, #3B163A)'}
           stroke={isNeobrutalist ? '#000000' : 'rgba(255,255,255,0.15)'}
           strokeWidth="1"
         />
@@ -485,7 +485,7 @@ export const RohitAiCompanion: React.FC = () => {
               className={`inline-flex items-center gap-1.5 font-bold underline underline-offset-3 hover:opacity-85 transition-all cursor-pointer ${
                 isNeobrutalist
                   ? 'text-black bg-[var(--c-accent)] px-1.5 py-0.5 rounded-[2px] shadow-[1.5px_1.5px_0_#000] active:translate-x-[1px] active:translate-y-[1px]'
-                  : 'bg-emerald-400/15 px-2 py-0.5 rounded-md text-emerald-300 border border-emerald-400/30 hover:bg-emerald-400/25'
+                  : 'bg-[var(--c-accent)]/15 px-2 py-0.5 rounded-md text-[var(--c-accent)] border border-[var(--c-accent)]/30 hover:bg-[var(--c-accent)]/25'
               }`}
             >
               <FaFilePdf className="w-3 h-3 inline text-red-500 shrink-0" />
@@ -513,7 +513,7 @@ export const RohitAiCompanion: React.FC = () => {
               className={`inline-flex items-center gap-1 font-bold underline underline-offset-3 hover:opacity-80 transition-opacity cursor-pointer ${
                 isNeobrutalist ? 'text-black bg-[var(--c-accent)] px-1 rounded-[2px]' : ''
               }`}
-              style={!isNeobrutalist ? { color: 'var(--c-accent, #00F5A0)' } : {}}
+              style={!isNeobrutalist ? { color: 'var(--c-accent, #F0C986)' } : {}}
             >
               {linkText}
             </button>
@@ -529,7 +529,7 @@ export const RohitAiCompanion: React.FC = () => {
               className={`inline-flex items-center gap-1 font-bold underline underline-offset-3 hover:opacity-80 transition-opacity ${
                 isNeobrutalist ? 'text-black bg-[var(--c-accent)] px-1 rounded-[2px]' : ''
               }`}
-              style={!isNeobrutalist ? { color: 'var(--c-accent, #00F5A0)' } : {}}
+              style={!isNeobrutalist ? { color: 'var(--c-accent, #F0C986)' } : {}}
             >
               {linkText}
             </Link>
@@ -546,7 +546,7 @@ export const RohitAiCompanion: React.FC = () => {
             className={`inline-flex items-center gap-1 font-bold underline underline-offset-3 hover:opacity-80 transition-opacity ${
               isNeobrutalist ? 'text-black bg-[var(--c-accent)] px-1 rounded-[2px]' : ''
             }`}
-            style={!isNeobrutalist ? { color: 'var(--c-accent, #00F5A0)' } : {}}
+            style={!isNeobrutalist ? { color: 'var(--c-accent, #F0C986)' } : {}}
           >
             {linkText} <FiExternalLink className="w-3 h-3 inline" />
           </a>
@@ -580,7 +580,7 @@ export const RohitAiCompanion: React.FC = () => {
           <code
             key={index}
             className={`font-mono text-[11px] px-1 py-0.5 rounded ${
-              isNeobrutalist ? 'bg-black text-white' : 'bg-white/10 text-emerald-300'
+              isNeobrutalist ? 'bg-black text-white' : 'bg-white/10 text-[var(--c-accent)]'
             }`}
           >
             {codeMatch[1]}
@@ -633,7 +633,7 @@ export const RohitAiCompanion: React.FC = () => {
               <div key={idx} className="flex items-start gap-2 pl-1 my-1">
                 <span
                   className={`shrink-0 text-[10px] font-mono font-black px-1.5 py-0.5 rounded-[3px] mt-0.5 ${
-                    isNeobrutalist ? 'bg-black text-white' : 'bg-emerald-400/20 text-emerald-400'
+                    isNeobrutalist ? 'bg-black text-white' : 'bg-[var(--c-accent)]/20 text-[var(--c-accent)]'
                   }`}
                 >
                   {numMatch[1]}
@@ -761,9 +761,9 @@ export const RohitAiCompanion: React.FC = () => {
             className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold rounded-lg transition-all duration-150 cursor-pointer active:scale-95 ${
               isNeobrutalist
                 ? 'border-2 border-black bg-[var(--c-accent)] text-black shadow-[2px_2px_0_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0_#000]'
-                : 'border border-[var(--c-accent)]/40 bg-[var(--c-accent)]/15 text-white hover:bg-[var(--c-accent)]/25 hover:border-[var(--c-accent)] hover:shadow-[0_0_12px_rgba(0,245,160,0.3)]'
+                : 'border border-[var(--c-accent)]/40 bg-[var(--c-accent)]/15 text-white hover:bg-[var(--c-accent)]/25 hover:border-[var(--c-accent)] hover:shadow-[0_0_12px_rgba(240,201,134,0.3)]'
             }`}
-            style={!isNeobrutalist ? { color: 'var(--c-accent, #00F5A0)' } : {}}
+            style={!isNeobrutalist ? { color: 'var(--c-accent, #F0C986)' } : {}}
           >
             {btn.icon}
             <span>{btn.label}</span>
@@ -802,15 +802,15 @@ export const RohitAiCompanion: React.FC = () => {
             className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 ${
               isNeobrutalist
                 ? 'border-2 border-black font-black shadow-[3px_3px_0_#000]'
-                : 'border border-[var(--c-accent)]/50 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(0,245,160,0.3)] hover:scale-105'
+                : 'border border-[var(--c-accent)]/50 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(240,201,134,0.3)] hover:scale-105'
             }`}
             style={{
               backgroundColor: isNeobrutalist
                 ? 'var(--c-accent, #FFE81F)'
-                : 'var(--c-bg, #031714)',
+                : 'var(--c-bg, #3B163A)',
               color: isNeobrutalist
                 ? 'var(--c-accent-text, #000000)'
-                : 'var(--c-accent, #00F5A0)',
+                : 'var(--c-accent, #F0C986)',
             }}
           >
             <div className="relative flex items-center justify-center">
@@ -818,7 +818,7 @@ export const RohitAiCompanion: React.FC = () => {
               <span
                 className="w-2 h-2 rounded-full absolute -top-1 -right-1 animate-ping"
                 style={{
-                  backgroundColor: isNeobrutalist ? '#000000' : 'var(--c-accent, #00F5A0)',
+                  backgroundColor: isNeobrutalist ? '#000000' : 'var(--c-accent, #F0C986)',
                 }}
               />
             </div>
@@ -853,11 +853,11 @@ export const RohitAiCompanion: React.FC = () => {
                     : '6px 6px 0 #000000',
                 }
               : {
-                  backgroundColor: 'rgba(3, 23, 20, 0.94)',
-                  borderColor: isLockdown ? '#EF4444' : 'var(--c-border, rgba(0,245,160,0.3))',
+                  backgroundColor: 'var(--c-bg, #3B163A)',
+                  borderColor: isLockdown ? '#EF4444' : 'var(--c-border, rgba(240,201,134,0.3))',
                   boxShadow: isLockdown
                     ? '0 0 50px rgba(239, 68, 68, 0.7)'
-                    : '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0,245,160,0.18)',
+                    : '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(240,201,134,0.18)',
                 }
           }
         >
@@ -885,12 +885,12 @@ export const RohitAiCompanion: React.FC = () => {
               isNeobrutalist
                 ? {
                     backgroundColor: 'var(--c-accent, #FFE81F)',
-                    color: 'var(--c-accent-text, #000000)',
+                    color: 'var(--c-accent-text, #250924)',
                     borderColor: isSith ? '#FF2020' : '#000000',
                   }
                 : {
-                    backgroundColor: 'rgba(4, 36, 32, 0.75)',
-                    borderColor: 'var(--c-border, rgba(0,245,160,0.2))',
+                    backgroundColor: 'var(--c-bg-alt, #4D1E4C)',
+                    borderColor: 'var(--c-border, rgba(240,201,134,0.2))',
                   }
             }
           >
@@ -899,25 +899,21 @@ export const RohitAiCompanion: React.FC = () => {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3
-                    className={`text-sm leading-tight ${
-                      isNeobrutalist ? 'font-black uppercase text-black' : 'font-semibold text-white'
-                    }`}
+                    className="text-sm sm:text-base font-black uppercase leading-none tracking-[0.16em]"
+                    style={{
+                      fontFamily: "'Orbitron', 'Michroma', 'Arial Black', sans-serif",
+                      color: isNeobrutalist ? '#000000' : 'var(--c-accent, #F0C986)',
+                      textShadow: isNeobrutalist
+                        ? 'none'
+                        : '0 0 10px rgba(240, 201, 134, 0.45), 0 0 2px rgba(240, 201, 134, 0.75)',
+                    }}
                   >
-                    Chitti
+                    CHITTI
                   </h3>
-                  <span
-                    className={`text-[9px] px-1.5 py-0.5 font-mono uppercase tracking-wider ${
-                      isNeobrutalist
-                        ? 'bg-black text-white font-black'
-                        : 'rounded-full bg-emerald-400/20 text-emerald-400'
-                    }`}
-                  >
-                    AI Twin
-                  </span>
                 </div>
                 <p
-                  className={`text-[10px] sm:text-[11px] ${
-                    isNeobrutalist ? 'text-black/70 font-medium' : 'text-white/50'
+                  className={`text-[9.5px] sm:text-[10.5px] font-mono tracking-tight mt-0.5 ${
+                    isNeobrutalist ? 'text-black/70 font-bold' : 'text-white/60'
                   }`}
                 >
                   Speed 1 THz • Rohit's Voice &amp; Quirks
@@ -1002,8 +998,8 @@ export const RohitAiCompanion: React.FC = () => {
                     style={
                       !isAssistant
                         ? {
-                            backgroundColor: 'var(--c-accent, #00F5A0)',
-                            color: 'var(--c-accent-text, #000000)',
+                            backgroundColor: 'var(--c-accent, #F0C986)',
+                            color: 'var(--c-accent-text, #250924)',
                             borderColor: isNeobrutalist ? '#000000' : 'transparent',
                           }
                         : {}
@@ -1032,9 +1028,11 @@ export const RohitAiCompanion: React.FC = () => {
                 >
                   <span
                     className="w-2 h-2 rounded-full animate-ping"
-                    style={{ backgroundColor: 'var(--c-accent, #00F5A0)' }}
+                    style={{ backgroundColor: 'var(--c-accent, #F0C986)' }}
                   />
-                  <span>Chitti is thinking...</span>
+                  <span style={{ fontFamily: "'Orbitron', monospace", letterSpacing: '0.08em', fontSize: '11px' }}>
+                    Chitti is processing...
+                  </span>
                 </div>
               </div>
             )}
@@ -1088,7 +1086,7 @@ export const RohitAiCompanion: React.FC = () => {
                   className={`shrink-0 px-2.5 py-1 text-[11px] font-mono whitespace-nowrap transition-all duration-150 cursor-pointer disabled:opacity-50 flex items-center gap-1.5 ${
                     isNeobrutalist
                       ? 'border-2 border-black bg-white text-black font-black shadow-[2px_2px_0_#000] hover:bg-[var(--c-accent)] active:translate-x-[1px] active:translate-y-[1px]'
-                      : 'rounded-lg bg-white/5 text-white/90 border border-white/10 hover:border-emerald-400/50 hover:bg-white/10 active:scale-95'
+                      : 'rounded-lg bg-white/5 text-white/90 border border-white/10 hover:border-[var(--c-accent)]/50 hover:bg-white/10 active:scale-95'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -1116,7 +1114,7 @@ export const RohitAiCompanion: React.FC = () => {
               className={`px-3 py-1 text-[10px] font-mono flex items-center justify-between border-t ${
                 isNeobrutalist
                   ? 'bg-[#FFFDF0] text-black border-black font-bold'
-                  : 'bg-emerald-500/10 text-emerald-400 border-white/5'
+                  : 'bg-[var(--c-accent)]/10 text-[var(--c-accent)] border-white/5'
               }`}
             >
               <span>
@@ -1155,7 +1153,7 @@ export const RohitAiCompanion: React.FC = () => {
               className={`flex-1 px-3 py-2 text-xs sm:text-sm transition-colors ${
                 isNeobrutalist
                   ? 'bg-white border-2 border-black text-black font-medium placeholder-black/40 shadow-[2px_2px_0_#000] focus:outline-none focus:bg-[#FFFDF0]'
-                  : 'bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-emerald-400'
+                  : 'bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-[var(--c-accent)]'
               }`}
             />
             <button
@@ -1167,8 +1165,8 @@ export const RohitAiCompanion: React.FC = () => {
                   : 'p-2.5 rounded-xl hover:scale-105 active:scale-95'
               }`}
               style={{
-                backgroundColor: 'var(--c-accent, #00F5A0)',
-                color: 'var(--c-accent-text, #000000)',
+                backgroundColor: 'var(--c-accent, #F0C986)',
+                color: 'var(--c-accent-text, #250924)',
               }}
             >
               <FiSend className="w-4 h-4" />
